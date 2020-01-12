@@ -1,19 +1,44 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot;
 
-/**
- * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
- * constants.  This class should not be used for any other purpose.  All constants should be
- * declared globally (i.e. public static).  Do not put anything functional in this class.
- *
- * <p>It is advised to statically import this class (or one of its inner classes) wherever the
- * constants are needed, to reduce verbosity.
- */
+import com.revrobotics.ColorMatch;
+
+import edu.wpi.first.wpilibj.util.Color;
+
 public final class Constants {
+    public final static class Colors{
+        public final static Color kBlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
+        public final static Color kGreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
+        public final static Color kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
+        public final static Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
+    }
+    public final static class LimeLight{
+        public final static class LED{
+            public final static Number kDefault = 0;
+            public final static Number kOn = 3;
+            public final static Number kOff = 1;
+            public final static Number kBlink = 2;
+        }
+        public final static class Detection{
+            public final static String kHasTarget = "tv";
+            public final static String kHorizontalOffset = "tx";
+            public final static String kVerticalOffset = "ty";
+            public final static String kDistanceOffset = "ta";
+
+            public final static double STEER_K = 0.03;
+            public final static double AIM_K = 0.03;
+            public final static double DRIVE_K = 0.26;
+            public final static double DESIRED_TARGET_AREA = 13.0;
+            public final static double MAX_DRIVE = 0.7;
+        }
+    }
+    public final static class DriveMotors {
+       public final static int kLeftMotor1 = 1;
+       public final static int kLeftMotor2 = 2;
+       public final static int kRightMotor1 = 3;
+       public final static int kRightMotor2 = 4;
+    }
+    public final static class DriveControllers{
+        public final static int DriverOne = 0;
+        public final static int DriverTwo = 1;
+    }
 }
