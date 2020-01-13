@@ -2,12 +2,16 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.subDriveTrain;
+import frc.robot.subsystems.subLimeLight;
 
-public class cDriveTrain_TeleOp extends CommandBase {
+public class cLimeLight_AlignToTarget extends CommandBase {
   private final subDriveTrain driveTrain;
-  public cDriveTrain_TeleOp(subDriveTrain _driveTrain) {
+  private final subLimeLight limeLight;
+  public cLimeLight_AlignToTarget(subDriveTrain _driveTrain, subLimeLight _limeLight) {
     driveTrain = _driveTrain;
+    limeLight = _limeLight;
     addRequirements(driveTrain);
+    addRequirements(limeLight);
   }
 
   @Override
@@ -16,7 +20,7 @@ public class cDriveTrain_TeleOp extends CommandBase {
 
   @Override
   public void execute() {
-    driveTrain.TeleOp(driveTrain);
+    driveTrain.LimeDrive(driveTrain, limeLight);
   }
 
   @Override
@@ -26,5 +30,5 @@ public class cDriveTrain_TeleOp extends CommandBase {
   @Override
   public boolean isFinished() {
     return false;
-  }
+  }  
 }

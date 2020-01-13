@@ -33,8 +33,24 @@ public class subDriveTrain extends SubsystemBase {
   public void TeleOp(subDriveTrain driveTrain) {
     driveTrain.m_driveTrain.tankDrive(driverOne.getY(Hand.kLeft), driverOne.getY(Hand.kRight));
   }
+  public void AutoDrive(subDriveTrain driveTrain, double drive, double turn){
+    driveTrain.m_driveTrain.arcadeDrive(drive, turn, true);
+  }
 
+  public void LimeDrive(subDriveTrain driveTrain, subLimeLight limeLight){
+    //limeLight.SteerCommand *= 0.70;
+    //limeLight.DriveCommand *= 0.70;
 
+    if (limeLight.HasValidTarget)
+    {
+      AutoDrive(driveTrain, limeLight.DriveCommand, limeLight.SteerCommand);
+    }
+    else
+    {
+      AutoDrive(driveTrain, 0, 0);
+    }
+  }
+  
   @Override
   public void periodic() {
     

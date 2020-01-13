@@ -12,7 +12,14 @@ public final class Constants {
         public final static Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
     }
     public final static class LimeLight{
-        public final static class LED{
+        public final static class Types{
+            public final static String kledMode = "ledMode";
+            public final static String kcamMode = "camMode";
+            public final static String kpipeline = "pipeline";
+            public final static String kstream = "stream";
+            public final static String ksnapshot = "snapshot";
+        }
+        public final static class ledMode{
             public final static Number kDefault = 0;
             public final static Number kOn = 3;
             public final static Number kOff = 1;
