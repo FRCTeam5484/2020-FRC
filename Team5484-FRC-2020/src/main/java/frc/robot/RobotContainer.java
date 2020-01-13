@@ -37,7 +37,7 @@ public class RobotContainer {
     new JoystickButton(driverOne, Button.kB.value)
         .whenHeld(new cLimeLight_AlignToTarget(driveTrain, limeLight));
     new JoystickButton(driverOne, Button.kX.value)
-        .whenPressed(() -> colorWheel.PrintColor());
+        .whileHeld(() -> colorWheel.PrintColor());
   }
 
   public Command getAutonomousCommand() {

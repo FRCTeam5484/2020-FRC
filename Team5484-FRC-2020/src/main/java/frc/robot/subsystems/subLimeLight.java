@@ -40,6 +40,7 @@ public class subLimeLight extends SubsystemBase {
   }
   public void setLED(Number ledState) {
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(ledState);
+    System.out.println(NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").getNumber(0));
   }
   public double GetNetworkTableValue(String value)
   {
