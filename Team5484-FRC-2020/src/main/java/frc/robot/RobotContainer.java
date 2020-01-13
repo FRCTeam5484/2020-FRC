@@ -16,6 +16,7 @@ public class RobotContainer {
   //SubSystems
   private final subDriveTrain driveTrain = new subDriveTrain();
   private final subLimeLight limeLight = new subLimeLight();
+  private final subColorWheel colorWheel = new subColorWheel();
 
   //Commands
   private final cDriveTrain_TeleOp driveTrain_TeleOp = new cDriveTrain_TeleOp(driveTrain);
@@ -35,6 +36,8 @@ public class RobotContainer {
         .whenReleased(() -> limeLight.setLED(LimeLight.ledMode.kOff));
     new JoystickButton(driverOne, Button.kB.value)
         .whenHeld(new cLimeLight_AlignToTarget(driveTrain, limeLight));
+    new JoystickButton(driverOne, Button.kX.value)
+        .whenPressed(() -> colorWheel.PrintColor());
   }
 
   public Command getAutonomousCommand() {
