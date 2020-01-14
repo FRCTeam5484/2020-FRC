@@ -3,7 +3,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import frc.robot.Constants.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
@@ -19,13 +21,13 @@ public class RobotContainer {
   private final subColorWheel colorWheel = new subColorWheel();
 
   //Commands
-  private final cDriveTrain_TeleOp driveTrain_TeleOp = new cDriveTrain_TeleOp(driveTrain, colorWheel);
   
   private final cAutonomous m_autoCommand = new cAutonomous(driveTrain, limeLight);
 
   public RobotContainer() {
     configureButtonBindings();
-    driveTrain.setDefaultCommand(driveTrain_TeleOp);
+    driveTrain.setDefaultCommand(
+        new RunCommand(() -> driveTrain.tankDrive(driverOne.getY(Hand.kLeft), driverOne.getY(Hand.kRight)), driveTrain));
     limeLight.setLED(LimeLight.ledMode.kOff);
   }
 
