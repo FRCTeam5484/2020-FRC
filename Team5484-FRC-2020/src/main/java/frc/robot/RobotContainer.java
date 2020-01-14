@@ -19,7 +19,7 @@ public class RobotContainer {
   private final subColorWheel colorWheel = new subColorWheel();
 
   //Commands
-  private final cDriveTrain_TeleOp driveTrain_TeleOp = new cDriveTrain_TeleOp(driveTrain);
+  private final cDriveTrain_TeleOp driveTrain_TeleOp = new cDriveTrain_TeleOp(driveTrain, colorWheel);
   
   private final cAutonomous m_autoCommand = new cAutonomous(driveTrain, limeLight);
 
