@@ -14,15 +14,14 @@ public class RobotContainer {
   XboxController driverOne = new XboxController(DriveControllers.DriverOne);
 
   //SubSystems
-  private final subDriveTrain driveTrain = new subDriveTrain();
+  private final subDriveTrain driveTrain = new subDriveTrain(); 
   private final subLimeLight limeLight = new subLimeLight();
   private final subColorWheel colorWheel = new subColorWheel();
 
   //Commands
   private final cDriveTrain_TeleOp driveTrain_TeleOp = new cDriveTrain_TeleOp(driveTrain);
   
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  private final cAutonomous m_autoCommand = new cAutonomous(driveTrain, limeLight);
 
   public RobotContainer() {
     configureButtonBindings();
