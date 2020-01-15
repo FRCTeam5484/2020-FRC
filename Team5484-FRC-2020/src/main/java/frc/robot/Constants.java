@@ -12,6 +12,11 @@ public final class Constants {
         public final static Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
     }
     public final static class LimeLight{
+        public final static class Pipeline{
+            public final static int kDriveCamera = 0;
+            public final static int kHighTarget = 1;
+            public final static int kLowTarget = 2;
+        }
         public final static class Types{
             public final static String kledMode = "ledMode";
             public final static String kcamMode = "camMode";
@@ -37,6 +42,10 @@ public final class Constants {
             public final static double DESIRED_TARGET_AREA = 13.0;
             public final static double MAX_DRIVE = 0.7;
         }
+    }
+    public final static class LED{
+        public final static int StrandOneID = 9;
+        public final static int StrandOneCount = 60;
     }
     public final static class DriveMotors {
        public final static int kLeftMotor1 = 1;

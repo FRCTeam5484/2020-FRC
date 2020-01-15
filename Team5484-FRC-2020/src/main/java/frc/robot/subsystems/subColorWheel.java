@@ -27,22 +27,20 @@ public class subColorWheel extends SubsystemBase {
     SmartDashboard.putString("Color Detected: ", GetColor());
   }
 
-  public String GetColor(){
-    Color detectedColor = m_colorSensor.getColor();
-    String colorString;
-    ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
-
+  public final String GetColor(){
+    final Color detectedColor = m_colorSensor.getColor();
+    final ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
+    
     if (match.color == Colors.kBlueTarget) {
-      colorString = "Blue";
+      return "Blue";
     } else if (match.color == Colors.kRedTarget) {
-      colorString = "Red";
+      return "Red";
     } else if (match.color == Colors.kGreenTarget) {
-      colorString = "Green";
+      return "Green";
     } else if (match.color == Colors.kYellowTarget) {
-      colorString = "Yellow";
+      return "Yellow";
     } else {
-      colorString = "Unknown";
+      return "Unknown";
     }
-    return colorString;
   }
 }

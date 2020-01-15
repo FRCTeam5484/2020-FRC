@@ -8,9 +8,8 @@ import frc.robot.subsystems.subLimeLight;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-
   private RobotContainer m_robotContainer;
-  
+  private subLimeLight limeLight = new subLimeLight();
 
   @Override
   public void robotInit() {
@@ -23,9 +22,8 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void disabledInit() {
-    subLimeLight limeLight = new subLimeLight();
-    limeLight.setLED(LimeLight.ledMode.kOff);
+  public void disabledInit() {    
+    limeLight.setLEDMode(LimeLight.ledMode.kOff);
   }
 
   @Override

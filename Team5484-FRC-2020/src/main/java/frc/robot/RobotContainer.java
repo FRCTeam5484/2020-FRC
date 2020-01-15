@@ -20,6 +20,7 @@ public class RobotContainer {
   private final subDriveTrain driveTrain = new subDriveTrain(); 
   private final subLimeLight limeLight = new subLimeLight();
   private final subColorWheel colorWheel = new subColorWheel();
+  private final subControlSystems controlSystems = new subControlSystems();
 
   //Commands
   
@@ -33,9 +34,17 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     new JoystickButton(driverOne, Button.kA.value)
-        .whenPressed(() -> limeLight.setLED(LimeLight.ledMode.kOn))
-        .whenReleased(() -> limeLight.setLED(LimeLight.ledMode.kOff));
+        .whileHeld(() -> controlSystems.setGreen());
     new JoystickButton(driverOne, Button.kB.value)
+        .whileHeld(() -> controlSystems.setRed());
+    new JoystickButton(driverOne, Button.kX.value)
+        .whileHeld(() -> controlSystems.setBlue());
+    new JoystickButton(driverOne, Button.kY.value)
+        .whileHeld(() -> controlSystems.setYellow());
+    new JoystickButton(driverOne, Button.kBumperRight.value)
+        .whenPressed(() -> limeLight.setLEDMode(LimeLight.ledMode.kOn))
+        .whenReleased(() -> limeLight.setLEDMode(LimeLight.ledMode.kOff));
+    new JoystickButton(driverOne, Button.kBumperLeft.value)
         .whenHeld(new cLimeLight_AlignToTarget(driveTrain, limeLight));
   }
 
