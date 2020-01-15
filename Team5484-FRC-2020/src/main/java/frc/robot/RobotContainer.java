@@ -37,8 +37,6 @@ public class RobotContainer {
         .whenReleased(() -> limeLight.setLED(LimeLight.ledMode.kOff));
     new JoystickButton(driverOne, Button.kB.value)
         .whenHeld(new cLimeLight_AlignToTarget(driveTrain, limeLight));
-    new JoystickButton(driverOne, Button.kX.value)
-        .whileHeld(() -> colorWheel.PrintColor());
   }
 
   public Command getAutonomousCommand() {

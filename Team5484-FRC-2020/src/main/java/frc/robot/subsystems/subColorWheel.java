@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.Colors;
@@ -23,7 +24,7 @@ public class subColorWheel extends SubsystemBase {
 
   @Override
   public void periodic() {
-    
+    SmartDashboard.putString("Color Detected: ", GetColor());
   }
 
   public String GetColor(){
@@ -43,8 +44,5 @@ public class subColorWheel extends SubsystemBase {
       colorString = "Unknown";
     }
     return colorString;
-  }
-  public void PrintColor() {
-    System.out.println(GetColor());
   }
 }

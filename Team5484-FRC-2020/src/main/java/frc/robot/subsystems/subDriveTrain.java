@@ -7,6 +7,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveControllers;
 import frc.robot.Constants.DriveMotors;
@@ -21,7 +22,6 @@ public class subDriveTrain extends SubsystemBase {
   private final SpeedControllerGroup leftDrive = new SpeedControllerGroup(sparkLeft1, sparkLeft2);
   private final SpeedControllerGroup rightDrive = new SpeedControllerGroup(sparkRight1, sparkRight2);
   private final DifferentialDrive driveTrain = new DifferentialDrive(leftDrive, rightDrive);;
-  private final XboxController driverOne = new XboxController(DriveControllers.DriverOne);
 
   public subDriveTrain() 
   {
@@ -32,13 +32,9 @@ public class subDriveTrain extends SubsystemBase {
       driveTrain.tankDrive(left, right);
   }
   public void AutoDrive(double drive, double turn){
-    driveTrain.arcadeDrive(drive, turn, true);
+      driveTrain.arcadeDrive(drive, turn, true);
   }
-
   public void LimeDrive(subDriveTrain driveTrain, subLimeLight limeLight){
-    //limeLight.SteerCommand *= 0.70;
-    //limeLight.DriveCommand *= 0.70;
-
     if (limeLight.HasValidTarget)
     {
       AutoDrive(limeLight.DriveCommand, limeLight.SteerCommand);
@@ -51,6 +47,7 @@ public class subDriveTrain extends SubsystemBase {
   
   @Override
   public void periodic() {
-    
+    SmartDashboard.putNumber("Left Drive Value: ", leftDrive.get());
+    SmartDashboard.putNumber("Right Drive Value: ", rightDrive.get());
   }
 }
