@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
 import frc.robot.Constants.LED;
 
 public class subControlSystems extends SubsystemBase {
@@ -14,7 +15,7 @@ public class subControlSystems extends SubsystemBase {
   private int rainbowFirstPixelHue;
 
   public subControlSystems() {
-
+    
   }
 
   @Override
@@ -24,6 +25,8 @@ public class subControlSystems extends SubsystemBase {
     SmartDashboard.putNumber("PDP Current: ", pdp.getTotalCurrent());
     SmartDashboard.putNumber("PDP Energy: ", pdp.getTotalEnergy());
   }
+
+  // Addressable LED Methods
   public void setRed(){
     for (var i = 0; i < ledBuffer.getLength(); i++) {
       ledBuffer.setRGB(i, 255, 0, 0);

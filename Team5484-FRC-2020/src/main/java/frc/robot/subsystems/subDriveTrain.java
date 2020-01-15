@@ -9,7 +9,11 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.Constants.DriveMotors;
+import frc.robot.Constants.NavX;
 
 
 public class subDriveTrain extends SubsystemBase {  
@@ -20,6 +24,7 @@ public class subDriveTrain extends SubsystemBase {
   private final SpeedControllerGroup leftDrive = new SpeedControllerGroup(sparkLeft1, sparkLeft2);
   private final SpeedControllerGroup rightDrive = new SpeedControllerGroup(sparkRight1, sparkRight2);
   private final DifferentialDrive driveTrain = new DifferentialDrive(leftDrive, rightDrive);
+  public AHRS ahrs;
 
   private CANEncoder left1Encoder = new CANEncoder(sparkLeft1);
   private CANEncoder left2Encoder = new CANEncoder(sparkLeft2);
@@ -33,8 +38,20 @@ public class subDriveTrain extends SubsystemBase {
       sparkRight1.restoreFactoryDefaults();
       sparkRight2.restoreFactoryDefaults();
 
+      left1Encoder = sparkLeft1.getEncoder();
+      left2Encoder = sparkLeft2.getEncoder();
+      right1Encoder = sparkRight1.getEncoder();
+      right2Encoder = sparkRight2.getEncoder();
+
       leftDrive.setInverted(true);
       rightDrive.setInverted(true);
+
+      try {
+        ahrs = new AHRS(SPI.Port.kMXP); 
+        ahrs.reset();
+      } catch (RuntimeException ex ) {
+          DriverStation.reportError("Error instantiating navX:  " + ex.getMessage(), true);
+      }
   }
 
   public void tankDrive(final double left, final double right) {
@@ -47,10 +64,6 @@ public class subDriveTrain extends SubsystemBase {
   
   @Override
   public void periodic() {
-    left1Encoder = sparkLeft1.getEncoder();
-    left2Encoder = sparkLeft2.getEncoder();
-    right1Encoder = sparkRight1.getEncoder();
-    right2Encoder = sparkRight2.getEncoder();
 
     SmartDashboard.putNumber("Left Drive Value: ", leftDrive.get());
     //Left Motor 1    
@@ -85,5 +98,32 @@ public class subDriveTrain extends SubsystemBase {
     SmartDashboard.putNumber("Right 2 Current", sparkRight2.getOutputCurrent());
     SmartDashboard.putNumber("Right 2 Applied Output", sparkRight2.getAppliedOutput());
     SmartDashboard.putNumber("Right 2 Motor Temperature", sparkRight2.getMotorTemperature());
+
+    // NavX
+    SmartDashboard.putNumber("Get Angle: ", getAngle());
+  }
+
+  // NavX Methods
+  public double getAngle(){
+    double value = 0;
+    try {
+        value = Math.IEEEremainder(ahrs.getAngle(), 360) * (NavX.kGyroReversed ? -1.0 : 1.0);
+    } catch( RuntimeException ex ) {
+        DriverStation.reportError("Error communicating with navX:  " + ex.getMessage(), true);
+    }
+    return value;
+  }
+  public void zeroHeading(){
+    try {
+      ahrs.reset();
+    } catch( RuntimeException ex ) {
+        DriverStation.reportError("Error communicating with navX:  " + ex.getMessage(), true);
+    }
+  }
+  public double getTurnRate() {
+    return ahrs.getRate() * (NavX.kGyroReversed ? -1.0 : 1.0);
+  }
+  public void setMaxOutput(double maxOutput) {
+    driveTrain.setMaxOutput(maxOutput);
   }
 }

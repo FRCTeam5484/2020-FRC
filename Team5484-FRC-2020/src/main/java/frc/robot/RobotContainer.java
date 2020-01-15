@@ -23,8 +23,7 @@ public class RobotContainer {
   private final subControlSystems controlSystems = new subControlSystems();
 
   //Commands
-  
-  private final cAutonomous m_autoCommand = new cAutonomous(driveTrain, limeLight);
+  private final cmdAutonomous commandAutoCommand = new cmdAutonomous(driveTrain, limeLight);
 
   public RobotContainer() {
     configureButtonBindings();
@@ -45,10 +44,14 @@ public class RobotContainer {
         .whenPressed(() -> limeLight.setLEDMode(LimeLight.ledMode.kOn))
         .whenReleased(() -> limeLight.setLEDMode(LimeLight.ledMode.kOff));
     new JoystickButton(driverOne, Button.kBumperLeft.value)
-        .whenHeld(new cLimeLight_AlignToTarget(driveTrain, limeLight));
+        .whenHeld(new cmdLimeLight_AlignToTarget(driveTrain, limeLight));
+    new JoystickButton(driverOne, Button.kStart.value)
+        .whenPressed(new cmdDriveTrain_TurnToAngle(90, driveTrain));
+    new JoystickButton(driverOne, Button.kBack.value)
+        .whenPressed(new cmdDriveTrain_TurnToAngle(-90, driveTrain));
   }
 
   public Command getAutonomousCommand() {
-    return m_autoCommand;
+    return commandAutoCommand;
   }
 }

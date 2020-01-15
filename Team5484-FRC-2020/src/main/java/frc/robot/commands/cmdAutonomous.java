@@ -11,13 +11,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.subDriveTrain;
 import frc.robot.subsystems.subLimeLight;
 
-public class cAutonomous extends CommandBase {
+public class cmdAutonomous extends CommandBase {
   /**
    * Creates a new cAutonomous.
    */
   private final subDriveTrain driveTrain;
   private final subLimeLight limeLight;
-  public cAutonomous(subDriveTrain subDrive, subLimeLight subLight) {
+  public cmdAutonomous(subDriveTrain subDrive, subLimeLight subLight) {
     // Use addRequirements() here to declare subsystem dependencies.
     driveTrain = subDrive;
     limeLight = subLight;

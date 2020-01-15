@@ -57,4 +57,15 @@ public final class Constants {
         public final static int DriverOne = 0;
         public final static int DriverTwo = 1;
     }
+    public final static class NavX{
+        public final static double kTurnP = 0;
+        public final static double kTurnI = 0;
+        public final static double kTurnD = 0;
+        public final static boolean kGyroReversed = true;
+        public static final double kMaxTurnRateDegPerS = 100;
+        public static final double kMaxTurnAccelerationDegPerSSquared = 300;
+
+        public static final double kTurnToleranceDeg = 5;
+        public static final double kTurnRateToleranceDegPerS = 10;
+    }
 }
