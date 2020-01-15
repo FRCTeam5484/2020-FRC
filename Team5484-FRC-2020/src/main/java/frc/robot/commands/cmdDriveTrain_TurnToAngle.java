@@ -16,7 +16,6 @@ public class cmdDriveTrain_TurnToAngle extends PIDCommand {
     getController().enableContinuousInput(-180, 180);
     getController().setTolerance(NavX.kTurnToleranceDeg, NavX.kTurnRateToleranceDegPerS);
   }
-
   
   @Override
   public boolean isFinished() {
