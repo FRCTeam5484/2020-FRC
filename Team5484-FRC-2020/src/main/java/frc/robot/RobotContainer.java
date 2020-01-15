@@ -11,6 +11,7 @@ import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 
 
+
 public class RobotContainer {
   //Controllers
   XboxController driverOne = new XboxController(DriveControllers.DriverOne);
@@ -28,7 +29,6 @@ public class RobotContainer {
     configureButtonBindings();
     driveTrain.setDefaultCommand(
         new RunCommand(() -> driveTrain.tankDrive(driverOne.getY(Hand.kLeft), driverOne.getY(Hand.kRight)), driveTrain));
-    limeLight.setLED(LimeLight.ledMode.kOff);
   }
 
   private void configureButtonBindings() {
