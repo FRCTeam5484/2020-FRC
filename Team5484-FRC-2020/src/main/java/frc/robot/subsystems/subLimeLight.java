@@ -48,15 +48,30 @@ public class subLimeLight extends SubsystemBase {
     SmartDashboard.putNumber("LimeLight camMode: ", camMode.getDouble(0.0)); */
 
     if (HasValidTarget){
-      //steering_adjust = KpAim*heading_error + min_aim_command;
       double steer_cmd = (LimeLight.Detection.DESIRED_ANGLE - txHorizontalOffset.getDouble(0.0)) * LimeLight.Detection.STEER_K;
-      SteerCommand = ((steer_cmd > LimeLight.Detection.MAX_DRIVE) ? LimeLight.Detection.MAX_DRIVE : steer_cmd);
+      if(steer_cmd > LimeLight.Detection.MAX_DRIVE){
+        SteerCommand = LimeLight.Detection.MAX_DRIVE;
+      }
+      else if (steer_cmd < LimeLight.Detection.MIN_DRIVE){
+        SteerCommand = LimeLight.Detection.MIN_DRIVE;
+      }
+      else{
+        SteerCommand = steer_cmd;
+      }
       double drive_cmd = (LimeLight.Detection.DESIRED_TARGET_AREA - taAreaDistance.getDouble(0)) * LimeLight.Detection.DRIVE_K;
-      DriveCommand = ((drive_cmd > LimeLight.Detection.MAX_DRIVE) ? LimeLight.Detection.MAX_DRIVE : drive_cmd);  
+      if(drive_cmd > LimeLight.Detection.MAX_DRIVE){
+        DriveCommand = LimeLight.Detection.MAX_DRIVE;
+      }
+      else if (drive_cmd < LimeLight.Detection.MIN_DRIVE){
+        DriveCommand = LimeLight.Detection.MIN_DRIVE;
+      }
+      else{
+        DriveCommand = drive_cmd;  
+      }
     }
     else{
-      DriveCommand = 0.0;
-      SteerCommand = 0.0;
+      DriveCommand = -0.2;
+      SteerCommand = 0.2;
     }
   }
   public void setLEDMode(Number ledState) {

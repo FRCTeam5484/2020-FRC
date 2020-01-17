@@ -41,6 +41,7 @@ public final class Constants {
             public final static double DESIRED_TARGET_AREA = 2.320;
             public final static double DESIRED_ANGLE = -3.86;
             public final static double MAX_DRIVE = 0.7;
+            public final static double MIN_DRIVE = 0.1;
         }
     }
     public final static class LED{
@@ -53,6 +54,7 @@ public final class Constants {
        public final static int kRightMotor1 = 3;
        public final static int kRightMotor2 = 4;
        public final static double kMaxSpeed = -0.7;
+       public final static double kUnitsPerInch = 100;
     }
     public final static class DriveControllers{
         public final static int DriverOne = 0;

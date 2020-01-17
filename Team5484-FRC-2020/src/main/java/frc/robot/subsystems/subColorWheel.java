@@ -2,8 +2,6 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.Colors;
 import frc.robot.Constants.WheelSystem;
@@ -39,7 +37,11 @@ public class subColorWheel extends SubsystemBase {
   }
 
   public final void turnToColor(){
-      if(gameColor != detectedColor){
+      getGameData();
+      if(gameColor == "NA") {
+        turnWheel(0);
+      }
+      else if(gameColor != detectedColor){
         turnWheel(1);
       }
       else{
@@ -90,7 +92,7 @@ public class subColorWheel extends SubsystemBase {
         case 'Y' :
           gameColor = "Yellow";
         default :
-          gameColor = "Not Available";
+          gameColor = "NA";
       }
     }
   }
