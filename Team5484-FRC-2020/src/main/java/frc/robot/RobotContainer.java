@@ -15,6 +15,7 @@ import frc.robot.subsystems.*;
 public class RobotContainer {
   //Controllers
   XboxController driverOne = new XboxController(DriveControllers.DriverOne);
+  XboxController driverTwo = new XboxController(DriveControllers.DriverTwo);
 
   //SubSystems
   private final subDriveTrain driveTrain = new subDriveTrain(); 
@@ -32,6 +33,8 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
+    
+    // Driver One Controls
     new JoystickButton(driverOne, Button.kA.value)
         .whileHeld(() -> controlSystems.setGreen());
     new JoystickButton(driverOne, Button.kB.value)
@@ -49,6 +52,12 @@ public class RobotContainer {
         .whenPressed(new cmdDriveTrain_TurnToAngle(90, driveTrain));
     new JoystickButton(driverOne, Button.kBack.value)
         .whenPressed(new cmdDriveTrain_TurnToAngle(-90, driveTrain));
+
+    // Driver Two Controls
+    new JoystickButton(driverTwo, Button.kA.value)
+        .whileHeld(() -> colorWheel.turnFourTimes());
+    new JoystickButton(driverTwo, Button.kB.value)
+        .whileHeld(() -> colorWheel.turnToColor());
   }
 
   public Command getAutonomousCommand() {

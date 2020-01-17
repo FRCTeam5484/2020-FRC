@@ -44,9 +44,6 @@ public class subDriveTrain extends SubsystemBase {
       right1Encoder = sparkRight1.getEncoder();
       right2Encoder = sparkRight2.getEncoder();
 
-      leftDrive.setInverted(true);
-      rightDrive.setInverted(true);
-
       try {
         ahrs = new AHRS(SPI.Port.kMXP); 
         ahrs.reset();
@@ -66,7 +63,7 @@ public class subDriveTrain extends SubsystemBase {
   @Override
   public void periodic() {
 
-    SmartDashboard.putNumber("Left Drive Value: ", leftDrive.get());
+    /* SmartDashboard.putNumber("Left Drive Value: ", leftDrive.get());
     //Left Motor 1    
     SmartDashboard.putNumber("Left 1 Encoder Position", left1Encoder.getPosition());
     SmartDashboard.putNumber("Left 1 Encoder Velocity", left1Encoder.getVelocity());
@@ -98,10 +95,10 @@ public class subDriveTrain extends SubsystemBase {
     SmartDashboard.putNumber("Right 2 Bus Voltage", sparkRight2.getBusVoltage());
     SmartDashboard.putNumber("Right 2 Current", sparkRight2.getOutputCurrent());
     SmartDashboard.putNumber("Right 2 Applied Output", sparkRight2.getAppliedOutput());
-    SmartDashboard.putNumber("Right 2 Motor Temperature", sparkRight2.getMotorTemperature());
+    SmartDashboard.putNumber("Right 2 Motor Temperature", sparkRight2.getMotorTemperature()); 
 
     // NavX
-    SmartDashboard.putNumber("Get Angle: ", getAngle());
+    SmartDashboard.putNumber("Get Angle: ", getAngle());*/
   }
 
   // NavX Methods

@@ -13,11 +13,11 @@ public class subLimeLight extends SubsystemBase {
   private NetworkTableEntry tvHasTarget = table.getEntry("tv");
   private NetworkTableEntry taAreaDistance = table.getEntry("ta");
   private NetworkTableEntry txHorizontalOffset = table.getEntry("tx");
-  private NetworkTableEntry tyVerticalOffset = table.getEntry("ty");
-  private NetworkTableEntry tsRotationOffset = table.getEntry("ts");
+  //private NetworkTableEntry tyVerticalOffset = table.getEntry("ty");
+  //private NetworkTableEntry tsRotationOffset = table.getEntry("ts");
   private NetworkTableEntry ledMode = table.getEntry(("ledMode"));
   private NetworkTableEntry pipeline = table.getEntry("pipeline");
-  private NetworkTableEntry camMode = table.getEntry("camMode");
+  //private NetworkTableEntry camMode = table.getEntry("camMode");
 
   public subLimeLight() {
 
@@ -25,24 +25,27 @@ public class subLimeLight extends SubsystemBase {
 
   @Override
   public void periodic() {
+    
+  }
+  public void triggeredPeriodic(){
     tvHasTarget = table.getEntry("tv");
     HasValidTarget = ((tvHasTarget.getDouble(0.0) < 1.0) ? false : true); 
     taAreaDistance = table.getEntry("ta");
     txHorizontalOffset = table.getEntry("tx");
-    tyVerticalOffset = table.getEntry("ty");
-    tsRotationOffset = table.getEntry("ts");
-    ledMode = table.getEntry("ledMode");
-    pipeline = table.getEntry("pipeline");
-    camMode = table.getEntry("camMode");
+    //tyVerticalOffset = table.getEntry("ty");
+    //tsRotationOffset = table.getEntry("ts");
+    //ledMode = table.getEntry("ledMode");
+    //pipeline = table.getEntry("pipeline");
+    //camMode = table.getEntry("camMode");
 
-    SmartDashboard.putBoolean("LimeLight Has Target: ", HasValidTarget);
+    /* SmartDashboard.putBoolean("LimeLight Has Target: ", HasValidTarget);
     SmartDashboard.putNumber("LimeLight ledMode: ", ledMode.getDouble(0.0));
     SmartDashboard.putNumber("LimeLight pipeLine: ", pipeline.getDouble(0.0));
     SmartDashboard.putNumber("LimeLight taAreaDistance: ", taAreaDistance.getDouble(0.0));
     SmartDashboard.putNumber("LimeLight txHorizontalOffset: ", txHorizontalOffset.getDouble(0.0));
     SmartDashboard.putNumber("LimeLight tyVerticalOffset: ", tyVerticalOffset.getDouble(0.0));
     SmartDashboard.putNumber("LimeLight tsRotationOffset: ", tsRotationOffset.getDouble(0.0));
-    SmartDashboard.putNumber("LimeLight camMode: ", camMode.getDouble(0.0));
+    SmartDashboard.putNumber("LimeLight camMode: ", camMode.getDouble(0.0)); */
 
     if (HasValidTarget){
       //steering_adjust = KpAim*heading_error + min_aim_command;

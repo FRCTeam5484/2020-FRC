@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.DriverStation;
 
 import frc.robot.Constants.LED;
 
@@ -20,10 +21,10 @@ public class subControlSystems extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("PDP Voltage: ", pdp.getVoltage());
-    SmartDashboard.putNumber("PDP Temp: ", pdp.getTemperature());
-    SmartDashboard.putNumber("PDP Current: ", pdp.getTotalCurrent());
-    SmartDashboard.putNumber("PDP Energy: ", pdp.getTotalEnergy());
+    //SmartDashboard.putNumber("PDP Voltage: ", pdp.getVoltage());
+    //SmartDashboard.putNumber("PDP Temp: ", pdp.getTemperature());
+    //SmartDashboard.putNumber("PDP Current: ", pdp.getTotalCurrent());
+    //SmartDashboard.putNumber("PDP Energy: ", pdp.getTotalEnergy());
   }
 
   // Addressable LED Methods

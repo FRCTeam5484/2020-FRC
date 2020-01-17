@@ -24,6 +24,7 @@ public class cmdLimeLight_AlignToTarget extends CommandBase {
 
   @Override
   public void execute() {
+    limeLight.triggeredPeriodic();
     driveTrain.AutoDrive(limeLight.DriveCommand, limeLight.SteerCommand);
   }
 
