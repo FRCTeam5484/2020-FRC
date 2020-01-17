@@ -36,10 +36,10 @@ public final class Constants {
             public final static String kVerticalOffset = "ty";
             public final static String kDistanceOffset = "ta";
 
-            public final static double STEER_K = 0.03;
-            public final static double AIM_K = 0.03;
-            public final static double DRIVE_K = 0.26;
-            public final static double DESIRED_TARGET_AREA = 13.0;
+            public final static double STEER_K = 0.023;
+            public final static double DRIVE_K = -0.35;
+            public final static double DESIRED_TARGET_AREA = 2.320;
+            public final static double DESIRED_ANGLE = -3.86;
             public final static double MAX_DRIVE = 0.7;
         }
     }
@@ -52,6 +52,7 @@ public final class Constants {
        public final static int kLeftMotor2 = 2;
        public final static int kRightMotor1 = 3;
        public final static int kRightMotor2 = 4;
+       public final static double kMaxSpeed = 0.7;
     }
     public final static class DriveControllers{
         public final static int DriverOne = 0;

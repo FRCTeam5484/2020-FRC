@@ -2,7 +2,7 @@ Pipeline 0 (DriverCamera):
 -Input
 --Pipeline Type: Limelight Standard
 --Source Image: Camera
---Resolution: 920x440 processing
+--Resolution: 960x720 processing
 --LEDs: Off
 --Orientation: 
 --Exposure: 2
@@ -10,31 +10,13 @@ Pipeline 0 (DriverCamera):
 --Red Balance: 1200
 --Blue Balance: 1975
 
--Thresholding
---Hue: 60
---Saturation: 70
---Value: 70
--- Erosion Steps: 0
--- Dilation Steps: 1
-
--Contour Filtering
---Sort Mode: Largest
---Area: 0.0201 - 21.5074
---Fulleness: 10 - 53.7
---W/H Ratio: 1.3008 - 17.3436
---Direction Filter: None
---Smart Speckle: 17
---Contour simpl: 5.0
---Target Grouping: Single Target
---Intersection Filter: None
-
--Output
---Targetting Region: Center
---Send Raw Corners: No
---Send Raw Contours: No
---Crosshair Mode: Single Crosshair
-
 Pipeline 1 (HighTarget):
+-Targeting Values: 
+--tx: -3.86
+--ty: 14.62
+--ta: 2.320
+--hl 48.8
+
 -Input
 --Pipeline Type: Limelight Standard
 --Source Image: Camera

@@ -1,6 +1,8 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
+import frc.robot.Constants.LimeLight;
 import frc.robot.subsystems.subDriveTrain;
 import frc.robot.subsystems.subLimeLight;
 
@@ -16,6 +18,8 @@ public class cmdLimeLight_AlignToTarget extends CommandBase {
 
   @Override
   public void initialize() {
+    limeLight.setPipeline(1);
+    limeLight.setLEDMode(LimeLight.ledMode.kOn);
   }
 
   @Override
@@ -25,6 +29,8 @@ public class cmdLimeLight_AlignToTarget extends CommandBase {
 
   @Override
   public void end(final boolean interrupted) {
+    limeLight.setPipeline(0);
+    limeLight.setLEDMode(LimeLight.ledMode.kOff);
   }
 
   @Override

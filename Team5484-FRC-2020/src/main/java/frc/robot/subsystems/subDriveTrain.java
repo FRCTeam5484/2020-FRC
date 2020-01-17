@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.DriverStation;
+import frc.robot.Constants;
 import frc.robot.Constants.DriveMotors;
 import frc.robot.Constants.NavX;
 
@@ -55,7 +56,7 @@ public class subDriveTrain extends SubsystemBase {
   }
 
   public void tankDrive(final double left, final double right) {
-    driveTrain.tankDrive(left, right);
+    driveTrain.tankDrive(left * Constants.DriveMotors.kMaxSpeed, right * Constants.DriveMotors.kMaxSpeed);
   }
 
   public void AutoDrive(final double drive, final double turn) {

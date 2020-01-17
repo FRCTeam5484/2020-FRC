@@ -45,7 +45,9 @@ public class subLimeLight extends SubsystemBase {
     SmartDashboard.putNumber("LimeLight camMode: ", camMode.getDouble(0.0));
 
     if (HasValidTarget){
-      SteerCommand = txHorizontalOffset.getDouble(0.0) * LimeLight.Detection.STEER_K;
+      //steering_adjust = KpAim*heading_error + min_aim_command;
+      double steer_cmd = (LimeLight.Detection.DESIRED_ANGLE - txHorizontalOffset.getDouble(0.0)) * LimeLight.Detection.STEER_K;
+      SteerCommand = ((steer_cmd > LimeLight.Detection.MAX_DRIVE) ? LimeLight.Detection.MAX_DRIVE : steer_cmd);
       double drive_cmd = (LimeLight.Detection.DESIRED_TARGET_AREA - taAreaDistance.getDouble(0)) * LimeLight.Detection.DRIVE_K;
       DriveCommand = ((drive_cmd > LimeLight.Detection.MAX_DRIVE) ? LimeLight.Detection.MAX_DRIVE : drive_cmd);  
     }
