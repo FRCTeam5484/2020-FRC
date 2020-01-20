@@ -35,16 +35,19 @@ public class RobotContainer {
     CommandScheduler.getInstance().onCommandFinish(command -> USBLogging.printCommandStatus(command, "FINISHeD"));
 
     CommandScheduler.getInstance().onCommandInterrupt(command -> USBLogging.printCommandStatus(command, "Interrupted"));
-    
+/*
     driveTrain.setDefaultCommand(
         new RunCommand(() -> driveTrain.tankDrive(driverOne.getY(Hand.kLeft), driverOne.getY(Hand.kRight), driverOne.getTriggerAxis(Hand.kRight) > DriveControllers.minRTriggerPress), driveTrain));
+*/
   }
 
   private void configureButtonBindings() {
     
     // Driver One Controls
+
     new JoystickButton(driverOne, Button.kA.value)
         .whileHeld(() -> controlSystems.setGreen());
+
     new JoystickButton(driverOne, Button.kB.value)
         .whileHeld(() -> controlSystems.setRed());
     new JoystickButton(driverOne, Button.kX.value)
@@ -54,8 +57,17 @@ public class RobotContainer {
     new JoystickButton(driverOne, Button.kBumperRight.value)
         .whenPressed(() -> limeLight.setLEDMode(LimeLight.ledMode.kOn))
         .whenReleased(() -> limeLight.setLEDMode(LimeLight.ledMode.kOff));
+
+    /*
     new JoystickButton(driverOne, Button.kBumperLeft.value)
         .whenHeld(new cmdLimeLight_AlignToTarget(driveTrain, limeLight));
+    */
+
+    
+    new JoystickButton(driverOne, Button.kBumperLeft.value)
+        .toggleWhenPressed(new RunCommand(() -> driveTrain.TestAllMotors()));
+    
+
     new JoystickButton(driverOne, Button.kStart.value)
         .whenPressed(new cmdDriveTrain_TurnToAngle(90, driveTrain));
     new JoystickButton(driverOne, Button.kBack.value)

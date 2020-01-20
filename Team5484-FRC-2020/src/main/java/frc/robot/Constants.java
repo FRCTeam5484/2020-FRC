@@ -53,9 +53,12 @@ public final class Constants {
        public final static int kLeftMotor2 = 2;
        public final static int kRightMotor1 = 3;
        public final static int kRightMotor2 = 4;
-       public final static double kMaxSpeed = -0.7;
+       public final static double kMaxSpeed = -0.8;        // change back to -0.7
        public final static double kUnitsPerInch = 100;
-       public final static double kBoostSpeed = -1; 
+       public final static double kBoostSpeed = -1;
+       public final static int kTestMotor = 4;
+       public final static double kinvertTestLeft = 1;
+       public final static double kinvertTestRight = -1;
     }
     public final static class DriveControllers{
         public final static int DriverOne = 0;
