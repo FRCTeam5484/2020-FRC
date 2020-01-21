@@ -11,7 +11,7 @@ public final class Constants {
         public final static Color kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
         public final static Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
     }
-    public final static class LimeLight{
+    public final static class LimeLight {
         public final static class Pipeline{
             public final static int kDriveCamera = 0;
             public final static int kHighTarget = 1;
