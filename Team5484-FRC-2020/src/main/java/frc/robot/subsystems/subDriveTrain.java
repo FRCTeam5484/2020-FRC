@@ -60,29 +60,7 @@ public class subDriveTrain extends SubsystemBase {
       driveTrain.tankDrive(left * DriveMotors.kMaxSpeed, right * DriveMotors.kMaxSpeed);
     }
   }
-
-  public void TestAllMotors() {
-    driveTrain.tankDrive(DriveMotors.kMaxSpeed * DriveMotors.kinvertTestLeft, DriveMotors.kMaxSpeed * DriveMotors.kinvertTestRight);
-  }
-  
-  public void TestIndividualMotor() {
-    switch (DriveMotors.kTestMotor) {
-      case 1:
-        sparkLeft1.set(DriveMotors.kMaxSpeed);
-        break;
-      case 2:
-        sparkLeft2.set(DriveMotors.kMaxSpeed);
-        break;
-      case 3:
-        sparkRight1.set(DriveMotors.kMaxSpeed);
-        break;
-      case 4:
-        sparkRight2.set(DriveMotors.kMaxSpeed);
-        break;
-      default:
-        break;
-    }
-  }
+    
 
   public void AutoDrive(final double drive, final double turn) {
       driveTrain.arcadeDrive(drive, turn, true);

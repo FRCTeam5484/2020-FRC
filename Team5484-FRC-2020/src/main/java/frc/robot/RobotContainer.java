@@ -33,9 +33,15 @@ public class RobotContainer {
     CommandScheduler.getInstance().onCommandInitialize(command -> USBLogging.printCommandStatus(command, "initialized"));
     CommandScheduler.getInstance().onCommandFinish(command -> USBLogging.printCommandStatus(command, "FINISHeD"));
     CommandScheduler.getInstance().onCommandInterrupt(command -> USBLogging.printCommandStatus(command, "Interrupted"));
+<<<<<<< HEAD
 
  drivetrain.setDefaultCommand(
         new RunCommand(() -> drivetrain.tankDrive(driverOne.getY(Hand.kLeft), driverOne.getY(Hand.kRight), driverOne.getTriggerAxis(Hand.kRight) > DriveControllers.minRTriggerPress), drivetrain));
+=======
+    
+    driveTrain.setDefaultCommand(
+        new RunCommand(() -> driveTrain.tankDrive(driverOne.getY(Hand.kLeft), driverOne.getY(Hand.kRight), driverOne.getTriggerAxis(Hand.kRight) > DriveControllers.minRTriggerPress), driveTrain));
+>>>>>>> parent of 1f15d02... Motor Test Functions
   }
 
   private void configureButtonBindings() {
@@ -52,7 +58,11 @@ public class RobotContainer {
         .whenPressed(() -> limeLight.setLEDMode(LimeLight.ledMode.kOn))
         .whenReleased(() -> limeLight.setLEDMode(LimeLight.ledMode.kOff));
     new JoystickButton(driverOne, Button.kBumperLeft.value)
+<<<<<<< HEAD
         .whenHeld(new cmdLimeLight_AlignToTarget drivetrain, limeLight));
+=======
+        .whenHeld(new cmdLimeLight_AlignToTarget(driveTrain, limeLight));
+>>>>>>> parent of 1f15d02... Motor Test Functions
     new JoystickButton(driverOne, Button.kStart.value)
         .whenPressed(new cmdDriveTrain_TurnToAngle(90, drivetrain));
     new JoystickButton(driverOne, Button.kBack.value)
