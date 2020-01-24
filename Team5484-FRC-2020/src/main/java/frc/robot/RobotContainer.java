@@ -19,19 +19,21 @@ public class RobotContainer {
   XboxController driverTwo = new XboxController(DriveControllers.DriverTwo);
 
   //SubSystems
-  private final subDriveTrain drivetrain = new subDriveTrain(); 
+  private final subDriveTrain driveTrain = new subDriveTrain(); 
   private final subLimeLight limeLight = new subLimeLight();
   private final subColorWheel colorWheel = new subColorWheel();
   private final subControlSystems controlSystems = new subControlSystems();
 
   //Commands
-  private final cmdAutonomous commandAutoCommand = new cmdAutonomous drivetrain, limeLight);
+  private final cmdAutonomous commandAutoCommand = new cmdAutonomous(driveTrain, limeLight);
 
   public RobotContainer() {
     configureButtonBindings();
 
     CommandScheduler.getInstance().onCommandInitialize(command -> USBLogging.printCommandStatus(command, "initialized"));
+
     CommandScheduler.getInstance().onCommandFinish(command -> USBLogging.printCommandStatus(command, "FINISHeD"));
+<<<<<<< HEAD
     CommandScheduler.getInstance().onCommandInterrupt(command -> USBLogging.printCommandStatus(command, "Interrupted"));
 <<<<<<< HEAD
 
@@ -42,12 +44,23 @@ public class RobotContainer {
     driveTrain.setDefaultCommand(
         new RunCommand(() -> driveTrain.tankDrive(driverOne.getY(Hand.kLeft), driverOne.getY(Hand.kRight), driverOne.getTriggerAxis(Hand.kRight) > DriveControllers.minRTriggerPress), driveTrain));
 >>>>>>> parent of 1f15d02... Motor Test Functions
+=======
+
+    CommandScheduler.getInstance().onCommandInterrupt(command -> USBLogging.printCommandStatus(command, "Interrupted"));
+/*
+    driveTrain.setDefaultCommand(
+        new RunCommand(() -> driveTrain.tankDrive(driverOne.getY(Hand.kLeft), driverOne.getY(Hand.kRight), driverOne.getTriggerAxis(Hand.kRight) > DriveControllers.minRTriggerPress), driveTrain));
+*/
+>>>>>>> parent of 360b8f6... Cleaned Up My Mess from Yesterday
   }
 
   private void configureButtonBindings() {
+    
     // Driver One Controls
+
     new JoystickButton(driverOne, Button.kA.value)
         .whileHeld(() -> controlSystems.setGreen());
+
     new JoystickButton(driverOne, Button.kB.value)
         .whileHeld(() -> controlSystems.setRed());
     new JoystickButton(driverOne, Button.kX.value)
@@ -57,6 +70,7 @@ public class RobotContainer {
     new JoystickButton(driverOne, Button.kBumperRight.value)
         .whenPressed(() -> limeLight.setLEDMode(LimeLight.ledMode.kOn))
         .whenReleased(() -> limeLight.setLEDMode(LimeLight.ledMode.kOff));
+<<<<<<< HEAD
     new JoystickButton(driverOne, Button.kBumperLeft.value)
 <<<<<<< HEAD
         .whenHeld(new cmdLimeLight_AlignToTarget drivetrain, limeLight));
@@ -68,16 +82,30 @@ public class RobotContainer {
     new JoystickButton(driverOne, Button.kBack.value)
         .whenPressed(new cmdDriveTrain_TurnToAngle(-90, drivetrain));
     // Uncomment below when testing a new drivetrain
+=======
+
+>>>>>>> parent of 360b8f6... Cleaned Up My Mess from Yesterday
     /*
     new JoystickButton(driverOne, Button.kBumperLeft.value)
-        .toggleWhenPressed(new RunCommand(() -> drivetrain.TestAllMotors()));
+        .whenHeld(new cmdLimeLight_AlignToTarget(driveTrain, limeLight));
     */
+
+    
+    new JoystickButton(driverOne, Button.kBumperLeft.value)
+        .toggleWhenPressed(new RunCommand(() -> driveTrain.TestAllMotors()));
+    
+
+    new JoystickButton(driverOne, Button.kStart.value)
+        .whenPressed(new cmdDriveTrain_TurnToAngle(90, driveTrain));
+    new JoystickButton(driverOne, Button.kBack.value)
+        .whenPressed(new cmdDriveTrain_TurnToAngle(-90, driveTrain));
 
     // Driver Two Controls
     new JoystickButton(driverTwo, Button.kA.value)
         .whileHeld(() -> colorWheel.turnFourTimes());
     new JoystickButton(driverTwo, Button.kB.value)
         .whileHeld(() -> colorWheel.turnToColor());
+    
   }
 
   public Command getAutonomousCommand() {

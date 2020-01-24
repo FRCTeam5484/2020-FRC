@@ -13,7 +13,7 @@ public class cmdLimeLight_AlignToTarget extends CommandBase {
     limeLight = _limeLight;
     addRequirements(driveTrain);
     addRequirements(limeLight);
-  }   
+  }
 
   @Override
   public void initialize() {
