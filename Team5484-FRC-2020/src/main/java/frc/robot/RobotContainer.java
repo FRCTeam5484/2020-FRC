@@ -47,20 +47,13 @@ public class RobotContainer {
 
 
     CommandScheduler.getInstance().onCommandInterrupt(command -> USBLogging.printCommandStatus(command, "Interrupted"));
-/*
-    driveTrain.setDefaultCommand(
-        new RunCommand(() -> driveTrain.tankDrive(driverOne.getY(Hand.kLeft), driverOne.getY(Hand.kRight), driverOne.getTriggerAxis(Hand.kRight) > DriveControllers.minRTriggerPress), driveTrain));
-*/
-
   }
 
   private void configureButtonBindings() {
     
     // Driver One Controls
-
     new JoystickButton(driverOne, Button.kA.value)
         .whileHeld(() -> controlSystems.setGreen());
-
     new JoystickButton(driverOne, Button.kB.value)
         .whileHeld(() -> controlSystems.setRed());
     new JoystickButton(driverOne, Button.kX.value)
@@ -86,7 +79,8 @@ public class RobotContainer {
         .whileHeld(() -> colorWheel.turnFourTimes());
     new JoystickButton(driverTwo, Button.kB.value)
         .whileHeld(() -> colorWheel.turnToColor());
-    
+    new JoystickButton(driverTwo, Button.kBumperLeft.value)
+        .toggleWhenPressed(new RunCommand(() -> driveTrain.DriveStraight()));
   }
 
   public Command getAutonomousCommand() {

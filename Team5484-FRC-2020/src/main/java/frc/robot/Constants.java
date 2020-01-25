@@ -56,6 +56,9 @@ public final class Constants {
        public final static double kMaxSpeed = -0.7;
        public final static double kUnitsPerInch = 100;
        public final static double kBoostSpeed = -1; 
+       public final static double kTestSpeed = -.8;
+       public final static double kLeftDriveStraightSpeed = -.02;
+       public final static double kRightDriveStraightSpeed = -.02;
     }
     public final static class DriveControllers{
         public final static int DriverOne = 0;

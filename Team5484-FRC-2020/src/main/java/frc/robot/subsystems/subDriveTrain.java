@@ -60,6 +60,10 @@ public class subDriveTrain extends SubsystemBase {
       driveTrain.tankDrive(left * DriveMotors.kMaxSpeed, right * DriveMotors.kMaxSpeed);
     }
   }
+
+  public void DriveStraight() {
+    driveTrain.tankDrive(DriveMotors.kLeftDriveStraightSpeed, DriveMotors.kRightDriveStraightSpeed);
+  }
     
 
   public void AutoDrive(final double drive, final double turn) {
@@ -69,6 +73,10 @@ public class subDriveTrain extends SubsystemBase {
   @Override
   public void periodic() {
 
+    SmartDashboard.putNumber("Left(1) Encoder Ticks", left1Encoder.getCountsPerRevolution());
+    SmartDashboard.putNumber("Left(2) Encoder Ticks", left2Encoder.getCountsPerRevolution());
+    SmartDashboard.putNumber("Right(1) Encoder Ticks", right1Encoder.getCountsPerRevolution());
+    SmartDashboard.putNumber("Right(2) Encoder Ticks", right2Encoder.getCountsPerRevolution());
     /* SmartDashboard.putNumber("Left Drive Value: ", leftDrive.get());
     //Left Motor 1    
     SmartDashboard.putNumber("Left 1 Encoder Position", left1Encoder.getPosition());
