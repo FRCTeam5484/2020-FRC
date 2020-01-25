@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.Colors;
 import frc.robot.Constants.WheelSystem;
@@ -33,7 +34,10 @@ public class subColorWheel extends SubsystemBase {
 
   @Override
   public void periodic() {
-    //SmartDashboard.putString("Color Detected: ", GetColor());
+    GetColor();
+    //SmartDashboard.putString("Color Detected: ", detectedColor);
+    //if (gameColor != "")
+    //  System.out.println("Color Detected: " + colorSensor.getRawColor().toString());
   }
 
   public final void turnToColor(){
@@ -62,17 +66,17 @@ public class subColorWheel extends SubsystemBase {
     wheelMotor.set(speed * WheelSystem.kMaxSpeed);
   }
 
-  public final void GetColor(){
+  public final void GetColor() {
     final ColorMatchResult match = colorMatcher.matchClosestColor(colorSensor.getColor());
-    
+    System.out.println("Match: " + Double.toString(match.color.blue));
     if (match.color == Colors.kBlueTarget) {
-      detectedColor = "Blue";
-    } else if (match.color == Colors.kRedTarget) {
       detectedColor = "Red";
+    } else if (match.color == Colors.kRedTarget) {
+      detectedColor = "Blue";
     } else if (match.color == Colors.kGreenTarget) {
-      detectedColor = "Green";
-    } else if (match.color == Colors.kYellowTarget) {
       detectedColor = "Yellow";
+    } else if (match.color == Colors.kYellowTarget) {
+      detectedColor = "Green";
     } else {
       detectedColor = "NA";
     }

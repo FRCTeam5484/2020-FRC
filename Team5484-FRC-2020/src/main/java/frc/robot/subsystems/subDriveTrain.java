@@ -6,12 +6,13 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANEncoder;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.Constants.*;
 
@@ -25,6 +26,7 @@ public class subDriveTrain extends SubsystemBase {
   private final SpeedControllerGroup leftDrive = new SpeedControllerGroup(sparkLeft1, sparkLeft2);
   private final SpeedControllerGroup rightDrive = new SpeedControllerGroup(sparkRight1, sparkRight2);
   private final DifferentialDrive driveTrain = new DifferentialDrive(leftDrive, rightDrive);
+  private final AnalogInput ultrasonic = new AnalogInput(UltrasonicSensor.kUltrasonicPort);
   public AHRS ahrs;
 
   private CANEncoder left1Encoder = new CANEncoder(sparkLeft1);
@@ -61,6 +63,25 @@ public class subDriveTrain extends SubsystemBase {
     }
   }
 
+  public void TestIndividualMotor() {
+    switch(DriveMotors.kTestMotor) {
+      case "Left1":
+        sparkLeft1.set(DriveMotors.kTestSpeed);
+        break;
+      case "Right1":
+        sparkRight1.set(DriveMotors.kTestSpeed);
+        break;
+      case "Left2":
+        sparkLeft2.set(DriveMotors.kTestSpeed);
+        break;
+      case "Right2":
+        sparkRight2.set(DriveMotors.kTestSpeed);
+        break;
+      default:
+        break;
+    }
+  }
+
   public void DriveStraight() {
     driveTrain.tankDrive(DriveMotors.kLeftDriveStraightSpeed, DriveMotors.kRightDriveStraightSpeed);
   }
@@ -72,11 +93,11 @@ public class subDriveTrain extends SubsystemBase {
   
   @Override
   public void periodic() {
-
-    SmartDashboard.putNumber("Left(1) Encoder Ticks", left1Encoder.getCountsPerRevolution());
-    SmartDashboard.putNumber("Left(2) Encoder Ticks", left2Encoder.getCountsPerRevolution());
-    SmartDashboard.putNumber("Right(1) Encoder Ticks", right1Encoder.getCountsPerRevolution());
-    SmartDashboard.putNumber("Right(2) Encoder Ticks", right2Encoder.getCountsPerRevolution());
+    // SmartDashboard.putNumber("Left(1) Encoder Ticks", left1Encoder.getCountsPerRevolution());
+    // SmartDashboard.putNumber("Left(2) Encoder Ticks", left2Encoder.getCountsPerRevolution());
+    // SmartDashboard.putNumber("Right(1) Encoder Ticks", right1Encoder.getCountsPerRevolution());
+    // SmartDashboard.putNumber("Right(2) Encoder Ticks", right2Encoder.getCountsPerRevolution());
+    SmartDashboard.putNumber("Ultrasonic", ultrasonic.getValue());
     /* SmartDashboard.putNumber("Left Drive Value: ", leftDrive.get());
     //Left Motor 1    
     SmartDashboard.putNumber("Left 1 Encoder Position", left1Encoder.getPosition());

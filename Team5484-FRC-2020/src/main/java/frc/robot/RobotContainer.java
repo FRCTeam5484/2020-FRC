@@ -23,6 +23,7 @@ public class RobotContainer {
   private final subLimeLight limeLight = new subLimeLight();
   private final subColorWheel colorWheel = new subColorWheel();
   private final subControlSystems controlSystems = new subControlSystems();
+  private final subShooter shooter = new subShooter();
 
   //Commands
   private final cmdAutonomous commandAutoCommand = new cmdAutonomous(driveTrain, limeLight);
@@ -65,8 +66,6 @@ public class RobotContainer {
         .whenReleased(() -> limeLight.setLEDMode(LimeLight.ledMode.kOff));
     new JoystickButton(driverOne, Button.kBumperLeft.value)
         .whenHeld(new cmdLimeLight_AlignToTarget(driveTrain, limeLight));
-    new JoystickButton(driverOne, Button.kStart.value)
-        .whenPressed(new cmdDriveTrain_TurnToAngle(90, driveTrain));
     new JoystickButton(driverOne, Button.kBack.value)
         .whenPressed(new cmdDriveTrain_TurnToAngle(-90, driveTrain));
     new JoystickButton(driverOne, Button.kStart.value)
@@ -75,12 +74,23 @@ public class RobotContainer {
         .whenPressed(new cmdDriveTrain_TurnToAngle(-90, driveTrain));
 
     // Driver Two Controls
-    new JoystickButton(driverTwo, Button.kA.value)
-        .whileHeld(() -> colorWheel.turnFourTimes());
+    // new JoystickButton(driverTwo, Button.kA.value)
+    //     .whileHeld(() -> colorWheel.turnFourTimes());
+    // new JoystickButton(driverTwo, Button.kB.value)
+    //     .whileHeld(() -> colorWheel.turnToColor());
+    // new JoystickButton(driverTwo, Button.kBumperLeft.value)
+    //     .toggleWhenPressed(new RunCommand(() -> driveTrain.DriveStraight()));
+    new JoystickButton(driverTwo, Button.kY.value)
+        .whileHeld(() -> shooter.Shoot(1));
+    new JoystickButton(driverTwo, Button.kX.value)
+        .whileHeld(() -> shooter.Shoot(.9));
     new JoystickButton(driverTwo, Button.kB.value)
-        .whileHeld(() -> colorWheel.turnToColor());
-    new JoystickButton(driverTwo, Button.kBumperLeft.value)
-        .toggleWhenPressed(new RunCommand(() -> driveTrain.DriveStraight()));
+        .whileHeld(() -> shooter.Shoot(.8));
+    new JoystickButton(driverTwo, Button.kA.value)
+        .whileHeld(() -> shooter.Shoot(.7));
+    new JoystickButton(driverTwo, Button.kBumperRight.value)
+        .whileHeld(() -> shooter.Shoot(.1));
+    
   }
 
   public Command getAutonomousCommand() {
