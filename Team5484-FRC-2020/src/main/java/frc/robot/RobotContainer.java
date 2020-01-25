@@ -33,25 +33,25 @@ public class RobotContainer {
     CommandScheduler.getInstance().onCommandInitialize(command -> USBLogging.printCommandStatus(command, "initialized"));
 
     CommandScheduler.getInstance().onCommandFinish(command -> USBLogging.printCommandStatus(command, "FINISHeD"));
-<<<<<<< HEAD
-    CommandScheduler.getInstance().onCommandInterrupt(command -> USBLogging.printCommandStatus(command, "Interrupted"));
-<<<<<<< HEAD
 
- drivetrain.setDefaultCommand(
-        new RunCommand(() -> drivetrain.tankDrive(driverOne.getY(Hand.kLeft), driverOne.getY(Hand.kRight), driverOne.getTriggerAxis(Hand.kRight) > DriveControllers.minRTriggerPress), drivetrain));
-=======
+    CommandScheduler.getInstance().onCommandInterrupt(command -> USBLogging.printCommandStatus(command, "Interrupted"));
+
+
+ driveTrain.setDefaultCommand(
+        new RunCommand(() -> driveTrain.tankDrive(driverOne.getY(Hand.kLeft), driverOne.getY(Hand.kRight), driverOne.getTriggerAxis(Hand.kRight) > DriveControllers.minRTriggerPress), driveTrain));
+
     
     driveTrain.setDefaultCommand(
         new RunCommand(() -> driveTrain.tankDrive(driverOne.getY(Hand.kLeft), driverOne.getY(Hand.kRight), driverOne.getTriggerAxis(Hand.kRight) > DriveControllers.minRTriggerPress), driveTrain));
->>>>>>> parent of 1f15d02... Motor Test Functions
-=======
+
+
 
     CommandScheduler.getInstance().onCommandInterrupt(command -> USBLogging.printCommandStatus(command, "Interrupted"));
 /*
     driveTrain.setDefaultCommand(
         new RunCommand(() -> driveTrain.tankDrive(driverOne.getY(Hand.kLeft), driverOne.getY(Hand.kRight), driverOne.getTriggerAxis(Hand.kRight) > DriveControllers.minRTriggerPress), driveTrain));
 */
->>>>>>> parent of 360b8f6... Cleaned Up My Mess from Yesterday
+
   }
 
   private void configureButtonBindings() {
@@ -70,31 +70,12 @@ public class RobotContainer {
     new JoystickButton(driverOne, Button.kBumperRight.value)
         .whenPressed(() -> limeLight.setLEDMode(LimeLight.ledMode.kOn))
         .whenReleased(() -> limeLight.setLEDMode(LimeLight.ledMode.kOff));
-<<<<<<< HEAD
     new JoystickButton(driverOne, Button.kBumperLeft.value)
-<<<<<<< HEAD
-        .whenHeld(new cmdLimeLight_AlignToTarget drivetrain, limeLight));
-=======
         .whenHeld(new cmdLimeLight_AlignToTarget(driveTrain, limeLight));
->>>>>>> parent of 1f15d02... Motor Test Functions
     new JoystickButton(driverOne, Button.kStart.value)
-        .whenPressed(new cmdDriveTrain_TurnToAngle(90, drivetrain));
+        .whenPressed(new cmdDriveTrain_TurnToAngle(90, driveTrain));
     new JoystickButton(driverOne, Button.kBack.value)
-        .whenPressed(new cmdDriveTrain_TurnToAngle(-90, drivetrain));
-    // Uncomment below when testing a new drivetrain
-=======
-
->>>>>>> parent of 360b8f6... Cleaned Up My Mess from Yesterday
-    /*
-    new JoystickButton(driverOne, Button.kBumperLeft.value)
-        .whenHeld(new cmdLimeLight_AlignToTarget(driveTrain, limeLight));
-    */
-
-    
-    new JoystickButton(driverOne, Button.kBumperLeft.value)
-        .toggleWhenPressed(new RunCommand(() -> driveTrain.TestAllMotors()));
-    
-
+        .whenPressed(new cmdDriveTrain_TurnToAngle(-90, driveTrain));
     new JoystickButton(driverOne, Button.kStart.value)
         .whenPressed(new cmdDriveTrain_TurnToAngle(90, driveTrain));
     new JoystickButton(driverOne, Button.kBack.value)
