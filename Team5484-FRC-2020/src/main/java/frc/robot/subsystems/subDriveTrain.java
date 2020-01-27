@@ -41,6 +41,14 @@ public class subDriveTrain extends SubsystemBase {
       sparkRight1.restoreFactoryDefaults();
       sparkRight2.restoreFactoryDefaults();
 
+      sparkLeft1.setSmartCurrentLimit(DriveMotors.kAmpLimit);
+      sparkLeft2.setSmartCurrentLimit(DriveMotors.kAmpLimit);
+      sparkRight1.setSmartCurrentLimit(DriveMotors.kAmpLimit);
+      sparkRight2.setSmartCurrentLimit(DriveMotors.kAmpLimit);
+
+      leftDrive.setInverted(DriveMotors.leftInvert);
+      rightDrive.setInverted(DriveMotors.rightInvert);
+
       left1Encoder = sparkLeft1.getEncoder();
       left2Encoder = sparkLeft2.getEncoder();
       right1Encoder = sparkRight1.getEncoder();

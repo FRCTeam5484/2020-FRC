@@ -49,23 +49,27 @@ public final class Constants {
         public final static int StrandOneCount = 60;
     }
     public final static class ShooterMotors {
+        public final static int kAmpLimit = 38;
         public final static int kLeftMotor = 5;
         public final static int kRightMotor = 6;
         public final static double kLeftSpeed = .1;
         public final static double kRightSpeed = -.1;
     }   
     public final static class DriveMotors {
-       public final static int kLeftMotor1 = 3;
-       public final static int kLeftMotor2 = 4;
-       public final static int kRightMotor1 = 1;
-       public final static int kRightMotor2 = 2;
-       public final static String kTestMotor = "Left2";
-       public final static double kMaxSpeed = 0.7;
-       public final static double kUnitsPerInch = 100;
-       public final static double kBoostSpeed = 1;
-       public final static double kTestSpeed = -.85;
-       public final static double kLeftDriveStraightSpeed = -.02;
-       public final static double kRightDriveStraightSpeed = -.02;
+        public final static int kAmpLimit = 38;
+        public final static int kLeftMotor1 = 3;
+        public final static int kLeftMotor2 = 4;
+        public final static int kRightMotor1 = 1;
+        public final static int kRightMotor2 = 2;
+        public final static boolean leftInvert = true;
+        public final static boolean rightInvert = false;
+        public final static String kTestMotor = "Left2";
+        public final static double kMaxSpeed = 0.7;
+        public final static double kUnitsPerInch = 100;
+        public final static double kBoostSpeed = 1;
+        public final static double kTestSpeed = -.85;
+        public final static double kLeftDriveStraightSpeed = -.02;
+        public final static double kRightDriveStraightSpeed = -.02;
     }
     public final static class DriveControllers {
         public final static int DriverOne = 0;
@@ -73,6 +77,7 @@ public final class Constants {
         public final static double minRTriggerPress = .5;
     }
     public final static class WheelSystem {
+        public final static int kAmpLimit = 38;
         public final static int kMotor = 5;
         public final static double kMaxSpeed = 0.5;
         public final static double kFourTurnUnitCount = 50.0;

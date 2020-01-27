@@ -22,6 +22,8 @@ public class subShooter extends SubsystemBase {
 
   public subShooter() {
     rightShooter.setInverted(true);
+    rightShooter.setSmartCurrentLimit(ShooterMotors.kAmpLimit);
+    leftShooter.setSmartCurrentLimit(ShooterMotors.kAmpLimit);
   }
 
   public void Shoot(double percent) {
