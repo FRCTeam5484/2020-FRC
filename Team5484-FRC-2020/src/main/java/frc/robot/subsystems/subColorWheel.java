@@ -37,6 +37,7 @@ public class subColorWheel extends SubsystemBase {
 
   @Override
   public void periodic() {
+    GetColor();
     SmartDashboard.putString("Detected Color", detectedColor);
   }
 
@@ -68,9 +69,9 @@ public class subColorWheel extends SubsystemBase {
 
   public final void GetColor() {
     final ColorMatchResult match = colorMatcher.matchClosestColor(colorSensor.getColor());
-    // SmartDashboard.putString("Red", Double.toString(match.color.red));
-    // SmartDashboard.putString("Blue", Double.toString(match.color.blue));
-    // SmartDashboard.putString("Green", Double.toString(match.color.green));
+    SmartDashboard.putString("Red", Double.toString(match.color.red));
+    SmartDashboard.putString("Blue", Double.toString(match.color.blue));
+    SmartDashboard.putString("Green", Double.toString(match.color.green));
     if (match.color == Colors.kBlueTarget) {
       detectedColor = "Red";
     } else if (match.color == Colors.kRedTarget) {
