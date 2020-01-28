@@ -21,22 +21,20 @@ public class subShooter extends SubsystemBase {
   private final CANSparkMax rightShooter = new CANSparkMax(ShooterMotors.kRightMotor, MotorType.kBrushless);
 
   public subShooter() {
+    // Limits Amps
     rightShooter.setSmartCurrentLimit(ShooterMotors.kAmpLimit);
     leftShooter.setSmartCurrentLimit(ShooterMotors.kAmpLimit);
+    // Inverts motors
+    rightShooter.setInverted(ShooterMotors.invertRMotor);
+    leftShooter.setInverted(ShooterMotors.invertRMotor);
   }
 
-  public void Shoot(double percent) {
-    leftShooter.set(percent);
-    rightShooter.set(percent);
-  }
-
-  public void Stop(){
-    leftShooter.set(0);
-    rightShooter.set(0);
+  public void Shoot(double speed) {
+    leftShooter.set(speed);
+    rightShooter.set(speed);
   }
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
   }
 }

@@ -4,7 +4,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.AllMotors;
+import frc.robot.Constants.*;
 
 public class subAllMotors extends SubsystemBase {
   private final CANSparkMax spark1 = new CANSparkMax(1, MotorType.kBrushless);

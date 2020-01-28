@@ -10,6 +10,7 @@ public final class Constants {
         public final static Color kGreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
         public final static Color kRedTarget = ColorMatch.makeColor(0.561, 0.231, 0.114);
         public final static Color kYellowTarget = ColorMatch.makeColor(0.361, 0.523, 0.113);
+        public final static double kConfidence = .01;
     }
     public final static class LimeLight {
         public final static class Pipeline {
@@ -49,14 +50,16 @@ public final class Constants {
         public final static int StrandOneCount = 60;
     }
     public final static class ShooterMotors {
-        public final static int kAmpLimit = 38;
+        public final static int kAmpLimit = 35;
         public final static int kLeftMotor = 5;
         public final static int kRightMotor = 6;
         public final static double kLeftSpeed = .1;
         public final static double kRightSpeed = -.1;
+        public final static boolean invertRMotor = true;
+        public final static boolean invertLMotor = false;
     }   
     public final static class DriveMotors {
-        public final static int kAmpLimit = 38;
+        public final static int kAmpLimit = 35;
         public final static int kLeftMotor1 = 3;
         public final static int kLeftMotor2 = 4;
         public final static int kRightMotor1 = 1;
@@ -70,6 +73,10 @@ public final class Constants {
         public final static double kTestSpeed = -.85;
         public final static double kLeftDriveStraightSpeed = -.02;
         public final static double kRightDriveStraightSpeed = -.02;
+    }
+    public final static class AllMotors {
+        public final static double kTestSpeed = .8;
+        public final static boolean kInverted = false;
     }
     public final static class DriveControllers {
         public final static int DriverOne = 0;
