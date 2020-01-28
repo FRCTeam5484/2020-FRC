@@ -2,7 +2,6 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.Colors;
@@ -35,7 +34,6 @@ public class subColorWheel extends SubsystemBase {
 
   @Override
   public void periodic() {
-    //GetColor();
   }
 
   public final void turnToColor(){
