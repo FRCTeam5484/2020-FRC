@@ -8,8 +8,8 @@ public final class Constants {
     public final static class Colors {
         public final static Color kBlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
         public final static Color kGreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
-        public final static Color kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
-        public final static Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
+        public final static Color kRedTarget = ColorMatch.makeColor(0.561, 0.231, 0.114);
+        public final static Color kYellowTarget = ColorMatch.makeColor(0.361, 0.523, 0.113);
     }
     public final static class LimeLight {
         public final static class Pipeline {

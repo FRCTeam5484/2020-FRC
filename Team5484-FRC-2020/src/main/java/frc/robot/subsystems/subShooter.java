@@ -21,7 +21,6 @@ public class subShooter extends SubsystemBase {
   private final CANSparkMax rightShooter = new CANSparkMax(ShooterMotors.kRightMotor, MotorType.kBrushless);
 
   public subShooter() {
-    rightShooter.setInverted(true);
     rightShooter.setSmartCurrentLimit(ShooterMotors.kAmpLimit);
     leftShooter.setSmartCurrentLimit(ShooterMotors.kAmpLimit);
   }
@@ -29,6 +28,11 @@ public class subShooter extends SubsystemBase {
   public void Shoot(double percent) {
     leftShooter.set(percent);
     rightShooter.set(percent);
+  }
+
+  public void Stop(){
+    leftShooter.set(0);
+    rightShooter.set(0);
   }
 
   @Override

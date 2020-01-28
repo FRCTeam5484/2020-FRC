@@ -35,7 +35,7 @@ public class subColorWheel extends SubsystemBase {
 
   @Override
   public void periodic() {
-    GetColor();
+    //GetColor();
   }
 
   public final void turnToColor(){

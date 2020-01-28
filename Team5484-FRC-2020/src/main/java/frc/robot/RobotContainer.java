@@ -83,13 +83,17 @@ public class RobotContainer {
     new JoystickButton(driverTwo, Button.kY.value)
         .whileHeld(() -> shooter.Shoot(1));
     new JoystickButton(driverTwo, Button.kX.value)
-        .whileHeld(() -> shooter.Shoot(.9));
+        .whenPressed(() -> shooter.Shoot(-.9))
+        .whenReleased(() -> shooter.Stop());
     new JoystickButton(driverTwo, Button.kB.value)
-        .whileHeld(() -> shooter.Shoot(.8));
+        .whenPressed(() -> shooter.Shoot(-.8))
+        .whenReleased(() -> shooter.Stop());
     new JoystickButton(driverTwo, Button.kA.value)
-        .whileHeld(() -> shooter.Shoot(.7));
+        .whenPressed(() -> shooter.Shoot(-.7))
+        .whenReleased(() -> shooter.Stop());
     new JoystickButton(driverTwo, Button.kBumperRight.value)
-        .whileHeld(() -> shooter.Shoot(.1));
+        .whenPressed(() -> shooter.Shoot(-.1))
+        .whenReleased(() -> shooter.Stop());
     
   }
 
