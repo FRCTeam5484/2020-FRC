@@ -26,13 +26,15 @@ public class subDriveTrain extends SubsystemBase {
   private final SpeedControllerGroup leftDrive = new SpeedControllerGroup(sparkLeft1, sparkLeft2);
   private final SpeedControllerGroup rightDrive = new SpeedControllerGroup(sparkRight1, sparkRight2);
   private final DifferentialDrive driveTrain = new DifferentialDrive(leftDrive, rightDrive);
-  private final AnalogInput ultrasonic = new AnalogInput(UltrasonicSensor.kUltrasonicPort);
+  private final Ultrasonic ultrasonic = new Ultrasonic(1, 2);
   public AHRS ahrs;
 
   private CANEncoder left1Encoder = new CANEncoder(sparkLeft1);
   private CANEncoder left2Encoder = new CANEncoder(sparkLeft2);
   private CANEncoder right1Encoder = new CANEncoder(sparkRight1);
   private CANEncoder right2Encoder = new CANEncoder(sparkRight2);
+  private double leftEncoderValue;
+  private double rightEncoderValue;
 
 
   public subDriveTrain() {
@@ -71,27 +73,17 @@ public class subDriveTrain extends SubsystemBase {
     }
   }
 
-  public void TestIndividualMotor() {
-    switch(DriveMotors.kTestMotor) {
-      case "Left1":
-        sparkLeft1.set(DriveMotors.kTestSpeed);
-        break;
-      case "Right1":
-        sparkRight1.set(DriveMotors.kTestSpeed);
-        break;
-      case "Left2":
-        sparkLeft2.set(DriveMotors.kTestSpeed);
-        break;
-      case "Right2":
-        sparkRight2.set(DriveMotors.kTestSpeed);
-        break;
-      default:
-        break;
-    }
-  }
 
   public void DriveStraight() {
-    driveTrain.tankDrive(DriveMotors.kLeftDriveStraightSpeed, DriveMotors.kRightDriveStraightSpeed);
+    if (rightEncoderValue < leftEncoderValue - DriveMotors.kTickTolerance) {
+      driveTrain.tankDrive(DriveMotors.kLeftDriveStraightSpeed * DriveMotors.ketchup, DriveMotors.kRightDriveStraightSpeed);
+    }
+    else if (leftEncoderValue < rightEncoderValue - DriveMotors.kTickTolerance){
+      driveTrain.tankDrive(DriveMotors.kLeftDriveStraightSpeed, DriveMotors.kRightDriveStraightSpeed * DriveMotors.ketchup);
+    }
+    else {
+      driveTrain.tankDrive(DriveMotors.kLeftDriveStraightSpeed, DriveMotors.kRightDriveStraightSpeed);
+    }
   }
     
 
@@ -101,11 +93,16 @@ public class subDriveTrain extends SubsystemBase {
   
   @Override
   public void periodic() {
+    leftEncoderValue = left1Encoder.getPosition() + left2Encoder.getPosition();
+    rightEncoderValue = right1Encoder.getPosition() + right2Encoder.getPosition();
+    //SmartDashboard.putNumber("Ultrasonic", Double.toString(ultrasonic.getRangeInches());
+
+
     // SmartDashboard.putNumber("Left(1) Encoder Ticks", left1Encoder.getCountsPerRevolution());
     // SmartDashboard.putNumber("Left(2) Encoder Ticks", left2Encoder.getCountsPerRevolution());
     // SmartDashboard.putNumber("Right(1) Encoder Ticks", right1Encoder.getCountsPerRevolution());
     // SmartDashboard.putNumber("Right(2) Encoder Ticks", right2Encoder.getCountsPerRevolution());
-    SmartDashboard.putNumber("Ultrasonic", ultrasonic.getValue());
+    
     /* SmartDashboard.putNumber("Left Drive Value: ", leftDrive.get());
     //Left Motor 1    
     SmartDashboard.putNumber("Left 1 Encoder Position", left1Encoder.getPosition());

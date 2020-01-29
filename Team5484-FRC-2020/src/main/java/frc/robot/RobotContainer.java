@@ -37,6 +37,8 @@ public class RobotContainer {
     private final subColorWheel colorWheel = new subColorWheel();
     private final subControlSystems controlSystems = new subControlSystems();
     private final subShooter shooter = new subShooter();
+    private final subTargetingLight targetingLight = new subTargetingLight();
+    //private final subLED sled = new subLED();
 
     //Commands
     private final cmdAutonomous commandAutoCommand = new cmdAutonomous(driveTrain, limeLight);
@@ -96,7 +98,11 @@ public class RobotContainer {
         //     .toggleWhenPressed(new RunCommand(() -> driveTrain.DriveStraight()));
         new JoystickButton(driverTwo, Button.kBumperRight.value)
             .toggleWhenPressed(new RunCommand(() -> shooter.Shoot(speed.getDouble(0))));
-    
+        new JoystickButton(driverTwo, Button.kBumperLeft.value)
+            .toggleWhenPressed(new RunCommand(() -> driveTrain.DriveStraight()));
+        new JoystickButton(driverTwo, Button.kX.value)
+            .whenPressed(() -> targetingLight.TurnOn())
+            .whenReleased(() -> targetingLight.TurnOff());
   }
 
   public Command getAutonomousCommand() {
