@@ -22,7 +22,6 @@ public class subColorWheel extends SubsystemBase {
   private final ColorMatch colorMatcher = new ColorMatch();
   private final CANSparkMax wheelMotor = new CANSparkMax(WheelSystem.kMotor, MotorType.kBrushless);
   private CANEncoder wheelEncoder = new CANEncoder(wheelMotor);
-  private String gameColor = "Unknown";
   private String detectedColor = "NA";
 
   public subColorWheel() {
@@ -42,11 +41,11 @@ public class subColorWheel extends SubsystemBase {
   }
 
   public final void turnToColor(){
-      getGameData();
-      if(gameColor == "NA") {
+
+      if(getGameData() == "NA") {
         turnWheel(0);
       }
-      else if(gameColor != detectedColor){
+      else if(getGameData() != detectedColor){
         turnWheel(1);
       }
       else{
@@ -84,7 +83,8 @@ public class subColorWheel extends SubsystemBase {
       detectedColor = "NA";
     }
   }
-  public void getGameData(){
+  public String getGameData(){
+    String gameColor = "Unknown";
     String gameData = DriverStation.getInstance().getGameSpecificMessage();
     if(gameData.length() > 0)
     {
@@ -102,5 +102,6 @@ public class subColorWheel extends SubsystemBase {
           gameColor = "NA";
       }
     }
+    return gameColor;
   }
 }

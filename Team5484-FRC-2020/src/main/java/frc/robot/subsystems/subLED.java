@@ -32,7 +32,6 @@ public class subLED extends SubsystemBase {
     if (status != "custom")
       colorStatus = status;
   }
-
   public void setLEDStatus(int Red, int Blue, int Green) {
     colorStatus = "custom";
     customRed = Red;
