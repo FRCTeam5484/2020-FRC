@@ -58,6 +58,14 @@ public final class Constants {
         public final static boolean invertRMotor = true;
         public final static boolean invertLMotor = false;
     }   
+    public final static class IntakeMotors {
+        public final static int kMotor1 = 2;
+        public final static int kWindow1 = 1;
+        public final static boolean kMotor1Invert = true;
+        public final static boolean kWindow1Invert = true;
+        public final static double kMotorSpeed = .8;
+        public final static double kWindowSpeed = .2;
+    }
     public final static class DriveMotors {
         public final static int kAmpLimit = 35;
         public final static int kLeftMotor1 = 3;
@@ -65,7 +73,7 @@ public final class Constants {
         public final static int kRightMotor1 = 1;
         public final static int kRightMotor2 = 2;
         public final static boolean leftInvert = true;
-        public final static boolean rightInvert = false;
+        public final static boolean rightInvert = true;
         public final static String kTestMotor = "Left2";
         public final static double kMaxSpeed = 0.7;
         public final static double kUnitsPerInch = 100;
@@ -74,7 +82,7 @@ public final class Constants {
         public final static double kLeftDriveStraightSpeed = -.5;
         public final static double kRightDriveStraightSpeed = -.5;
         public final static double kTickTolerance = .1;
-        public final static double ketchup = .7;
+        public final static double ketchup = .8;
     }
     public final static class AllMotors {
         public final static double kTestSpeed = .8;

@@ -15,8 +15,8 @@ public class subLED extends SubsystemBase {
   /**
    * Creates a new subLED.
    */
-  private final AddressableLED m_led = new AddressableLED(8);
-  private AddressableLEDBuffer m_buffer = new AddressableLEDBuffer(60);
+  private final AddressableLED m_led = new AddressableLED(9);
+  private AddressableLEDBuffer m_buffer = new AddressableLEDBuffer(150);
   private int m_rainbowFirstPixelHue;
   public subLED() {
     m_led.setLength(m_buffer.getLength());
@@ -25,7 +25,7 @@ public class subLED extends SubsystemBase {
   }
 
   private void rainbow() {
-    for (var i = 0; i < m_buffer.getLength(); i++) {
+    for (int i = 0; i < m_buffer.getLength(); i++) {
       final var hue = (m_rainbowFirstPixelHue + (i * 180 / m_buffer.getLength())) % 180;
       m_buffer.setHSV(i, hue, 255, 128);
     }

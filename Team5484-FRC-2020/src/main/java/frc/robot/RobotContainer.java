@@ -21,8 +21,18 @@ import frc.robot.subsystems.*;
 
 
 public class RobotContainer {
-    NetworkTableEntry speed = Shuffleboard.getTab("SmartDashboard")
+    NetworkTableEntry shootSpeed = Shuffleboard.getTab("SmartDashboard")
         .add("Shooter Speed", 0)
+        .withWidget(BuiltInWidgets.kNumberSlider)
+        .withProperties(Map.of("min", 0, "max", 1))
+        .getEntry();
+    NetworkTableEntry intakeSpeed = Shuffleboard.getTab("SmartDashboard")
+        .add("Intake Speed", 0)
+        .withWidget(BuiltInWidgets.kNumberSlider)
+        .withProperties(Map.of("min", 0, "max", 1))
+        .getEntry();
+    NetworkTableEntry windowIntakeSpeed = Shuffleboard.getTab("SmartDashboard")
+        .add("Window Speed", 0)
         .withWidget(BuiltInWidgets.kNumberSlider)
         .withProperties(Map.of("min", 0, "max", 1))
         .getEntry();
@@ -38,7 +48,8 @@ public class RobotContainer {
     private final subControlSystems controlSystems = new subControlSystems();
     private final subShooter shooter = new subShooter();
     private final subTargetingLight targetingLight = new subTargetingLight();
-    //private final subLED sled = new subLED();
+    private final subLED leds = new subLED();
+    private final subIntake intake = new subIntake();
 
     //Commands
     private final cmdAutonomous commandAutoCommand = new cmdAutonomous(driveTrain, limeLight);
@@ -53,12 +64,13 @@ public class RobotContainer {
         CommandScheduler.getInstance().onCommandInterrupt(command -> USBLogging.printCommandStatus(command, "Interrupted"));
 
 
-    driveTrain.setDefaultCommand(
-            new RunCommand(() -> driveTrain.tankDrive(driverOne.getY(Hand.kLeft), driverOne.getY(Hand.kRight), driverOne.getTriggerAxis(Hand.kRight) > DriveControllers.minRTriggerPress), driveTrain));
-
-        
         driveTrain.setDefaultCommand(
             new RunCommand(() -> driveTrain.tankDrive(driverOne.getY(Hand.kLeft), driverOne.getY(Hand.kRight), driverOne.getTriggerAxis(Hand.kRight) > DriveControllers.minRTriggerPress), driveTrain));
+        intake.setDefaultCommand(new RunCommand(() -> intake.runIntake(intakeSpeed.getDouble(0), windowIntakeSpeed.getDouble(0)), intake));
+        shooter.setDefaultCommand(new RunCommand(() -> shooter.Shoot(shootSpeed.getDouble(0)), shooter));
+    
+        
+    
 
 
 
@@ -68,14 +80,14 @@ public class RobotContainer {
     private void configureButtonBindings() {
         
         // Driver One Controls
-        new JoystickButton(driverOne, Button.kA.value)
-            .whileHeld(() -> controlSystems.setGreen());
-        new JoystickButton(driverOne, Button.kB.value)
-            .whileHeld(() -> controlSystems.setRed());
-        new JoystickButton(driverOne, Button.kX.value)
-            .whileHeld(() -> controlSystems.setBlue());
-        new JoystickButton(driverOne, Button.kY.value)
-            .whileHeld(() -> controlSystems.setYellow());
+        // new JoystickButton(driverOne, Button.kA.value)
+        //     .whileHeld(() -> controlSystems.setGreen());
+        // new JoystickButton(driverOne, Button.kB.value)
+        //     .whileHeld(() -> controlSystems.setRed());
+        // new JoystickButton(driverOne, Button.kX.value)
+        //     .whileHeld(() -> controlSystems.setBlue());
+        // new JoystickButton(driverOne, Button.kY.value)
+        //     .whileHeld(() -> controlSystems.setYellow());
         new JoystickButton(driverOne, Button.kBumperRight.value)
             .whenPressed(() -> limeLight.setLEDMode(LimeLight.ledMode.kOn))
             .whenReleased(() -> limeLight.setLEDMode(LimeLight.ledMode.kOff));
@@ -96,8 +108,6 @@ public class RobotContainer {
         //     .whileHeld(() -> colorWheel.turnToColor());
         // new JoystickButton(driverTwo, Button.kBumperLeft.value)
         //     .toggleWhenPressed(new RunCommand(() -> driveTrain.DriveStraight()));
-        new JoystickButton(driverTwo, Button.kBumperRight.value)
-            .toggleWhenPressed(new RunCommand(() -> shooter.Shoot(speed.getDouble(0))));
         new JoystickButton(driverTwo, Button.kBumperLeft.value)
             .toggleWhenPressed(new RunCommand(() -> driveTrain.DriveStraight()));
         new JoystickButton(driverTwo, Button.kX.value)
