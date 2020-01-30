@@ -69,7 +69,7 @@ public class subLED extends SubsystemBase {
 
   private void Red() {
     for (int i = 0; i < m_buffer.getLength(); i++) {
-      m_buffer.setRGB(i, 0, 255, 255);
+      m_buffer.setRGB(i, 255, 0, 0);
     }   
   }
 
