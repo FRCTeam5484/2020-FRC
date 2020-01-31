@@ -83,6 +83,9 @@ public final class Constants {
         public final static double kRightDriveStraightSpeed = -.5;
         public final static double kTickTolerance = .1;
         public final static double ketchup = .8;
+        public final static double kStraightPower = .8;
+        public final static double kConstantofProportionality = .3;
+        
     }
     public final static class AllMotors {
         public final static double kTestSpeed = .8;

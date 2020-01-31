@@ -21,17 +21,22 @@ import frc.robot.subsystems.*;
 
 
 public class RobotContainer {
-    NetworkTableEntry shootSpeed = Shuffleboard.getTab("SmartDashboard")
+    NetworkTableEntry shootSpeed = Shuffleboard.getTab("Test")
         .add("Shooter Speed", 0)
         .withWidget(BuiltInWidgets.kNumberSlider)
         .withProperties(Map.of("min", 0, "max", 1))
         .getEntry();
-    NetworkTableEntry intakeSpeed = Shuffleboard.getTab("SmartDashboard")
+    NetworkTableEntry intakeSpeed = Shuffleboard.getTab("Test")
         .add("Intake Speed", 0)
         .withWidget(BuiltInWidgets.kNumberSlider)
         .withProperties(Map.of("min", 0, "max", 1))
         .getEntry();
-    NetworkTableEntry windowIntakeSpeed = Shuffleboard.getTab("SmartDashboard")
+    NetworkTableEntry windowIntakeSpeed = Shuffleboard.getTab("Test")
+        .add("Window Speed", 0)
+        .withWidget(BuiltInWidgets.kNumberSlider)
+        .withProperties(Map.of("min", 0, "max", 1))
+        .getEntry();
+    NetworkTableEntry constantOfProportionality = Shuffleboard.getTab("Test")
         .add("Window Speed", 0)
         .withWidget(BuiltInWidgets.kNumberSlider)
         .withProperties(Map.of("min", 0, "max", 1))
@@ -56,38 +61,26 @@ public class RobotContainer {
 
     public RobotContainer() {
         configureButtonBindings();
-
         CommandScheduler.getInstance().onCommandInitialize(command -> USBLogging.printCommandStatus(command, "initialized"));
-
         CommandScheduler.getInstance().onCommandFinish(command -> USBLogging.printCommandStatus(command, "FINISHeD"));
-
         CommandScheduler.getInstance().onCommandInterrupt(command -> USBLogging.printCommandStatus(command, "Interrupted"));
 
-
         driveTrain.setDefaultCommand(
-            new RunCommand(() -> driveTrain.tankDrive(driverOne.getY(Hand.kLeft), driverOne.getY(Hand.kRight), driverOne.getTriggerAxis(Hand.kRight) > DriveControllers.minRTriggerPress), driveTrain));
+            new RunCommand(() -> driveTrain.tankDrive(driverOne.getY(Hand.kLeft),
+                driverOne.getY(Hand.kRight), driverOne.getTriggerAxis(Hand.kRight) > DriveControllers.minRTriggerPress),
+                driveTrain));
+        // Comment out following two lines for actual competition/drive practice
         intake.setDefaultCommand(new RunCommand(() -> intake.runIntake(intakeSpeed.getDouble(0), windowIntakeSpeed.getDouble(0)), intake));
         shooter.setDefaultCommand(new RunCommand(() -> shooter.Shoot(shootSpeed.getDouble(0)), shooter));
-    
-        
-    
 
-
-
+        // Sets LEDs to FMS-determined color at the beginning of the match
+        leds.setLEDStatus(colorWheel.getGameData());
         CommandScheduler.getInstance().onCommandInterrupt(command -> USBLogging.printCommandStatus(command, "Interrupted"));
     }
 
     private void configureButtonBindings() {
         
         // Driver One Controls
-        // new JoystickButton(driverOne, Button.kA.value)
-        //     .whileHeld(() -> controlSystems.setGreen());
-        // new JoystickButton(driverOne, Button.kB.value)
-        //     .whileHeld(() -> controlSystems.setRed());
-        // new JoystickButton(driverOne, Button.kX.value)
-        //     .whileHeld(() -> controlSystems.setBlue());
-        // new JoystickButton(driverOne, Button.kY.value)
-        //     .whileHeld(() -> controlSystems.setYellow());
         new JoystickButton(driverOne, Button.kBumperRight.value)
             .whenPressed(() -> limeLight.setLEDMode(LimeLight.ledMode.kOn))
             .whenReleased(() -> limeLight.setLEDMode(LimeLight.ledMode.kOff));
@@ -109,7 +102,7 @@ public class RobotContainer {
         // new JoystickButton(driverTwo, Button.kBumperLeft.value)
         //     .toggleWhenPressed(new RunCommand(() -> driveTrain.DriveStraight()));
         new JoystickButton(driverTwo, Button.kBumperLeft.value)
-            .toggleWhenPressed(new RunCommand(() -> driveTrain.DriveStraight()));
+            .toggleWhenPressed(new RunCommand(() -> driveTrain.DriveStraight(constantOfProportionality.getDouble(.2))));
         new JoystickButton(driverTwo, Button.kX.value)
             .whenPressed(() -> targetingLight.TurnOn())
             .whenReleased(() -> targetingLight.TurnOff());

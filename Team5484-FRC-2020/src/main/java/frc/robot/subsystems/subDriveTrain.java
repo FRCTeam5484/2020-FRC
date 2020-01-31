@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.Constants.*;
 
@@ -35,6 +34,8 @@ public class subDriveTrain extends SubsystemBase {
   private CANEncoder right2Encoder = new CANEncoder(sparkRight2);
   private double leftEncoderValue;
   private double rightEncoderValue;
+  private double error;
+  private double turnPower;
 
 
   public subDriveTrain() {
@@ -73,19 +74,31 @@ public class subDriveTrain extends SubsystemBase {
     }
   }
 
-
+  // public void DriveStraight() {
+  //   if (rightEncoderValue < leftEncoderValue - DriveMotors.kTickTolerance) {
+  //     driveTrain.tankDrive(DriveMotors.kLeftDriveStraightSpeed * DriveMotors.ketchup, DriveMotors.kRightDriveStraightSpeed);
+  //   }
+  //   else if (leftEncoderValue < rightEncoderValue - DriveMotors.kTickTolerance){
+  //     driveTrain.tankDrive(DriveMotors.kLeftDriveStraightSpeed, DriveMotors.kRightDriveStraightSpeed * DriveMotors.ketchup);
+  //   }
+  //   else {
+  //     driveTrain.tankDrive(DriveMotors.kLeftDriveStraightSpeed, DriveMotors.kRightDriveStraightSpeed);
+  //   }
+  // }
   public void DriveStraight() {
-    if (rightEncoderValue < leftEncoderValue - DriveMotors.kTickTolerance) {
-      driveTrain.tankDrive(DriveMotors.kLeftDriveStraightSpeed * DriveMotors.ketchup, DriveMotors.kRightDriveStraightSpeed);
-    }
-    else if (leftEncoderValue < rightEncoderValue - DriveMotors.kTickTolerance){
-      driveTrain.tankDrive(DriveMotors.kLeftDriveStraightSpeed, DriveMotors.kRightDriveStraightSpeed * DriveMotors.ketchup);
-    }
-    else {
-      driveTrain.tankDrive(DriveMotors.kLeftDriveStraightSpeed, DriveMotors.kRightDriveStraightSpeed);
-    }
+    leftEncoderValue = left1Encoder.getPosition() + left2Encoder.getPosition();
+    rightEncoderValue = right1Encoder.getPosition() + right2Encoder.getPosition();
+    error = leftEncoderValue - rightEncoderValue;
+    turnPower = DriveMotors.kConstantofProportionality * error;
+    driveTrain.arcadeDrive(DriveMotors.kStraightPower, turnPower, false);
   }
-    
+  public void DriveStraight(double constantOfProportionality) {
+    leftEncoderValue = left1Encoder.getPosition() + left2Encoder.getPosition();
+    rightEncoderValue = right1Encoder.getPosition() + right2Encoder.getPosition();
+    error = leftEncoderValue - rightEncoderValue;
+    turnPower = constantOfProportionality * error;
+    driveTrain.arcadeDrive(DriveMotors.kStraightPower, turnPower, false);
+  }
 
   public void AutoDrive(final double drive, final double turn) {
       driveTrain.arcadeDrive(drive, turn, true);
@@ -93,9 +106,9 @@ public class subDriveTrain extends SubsystemBase {
   
   @Override
   public void periodic() {
-    leftEncoderValue = left1Encoder.getPosition() + left2Encoder.getPosition();
-    rightEncoderValue = right1Encoder.getPosition() + right2Encoder.getPosition();
-    //SmartDashboard.putNumber("Ultrasonic", Double.toString(ultrasonic.getRangeInches());
+    // leftEncoderValue = left1Encoder.getPosition() + left2Encoder.getPosition();
+    // rightEncoderValue = right1Encoder.getPosition() + right2Encoder.getPosition();
+    SmartDashboard.putNumber("Ultrasonic", ultrasonic.getRangeInches());
 
 
     // SmartDashboard.putNumber("Left(1) Encoder Ticks", left1Encoder.getCountsPerRevolution());

@@ -91,13 +91,13 @@ public class subColorWheel extends SubsystemBase {
       switch (gameData.charAt(0))
       {
         case 'B' :
-          gameColor = "Blue";
+          gameColor = "blue";
         case 'G' :
-          gameColor = "Green";
+          gameColor = "green";
         case 'R' :
-          gameColor = "Red";
+          gameColor = "red";
         case 'Y' :
-          gameColor = "Yellow";
+          gameColor = "yellow";
         default :
           gameColor = "NA";
       }
