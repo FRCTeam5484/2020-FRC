@@ -7,6 +7,9 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.IntakeMotors;
@@ -15,27 +18,40 @@ public class subIntake extends SubsystemBase {
   /**
    * Creates a new subIntake.
    */
-  private VictorSP intakeMotor1 = new VictorSP(IntakeMotors.kMotor1);
+  private CANSparkMax intakeMotor1 = new CANSparkMax(IntakeMotors.kIntake, MotorType.kBrushless);
+  private CANSparkMax ballFeed = new CANSparkMax(IntakeMotors.kBallFeed, MotorType.kBrushless);
   private VictorSP window1 = new VictorSP(IntakeMotors.kWindow1);
 
   public subIntake() {
     intakeMotor1.setInverted(IntakeMotors.kMotor1Invert);
+    window1.setInverted(IntakeMotors.kWindow1Invert);
+    ballFeed.setInverted(IntakeMotors.kBallFeedInvert);
   }
 
   public void runIntake() {
     intakeMotor1.set(IntakeMotors.kMotorSpeed);
   }
-  public void runIntake(double speed1) {
-    intakeMotor1.set(speed1);
+  // public void runIntake(double speed1) {
+  //   intakeMotor1.set(speed1);
+  // }
+  // public void runIntake(double speed1, double speedWindow) {
+  //   intakeMotor1.set(speed1);
+  //   window1.set(speedWindow);
+  // }
 
-  }
-  public void runIntake(double speed1, double speedWindow) {
-    intakeMotor1.set(speed1);
-    window1.set(speedWindow);
+  public void runBallFeed(boolean reverse){
+    if (!reverse)
+      ballFeed.set(IntakeMotors.kBallFeedSpeed);
+    else {
+      ballFeed.set(IntakeMotors.kBallFeedSpeedReversed);
+    }
   }
 
-  public void runWindow() {
-    window1.set(IntakeMotors.kWindowSpeed);
+  public void runWindow(boolean reverse) {
+    if (!reverse)
+      window1.set(IntakeMotors.kWindowSpeed);
+    else
+      window1.set(IntakeMotors.kWindowSpeedReversed);
   }
 
   @Override
