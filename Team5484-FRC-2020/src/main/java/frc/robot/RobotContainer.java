@@ -37,7 +37,7 @@ public class RobotContainer {
         .withProperties(Map.of("min", 0, "max", 1))
         .getEntry();
     NetworkTableEntry constantOfProportionality = Shuffleboard.getTab("Test")
-        .add("Window Speed", 0)
+        .add("Constant of Proportionality", 0)
         .withWidget(BuiltInWidgets.kNumberSlider)
         .withProperties(Map.of("min", 0, "max", 1))
         .getEntry();
