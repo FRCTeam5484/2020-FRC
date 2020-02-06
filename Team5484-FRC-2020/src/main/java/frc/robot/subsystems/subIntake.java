@@ -31,6 +31,9 @@ public class subIntake extends SubsystemBase {
   public void runIntake() {
     intakeMotor1.set(IntakeMotors.kMotorSpeed);
   }
+  public void stopIntake() {
+    intakeMotor1.set(0);
+  }
   // public void runIntake(double speed1) {
   //   intakeMotor1.set(speed1);
   // }
@@ -46,12 +49,18 @@ public class subIntake extends SubsystemBase {
       ballFeed.set(IntakeMotors.kBallFeedSpeedReversed);
     }
   }
+  public void stopBallFeed() {
+    ballFeed.set(0);
+  }
 
   public void runWindow(boolean reverse) {
     if (!reverse)
       window1.set(IntakeMotors.kWindowSpeed);
     else
       window1.set(IntakeMotors.kWindowSpeedReversed);
+  }
+  public void stopWindow() {
+    window1.set(0);
   }
 
   @Override

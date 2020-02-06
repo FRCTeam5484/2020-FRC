@@ -51,8 +51,8 @@ public final class Constants {
     }
     public final static class ShooterMotors {
         public final static int kAmpLimit = 35;
-        public final static int kLeftMotor = 7;
-        public final static int kRightMotor = 8;
+        public final static int kLeftMotor = 10;
+        public final static int kRightMotor = 9;
         public final static double kLeftSpeed = .1;
         public final static double kRightSpeed = .1;
         public final static boolean invertRMotor = true;
@@ -65,11 +65,11 @@ public final class Constants {
         public final static boolean kMotor1Invert = true;
         public final static boolean kWindow1Invert = true;
         public final static boolean kBallFeedInvert = true;
-        public final static double kMotorSpeed = .8;
+        public final static double kMotorSpeed = 1;
         public final static double kWindowSpeed = .5;
         public final static double kWindowSpeedReversed = -.5;
-        public final static double kBallFeedSpeed = .7;
-        public final static double kBallFeedSpeedReversed = -.7;
+        public final static double kBallFeedSpeed = 1;
+        public final static double kBallFeedSpeedReversed = -1;
     }
     public final static class DriveMotors {
         public final static int kAmpLimit = 35;

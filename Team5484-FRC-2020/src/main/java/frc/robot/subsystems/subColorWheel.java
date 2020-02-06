@@ -36,8 +36,7 @@ public class subColorWheel extends SubsystemBase {
 
   @Override
   public void periodic() {
-    GetColor();
-    SmartDashboard.putString("Detected Color", detectedColor);
+    SmartDashboard.putString("Detected Color", GetColor());
   }
 
   public final void turnToColor(){
@@ -66,22 +65,23 @@ public class subColorWheel extends SubsystemBase {
     wheelMotor.set(speed * WheelSystem.kMaxSpeed);
   }
 
-  public final void GetColor() {
+  public final String GetColor() {
     final ColorMatchResult match = colorMatcher.matchClosestColor(colorSensor.getColor());
     SmartDashboard.putString("Red", Double.toString(match.color.red));
     SmartDashboard.putString("Blue", Double.toString(match.color.blue));
     SmartDashboard.putString("Green", Double.toString(match.color.green));
     if (match.color == Colors.kBlueTarget) {
-      detectedColor = "Red";
+      detectedColor = "red";
     } else if (match.color == Colors.kRedTarget) {
-      detectedColor = "Blue";
+      detectedColor = "blue";
     } else if (match.color == Colors.kGreenTarget) {
-      detectedColor = "Yellow";
+      detectedColor = "yellow";
     } else if (match.color == Colors.kYellowTarget) {
-      detectedColor = "Green";
+      detectedColor = "green";
     } else {
       detectedColor = "NA";
     }
+    return detectedColor;
   }
   public String getGameData(){
     String gameColor = "Unknown";

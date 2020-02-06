@@ -19,6 +19,7 @@ public class subLED extends SubsystemBase {
   private AddressableLEDBuffer m_buffer = new AddressableLEDBuffer(150);
   private int m_rainbowFirstPixelHue;
   private String colorStatus = "";
+  private String detectedColor = "";
   private int customRed;
   private int customBlue;
   private int customGreen;
@@ -31,6 +32,11 @@ public class subLED extends SubsystemBase {
   public void setLEDStatus(String status) {
     if (status != "custom")
       colorStatus = status;
+  }
+  public void setLEDStatus(String status, String colorWheelValue) {
+    if (status != "custom")
+      colorStatus = status;
+    detectedColor = colorWheelValue;
   }
   public void setLEDStatus(int Red, int Blue, int Green) {
     colorStatus = "custom";
@@ -45,8 +51,18 @@ public class subLED extends SubsystemBase {
       m_buffer.setHSV(i, hue, 255, 128);
     }
     m_rainbowFirstPixelHue += 3;
+    //m_rainbowFirstPixelHue %= 180;
     m_rainbowFirstPixelHue %= 180;
   }
+
+  // private void GreenLightsaber() {
+  //   for (int i = 0; i < m_buffer.getLength(); i++) {
+  //     final var hue = (m_rainbowFirstPixelHue + (i * 180 / m_buffer.getLength())) % 180;
+  //     m_buffer.setHSV(i, hue, 255, 128);
+  //   }
+  //   m_rainbowFirstPixelHue += 3;
+  //   m_rainbowFirstPixelHue %= 180;
+  // }
   
   private void Blue() {
     for (int i = 0; i < m_buffer.getLength(); i++) {
@@ -96,6 +112,24 @@ public class subLED extends SubsystemBase {
       case "green":
         Green();
         break;
+      // case "detected":
+      //   switch (detectedColor) {
+      //     case ("red"):
+      //       Red();
+      //     case ("blue"):
+      //       Blue();
+      //     case ("yellow"):
+      //       Yellow();
+      //     case ("green"):
+      //       Green();
+      //     default:
+      //       Rainbow();
+      //       break;
+      //   }
+      //   break;
+      // case "greenlightsaber":
+      //   GreenLightsaber();
+      //   break;
       case "custom":
         CustomColor(customRed, customBlue, customGreen);
         break;

@@ -32,6 +32,9 @@ public class subDriveTrain extends SubsystemBase {
   private CANEncoder left2Encoder = new CANEncoder(sparkLeft2);
   private CANEncoder right1Encoder = new CANEncoder(sparkRight1);
   private CANEncoder right2Encoder = new CANEncoder(sparkRight2);
+  private double resetLeftEncoder = 0;
+  private double resetRightEncoder = 0;
+
   private double leftEncoderValue;
   private double rightEncoderValue;
   private double error;
@@ -93,11 +96,16 @@ public class subDriveTrain extends SubsystemBase {
     driveTrain.arcadeDrive(DriveMotors.kStraightPower, turnPower, false);
   }
   public void DriveStraight(double constantOfProportionality) {
-    leftEncoderValue = left1Encoder.getPosition() + left2Encoder.getPosition();
-    rightEncoderValue = right1Encoder.getPosition() + right2Encoder.getPosition();
+    leftEncoderValue = (left1Encoder.getPosition() + left2Encoder.getPosition()) - resetLeftEncoder;
+    rightEncoderValue = (right1Encoder.getPosition() + right2Encoder.getPosition()) - resetRightEncoder;
     error = leftEncoderValue - rightEncoderValue;
     turnPower = constantOfProportionality * error;
     driveTrain.arcadeDrive(DriveMotors.kStraightPower, turnPower, false);
+  }
+
+  public void FindCurrentEncoders() {
+    resetLeftEncoder = left1Encoder.getPosition() + left2Encoder.getPosition();
+    resetRightEncoder = right1Encoder.getPosition() + right2Encoder.getPosition();
   }
 
   public void AutoDrive(final double drive, final double turn) {
