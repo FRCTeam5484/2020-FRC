@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.LED;
 
 public class subLED extends SubsystemBase {
   /**
@@ -23,10 +24,18 @@ public class subLED extends SubsystemBase {
   private int customRed;
   private int customBlue;
   private int customGreen;
+  private int timer;
+  private int lastTime;
+
   public subLED() {
+    timer = 0;
     m_led.setLength(m_buffer.getLength());
     m_led.setData(m_buffer);
     m_led.start();
+  }
+
+  private void ResetTimer() {
+    timer = 0;
   }
 
   public void setLEDStatus(String status) {
@@ -51,18 +60,20 @@ public class subLED extends SubsystemBase {
       m_buffer.setHSV(i, hue, 255, 128);
     }
     m_rainbowFirstPixelHue += 3;
-    //m_rainbowFirstPixelHue %= 180;
     m_rainbowFirstPixelHue %= 180;
   }
 
-  // private void GreenLightsaber() {
-  //   for (int i = 0; i < m_buffer.getLength(); i++) {
-  //     final var hue = (m_rainbowFirstPixelHue + (i * 180 / m_buffer.getLength())) % 180;
-  //     m_buffer.setHSV(i, hue, 255, 128);
-  //   }
-  //   m_rainbowFirstPixelHue += 3;
-  //   m_rainbowFirstPixelHue %= 180;
-  // }
+  private void GreenLightsaber() {
+    for (int i = 0; i < m_buffer.getLength(); i++) {
+      if (timer > LED.timerInterval + lastTime) {
+        m_buffer.setRGB(i, 0, 255, 0);
+        lastTime = timer;
+      }
+      else {
+        i--;
+      }
+    }
+  }
   
   private void Blue() {
     for (int i = 0; i < m_buffer.getLength(); i++) {
@@ -96,6 +107,9 @@ public class subLED extends SubsystemBase {
 
   @Override
   public void periodic() {
+    if (timer > 2147483600)
+      ResetTimer();
+    timer++;
     switch (colorStatus) {
       case "rainbow":
         Rainbow();
@@ -112,24 +126,9 @@ public class subLED extends SubsystemBase {
       case "green":
         Green();
         break;
-      // case "detected":
-      //   switch (detectedColor) {
-      //     case ("red"):
-      //       Red();
-      //     case ("blue"):
-      //       Blue();
-      //     case ("yellow"):
-      //       Yellow();
-      //     case ("green"):
-      //       Green();
-      //     default:
-      //       Rainbow();
-      //       break;
-      //   }
-      //   break;
-      // case "greenlightsaber":
-      //   GreenLightsaber();
-      //   break;
+      case "green lightsaber":
+        GreenLightsaber();
+        break;
       case "custom":
         CustomColor(customRed, customBlue, customGreen);
         break;

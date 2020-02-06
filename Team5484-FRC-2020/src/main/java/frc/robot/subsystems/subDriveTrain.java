@@ -103,7 +103,7 @@ public class subDriveTrain extends SubsystemBase {
     driveTrain.arcadeDrive(DriveMotors.kStraightPower, turnPower, false);
   }
 
-  public void FindCurrentEncoders() {
+  public void findCurrentEncoders() {
     resetLeftEncoder = left1Encoder.getPosition() + left2Encoder.getPosition();
     resetRightEncoder = right1Encoder.getPosition() + right2Encoder.getPosition();
   }

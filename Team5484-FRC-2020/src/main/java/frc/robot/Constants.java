@@ -48,11 +48,12 @@ public final class Constants {
     public final static class LED {
         public final static int StrandOneID = 9;
         public final static int StrandOneCount = 60;
+        public final static int timerInterval = 3000;
     }
     public final static class ShooterMotors {
         public final static int kAmpLimit = 35;
-        public final static int kLeftMotor = 10;
-        public final static int kRightMotor = 9;
+        public final static int kLeftMotor = 8;
+        public final static int kRightMotor = 7;
         public final static double kLeftSpeed = .1;
         public final static double kRightSpeed = .1;
         public final static boolean invertRMotor = true;

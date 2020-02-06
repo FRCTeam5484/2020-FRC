@@ -96,8 +96,8 @@ public class RobotContainer {
             .whileHeld(() -> intake.runIntake())
             .whenReleased(() -> intake.stopIntake());
         new JoystickButton(driverOne, Button.kBumperLeft.value)
-            .toggleWhenPressed(new RunCommand(() -> driveTrain.DriveStraight(constantOfProportionality.getDouble(.2))))
-            .whenPressed(() -> driveTrain.FindCurrentEncoders());
+            .toggleWhenPressed(new RunCommand(() -> driveTrain.DriveStraight(constantOfProportionality.getDouble(.05))))
+            .whenPressed(() -> driveTrain.findCurrentEncoders());
         // new JoystickButton(driverOne, Button.kBumperLeft.value)
         //     .whenHeld(new cmdLimeLight_AlignToTarget(driveTrain, limeLight));
         // new JoystickButton(driverOne, Button.kBack.value)
