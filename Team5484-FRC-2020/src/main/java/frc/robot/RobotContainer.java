@@ -41,6 +41,11 @@ public class RobotContainer {
         .withWidget(BuiltInWidgets.kNumberSlider)
         .withProperties(Map.of("min", 0, "max", .5))
         .getEntry();
+    // NetworkTableEntry ledColor = Shuffleboard.getTab("Test")
+    //     .add("LED", 0)
+    //     .withWidget(BuiltInWidgets.kToggleSwitch)
+    //     .withProperties(Map.of("Red", "red", "Blue", "blue"))
+    //     .getEntry();
     
 
     //Controllers
@@ -127,9 +132,9 @@ public class RobotContainer {
         new JoystickButton(driverTwo, Button.kBumperRight.value)
             .whileHeld(() -> intake.runWindow(false))
             .whenReleased(() -> intake.stopWindow());
-        new JoystickButton(driverTwo, Button.kX.value)
-            .whileHeld(() -> intake.runBallFeed(true))
-            .whenReleased(() -> intake.stopBallFeed());
+        // new JoystickButton(driverTwo, Button.kX.value)
+        //     .whileHeld(() -> intake.runBallFeed(true))
+        //     .whenReleased(() -> intake.stopBallFeed());
         new JoystickButton(driverTwo, Button.kB.value)
             .whileHeld(() -> intake.runBallFeed(false))
             .whenReleased(() -> intake.stopBallFeed());

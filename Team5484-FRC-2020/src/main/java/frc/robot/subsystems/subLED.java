@@ -107,9 +107,9 @@ public class subLED extends SubsystemBase {
 
   @Override
   public void periodic() {
-    if (timer > 2147483600)
-      ResetTimer();
-    timer++;
+    // if (timer > 2147483600)
+    //   ResetTimer();
+    // timer++;
     switch (colorStatus) {
       case "rainbow":
         Rainbow();

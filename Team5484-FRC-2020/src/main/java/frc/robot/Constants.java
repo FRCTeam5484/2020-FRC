@@ -54,10 +54,10 @@ public final class Constants {
         public final static int kAmpLimit = 35;
         public final static int kLeftMotor = 8;
         public final static int kRightMotor = 7;
-        public final static double kLeftSpeed = .1;
+        public final static double kLeftSpeed = .5;
         public final static double kRightSpeed = .1;
-        public final static boolean invertRMotor = true;
-        public final static boolean invertLMotor = false;
+        public final static boolean invertRMotor = false; // false for shooter1
+        public final static boolean invertLMotor = true; // true for shooter1
     }   
     public final static class IntakeMotors {
         public final static int kIntake = 6;

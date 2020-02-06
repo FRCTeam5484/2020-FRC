@@ -26,12 +26,13 @@ public class subShooter extends SubsystemBase {
     leftShooter.setSmartCurrentLimit(ShooterMotors.kAmpLimit);
     // Inverts motors
     rightShooter.setInverted(ShooterMotors.invertRMotor);
-    leftShooter.setInverted(ShooterMotors.invertRMotor);
+    leftShooter.setInverted(ShooterMotors.invertLMotor);
   }
 
   public void Shoot(double speed) {
+    leftShooter.set(ShooterMotors.kLeftSpeed);
     leftShooter.set(speed);
-    rightShooter.set(speed);
+    //rightShooter.set(speed);
   }
 
   @Override
