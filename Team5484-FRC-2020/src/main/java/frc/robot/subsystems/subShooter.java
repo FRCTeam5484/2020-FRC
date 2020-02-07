@@ -30,9 +30,9 @@ public class subShooter extends SubsystemBase {
   }
 
   public void Shoot(double speed) {
-    leftShooter.set(ShooterMotors.kLeftSpeed);
+    //leftShooter.set(ShooterMotors.kLeftSpeed);
     leftShooter.set(speed);
-    //rightShooter.set(speed);
+    rightShooter.set(speed);
   }
 
   @Override
