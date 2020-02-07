@@ -18,20 +18,18 @@ import frc.robot.Constants.*;
 
 
 public class subDriveTrain extends SubsystemBase {  
-  private final CANSparkMax sparkLeft1 = new CANSparkMax(DriveMotors.kLeftMotor1, MotorType.kBrushless);
-  private final CANSparkMax sparkLeft2 = new CANSparkMax(DriveMotors.kLeftMotor2, MotorType.kBrushless);
-  private final CANSparkMax sparkRight1 = new CANSparkMax(DriveMotors.kRightMotor1, MotorType.kBrushless);
-  private final CANSparkMax sparkRight2 = new CANSparkMax(DriveMotors.kRightMotor2, MotorType.kBrushless);
-  private final SpeedControllerGroup leftDrive = new SpeedControllerGroup(sparkLeft1, sparkLeft2);
-  private final SpeedControllerGroup rightDrive = new SpeedControllerGroup(sparkRight1, sparkRight2);
+  private final CANSparkMax leftDrive = new CANSparkMax(DriveMotors.kLeftMotor1, MotorType.kBrushless);
+  private final CANSparkMax leftDriveSlave = new CANSparkMax(DriveMotors.kLeftMotor2, MotorType.kBrushless);
+  private final CANSparkMax rightDrive = new CANSparkMax(DriveMotors.kRightMotor1, MotorType.kBrushless);
+  private final CANSparkMax rightDriveSlave = new CANSparkMax(DriveMotors.kRightMotor2, MotorType.kBrushless);
   private final DifferentialDrive driveTrain = new DifferentialDrive(leftDrive, rightDrive);
   private final Ultrasonic ultrasonic = new Ultrasonic(1, 2);
   public AHRS ahrs;
 
-  private CANEncoder left1Encoder = new CANEncoder(sparkLeft1);
-  private CANEncoder left2Encoder = new CANEncoder(sparkLeft2);
-  private CANEncoder right1Encoder = new CANEncoder(sparkRight1);
-  private CANEncoder right2Encoder = new CANEncoder(sparkRight2);
+  private CANEncoder left1Encoder = new CANEncoder(leftDrive);
+  private CANEncoder left2Encoder = new CANEncoder(leftDriveSlave);
+  private CANEncoder right1Encoder = new CANEncoder(rightDrive);
+  private CANEncoder right2Encoder = new CANEncoder(rightDriveSlave);
   private double resetLeftEncoder = 0;
   private double resetRightEncoder = 0;
 
@@ -42,23 +40,26 @@ public class subDriveTrain extends SubsystemBase {
 
 
   public subDriveTrain() {
-      sparkLeft1.restoreFactoryDefaults();
-      sparkLeft2.restoreFactoryDefaults();
-      sparkRight1.restoreFactoryDefaults();
-      sparkRight2.restoreFactoryDefaults();
+      leftDrive.restoreFactoryDefaults();
+      leftDriveSlave.restoreFactoryDefaults();
+      rightDrive.restoreFactoryDefaults();
+      rightDriveSlave.restoreFactoryDefaults();
 
-      sparkLeft1.setSmartCurrentLimit(DriveMotors.kAmpLimit);
-      sparkLeft2.setSmartCurrentLimit(DriveMotors.kAmpLimit);
-      sparkRight1.setSmartCurrentLimit(DriveMotors.kAmpLimit);
-      sparkRight2.setSmartCurrentLimit(DriveMotors.kAmpLimit);
+      leftDrive.setSmartCurrentLimit(DriveMotors.kAmpLimit);
+      leftDriveSlave.setSmartCurrentLimit(DriveMotors.kAmpLimit);
+      rightDrive.setSmartCurrentLimit(DriveMotors.kAmpLimit);
+      rightDriveSlave.setSmartCurrentLimit(DriveMotors.kAmpLimit);
 
       leftDrive.setInverted(DriveMotors.leftInvert);
       rightDrive.setInverted(DriveMotors.rightInvert);
 
-      left1Encoder = sparkLeft1.getEncoder();
-      left2Encoder = sparkLeft2.getEncoder();
-      right1Encoder = sparkRight1.getEncoder();
-      right2Encoder = sparkRight2.getEncoder();
+      left1Encoder = leftDrive.getEncoder();
+      left2Encoder = leftDriveSlave.getEncoder();
+      right1Encoder = rightDrive.getEncoder();
+      right2Encoder = rightDriveSlave.getEncoder();
+
+      leftDriveSlave.follow(leftDrive);
+      rightDriveSlave.follow(rightDrive);
 
       try {
         ahrs = new AHRS(SPI.Port.kMXP); 
@@ -96,16 +97,20 @@ public class subDriveTrain extends SubsystemBase {
     driveTrain.arcadeDrive(DriveMotors.kStraightPower, turnPower, false);
   }
   public void DriveStraight(double constantOfProportionality) {
-    leftEncoderValue = (left1Encoder.getPosition() + left2Encoder.getPosition()) - resetLeftEncoder;
-    rightEncoderValue = (right1Encoder.getPosition() + right2Encoder.getPosition()) - resetRightEncoder;
+    leftEncoderValue = Math.abs((left1Encoder.getPosition() + left2Encoder.getPosition())/2) - resetLeftEncoder;
+    rightEncoderValue = Math.abs((right1Encoder.getPosition() + right2Encoder.getPosition())/2) - resetRightEncoder;
     error = leftEncoderValue - rightEncoderValue;
-    turnPower = constantOfProportionality * error;
+    turnPower = .04*-error;
+    SmartDashboard.putNumber("leftEn", leftEncoderValue);
+    SmartDashboard.putNumber("rightEn", rightEncoderValue);
+    SmartDashboard.putNumber("Error", error);
+    SmartDashboard.putNumber("TurnPower", turnPower);
     driveTrain.arcadeDrive(DriveMotors.kStraightPower, turnPower, false);
   }
 
   public void findCurrentEncoders() {
-    resetLeftEncoder = left1Encoder.getPosition() + left2Encoder.getPosition();
-    resetRightEncoder = right1Encoder.getPosition() + right2Encoder.getPosition();
+    resetLeftEncoder = Math.abs((left1Encoder.getPosition() + left2Encoder.getPosition())/2);
+    resetRightEncoder = Math.abs((right1Encoder.getPosition() + right2Encoder.getPosition())/2);
   }
 
   public void AutoDrive(final double drive, final double turn) {
@@ -117,7 +122,6 @@ public class subDriveTrain extends SubsystemBase {
     // leftEncoderValue = left1Encoder.getPosition() + left2Encoder.getPosition();
     // rightEncoderValue = right1Encoder.getPosition() + right2Encoder.getPosition();
     SmartDashboard.putNumber("Ultrasonic", ultrasonic.getRangeInches());
-
 
     // SmartDashboard.putNumber("Left(1) Encoder Ticks", left1Encoder.getCountsPerRevolution());
     // SmartDashboard.putNumber("Left(2) Encoder Ticks", left2Encoder.getCountsPerRevolution());
