@@ -36,11 +36,6 @@ public class RobotContainer {
         .withWidget(BuiltInWidgets.kNumberSlider)
         .withProperties(Map.of("min", -1, "max", 1))
         .getEntry();
-    NetworkTableEntry constantOfProportionality = Shuffleboard.getTab("Test")
-        .add("Constant of Proportionality", 0)
-        .withWidget(BuiltInWidgets.kNumberSlider)
-        .withProperties(Map.of("min", 0, "max", .5))
-        .getEntry();
     // NetworkTableEntry ledColor = Shuffleboard.getTab("Test")
     //     .add("LED", 0)
     //     .withWidget(BuiltInWidgets.kToggleSwitch)
@@ -101,7 +96,7 @@ public class RobotContainer {
             .whileHeld(() -> intake.runIntake())
             .whenReleased(() -> intake.stopIntake());
         new JoystickButton(driverOne, Button.kBumperLeft.value)
-            .toggleWhenPressed(new RunCommand(() -> driveTrain.DriveStraight(constantOfProportionality.getDouble(.05))))
+            .toggleWhenPressed(new RunCommand(() -> driveTrain.DriveStraight()))
             .whenPressed(() -> driveTrain.findCurrentEncoders());
         // new JoystickButton(driverOne, Button.kBumperLeft.value)
         //     .whenHeld(new cmdLimeLight_AlignToTarget(driveTrain, limeLight));

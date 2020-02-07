@@ -52,8 +52,8 @@ public final class Constants {
     }
     public final static class ShooterMotors {
         public final static int kAmpLimit = 35;
-        public final static int kLeftMotor = 8;
-        public final static int kRightMotor = 7;
+        public final static int kShooterMasterMotor = 8;
+        public final static int kShooterSlaveMotor = 7;
         public final static double kLeftSpeed = .5;
         public final static double kRightSpeed = .1;
         public final static boolean invertRMotor = false; // false for shooter1
@@ -73,6 +73,7 @@ public final class Constants {
         public final static double kBallFeedSpeedReversed = -1;
     }
     public final static class DriveMotors {
+        public final static double kA = .04; // Constant of Proportionality
         public final static int kAmpLimit = 35;
         public final static int kLeftMotor1 = 3;
         public final static int kLeftMotor2 = 4;

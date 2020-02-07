@@ -17,22 +17,21 @@ public class subShooter extends SubsystemBase {
   /**
    * Creates a new subShooter.
    */
-  private final CANSparkMax leftShooter = new CANSparkMax(ShooterMotors.kLeftMotor, MotorType.kBrushless);
-  private final CANSparkMax rightShooter = new CANSparkMax(ShooterMotors.kRightMotor, MotorType.kBrushless);
+  private final CANSparkMax shooterMaster = new CANSparkMax(ShooterMotors.kShooterMasterMotor, MotorType.kBrushless);
+  private final CANSparkMax shooterSlave = new CANSparkMax(ShooterMotors.kShooterSlaveMotor, MotorType.kBrushless);
 
   public subShooter() {
     // Limits Amps
-    rightShooter.setSmartCurrentLimit(ShooterMotors.kAmpLimit);
-    leftShooter.setSmartCurrentLimit(ShooterMotors.kAmpLimit);
+    shooterSlave.setSmartCurrentLimit(ShooterMotors.kAmpLimit);
+    shooterMaster.setSmartCurrentLimit(ShooterMotors.kAmpLimit);
     // Inverts motors
-    rightShooter.setInverted(ShooterMotors.invertRMotor);
-    leftShooter.setInverted(ShooterMotors.invertLMotor);
+    shooterSlave.setInverted(ShooterMotors.invertRMotor);
+    shooterMaster.setInverted(ShooterMotors.invertLMotor);
+    shooterSlave.follow(shooterMaster);
   }
 
   public void Shoot(double speed) {
-    //leftShooter.set(ShooterMotors.kLeftSpeed);
-    leftShooter.set(speed);
-    rightShooter.set(speed);
+    shooterMaster.set(speed);
   }
 
   @Override

@@ -89,22 +89,16 @@ public class subDriveTrain extends SubsystemBase {
   //     driveTrain.tankDrive(DriveMotors.kLeftDriveStraightSpeed, DriveMotors.kRightDriveStraightSpeed);
   //   }
   // }
+
   public void DriveStraight() {
-    leftEncoderValue = left1Encoder.getPosition() + left2Encoder.getPosition();
-    rightEncoderValue = right1Encoder.getPosition() + right2Encoder.getPosition();
-    error = leftEncoderValue - rightEncoderValue;
-    turnPower = DriveMotors.kConstantofProportionality * error;
-    driveTrain.arcadeDrive(DriveMotors.kStraightPower, turnPower, false);
-  }
-  public void DriveStraight(double constantOfProportionality) {
     leftEncoderValue = Math.abs((left1Encoder.getPosition() + left2Encoder.getPosition())/2) - resetLeftEncoder;
     rightEncoderValue = Math.abs((right1Encoder.getPosition() + right2Encoder.getPosition())/2) - resetRightEncoder;
     error = leftEncoderValue - rightEncoderValue;
-    turnPower = .04*-error;
-    SmartDashboard.putNumber("leftEn", leftEncoderValue);
-    SmartDashboard.putNumber("rightEn", rightEncoderValue);
-    SmartDashboard.putNumber("Error", error);
-    SmartDashboard.putNumber("TurnPower", turnPower);
+    turnPower = DriveMotors.kA * -error;
+    // SmartDashboard.putNumber("leftEn", leftEncoderValue);
+    // SmartDashboard.putNumber("rightEn", rightEncoderValue);
+    // SmartDashboard.putNumber("Error", error);
+    // SmartDashboard.putNumber("TurnPower", turnPower);
     driveTrain.arcadeDrive(DriveMotors.kStraightPower, turnPower, false);
   }
 
