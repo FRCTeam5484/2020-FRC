@@ -10,8 +10,13 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.AnalogSensors;
+import frc.robot.Constants.DigitalSensors;
 import frc.robot.Constants.IntakeMotors;
 
 public class subIntake extends SubsystemBase {
@@ -21,15 +26,23 @@ public class subIntake extends SubsystemBase {
   private CANSparkMax intakeMotor1 = new CANSparkMax(IntakeMotors.kIntake, MotorType.kBrushless);
   private CANSparkMax ballFeed = new CANSparkMax(IntakeMotors.kBallFeed, MotorType.kBrushless);
   private VictorSP window1 = new VictorSP(IntakeMotors.kWindow1);
+  private AnalogInput ballSensor1;
+  private AnalogInput ballSensor2;
+  private AnalogInput ballSensor3;
 
   public subIntake() {
+    ballSensor1 = new AnalogInput(AnalogSensors.kBallSensor1Port);
+    ballSensor2 = new AnalogInput(AnalogSensors.kBallSensor2Port);
+    ballSensor3 = new AnalogInput(AnalogSensors.kBallSensor3Port);
     intakeMotor1.setInverted(IntakeMotors.kMotor1Invert);
     window1.setInverted(IntakeMotors.kWindow1Invert);
-    ballFeed.setInverted(IntakeMotors.kBallFeedInvert);
   }
 
   public void runIntake() {
     intakeMotor1.set(IntakeMotors.kMotorSpeed);
+  }
+  public void runIntakeBackward() {
+    intakeMotor1.set(-IntakeMotors.kMotorSpeed);
   }
   public void stopIntake() {
     intakeMotor1.set(0);
@@ -42,22 +55,23 @@ public class subIntake extends SubsystemBase {
   //   window1.set(speedWindow);
   // }
 
-  public void runBallFeed(boolean reverse){
-    if (!reverse)
-      ballFeed.set(IntakeMotors.kBallFeedSpeed);
-    else {
-      ballFeed.set(IntakeMotors.kBallFeedSpeedReversed);
-    }
+  public void runBallFeedIn(){
+    ballFeed.set(-IntakeMotors.kBallFeedSpeed);
   }
+
+  public void runBallFeedOut() {
+    ballFeed.set(IntakeMotors.kBallFeedSpeed);
+  }
+
   public void stopBallFeed() {
     ballFeed.set(0);
   }
 
-  public void runWindow(boolean reverse) {
-    if (!reverse)
-      window1.set(IntakeMotors.kWindowSpeed);
-    else
-      window1.set(IntakeMotors.kWindowSpeedReversed);
+  public void runWindowUp() {
+    window1.set(IntakeMotors.kWindowSpeed);
+  }
+  public void runWindowDown() {
+    window1.set(-IntakeMotors.kWindowSpeed);
   }
   public void stopWindow() {
     window1.set(0);
@@ -65,5 +79,8 @@ public class subIntake extends SubsystemBase {
 
   @Override
   public void periodic() {
+    // SmartDashboard.putNumber("Ball Sensor 1", ballSensor1.getValue());
+    // SmartDashboard.putNumber("Ball Sensor 2", ballSensor2.getValue());
+    // SmartDashboard.putNumber("Ball Sensor 3", ballSensor3.getValue());
   }
 }

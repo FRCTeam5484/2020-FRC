@@ -51,13 +51,19 @@ public final class Constants {
         public final static int timerInterval = 3000;
     }
     public final static class ShooterMotors {
-        public final static int kAmpLimit = 35;
+        public final static int kAmpLimit = 39;
         public final static int kShooterMasterMotor = 8;
         public final static int kShooterSlaveMotor = 7;
-        public final static double kLeftSpeed = .5;
-        public final static double kRightSpeed = .1;
-        public final static boolean invertRMotor = false; // false for shooter1
-        public final static boolean invertLMotor = true; // true for shooter1
+        public final static boolean invertRMotor = true; 
+        public final static boolean invertLMotor = false; 
+    }   
+    public final static class AltShooterMotors {
+        public final static int kShooterMotorTop = 10;
+        public final static int kShooterMotorBottom = 9;
+        public final static double kBottomSpeed = .5;
+        public final static double kTopSpeed = .1;
+        public final static boolean invertTMotor = true; 
+        public final static boolean invertBMotor = false; 
     }   
     public final static class IntakeMotors {
         public final static int kIntake = 6;
@@ -65,16 +71,13 @@ public final class Constants {
         public final static int kBallFeed = 5;
         public final static boolean kMotor1Invert = true;
         public final static boolean kWindow1Invert = true;
-        public final static boolean kBallFeedInvert = true;
         public final static double kMotorSpeed = 1;
         public final static double kWindowSpeed = .5;
-        public final static double kWindowSpeedReversed = -.5;
-        public final static double kBallFeedSpeed = 1;
-        public final static double kBallFeedSpeedReversed = -1;
+        public final static double kBallFeedSpeed = .8;
     }
     public final static class DriveMotors {
         public final static double kA = .04; // Constant of Proportionality
-        public final static int kAmpLimit = 35;
+        public final static int kAmpLimit = 39;
         public final static int kLeftMotor1 = 3;
         public final static int kLeftMotor2 = 4;
         public final static int kRightMotor1 = 1;
@@ -109,8 +112,17 @@ public final class Constants {
         public final static double kMaxSpeed = 0.5;
         public final static double kFourTurnUnitCount = 50.0;
     }
-    public final static class UltrasonicSensor {
-        public final static int kUltrasonicPort = 0;
+    public final static class AnalogSensors {
+        //public final static int kUltrasonicPort = 0;
+        public final static int kBallSensor1Port = 0;
+        public final static int kBallSensor2Port = 1;
+        public final static int kBallSensor3Port = 2;
+    }
+    public final static class DigitalSensors {
+        public final static int kLimitSwitch1Port = 0;
+        public final static int kLimitSwitch2Port = 1;
+        public final static int kLimitSwitch3Port = 2;
+        public final static int kLimitSwitch4Port = 3;
     }
     public final static class NavX {
         public final static double kTurnP = 0;

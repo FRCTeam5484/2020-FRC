@@ -3,12 +3,14 @@ package frc.robot;
 import java.util.Map;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.WidgetType;
@@ -21,6 +23,11 @@ import frc.robot.subsystems.*;
 
 
 public class RobotContainer {
+    // private DigitalInput downContact;
+    // private DigitalInput downContactBackup;
+    // private DigitalInput upContact;
+    // private DigitalInput upContactBackup;
+
     NetworkTableEntry shootSpeed = Shuffleboard.getTab("Test")
         .add("Shooter Speed", 0)
         .withWidget(BuiltInWidgets.kNumberSlider)
@@ -56,6 +63,7 @@ public class RobotContainer {
     private final subTargetingLight targetingLight = new subTargetingLight();
     private final subLED leds = new subLED();
     private final subIntake intake = new subIntake();
+    private final subAltShooter altShooter = new subAltShooter();
 
     //Commands
     private final cmdAutonomous commandAutoCommand = new cmdAutonomous(driveTrain, limeLight);
@@ -72,9 +80,12 @@ public class RobotContainer {
                 driveTrain));
             // Comment below later
             //leds.setDefaultCommand(new RunCommand(() -> leds.setLEDStatus("detected", colorWheel.GetColor()), leds));
-        // Comment out following two lines for actual competition/drive practice
-        // intake.setDefaultCommand(new RunCommand(() -> intake.runIntake(intakeSpeed.getDouble(0), windowIntakeSpeed.getDouble(0)), intake));
-        shooter.setDefaultCommand(new RunCommand(() -> shooter.Shoot(shootSpeed.getDouble(0)), shooter));
+        altShooter.setDefaultCommand(new RunCommand(() -> altShooter.shoot(shootSpeed.getDouble(0)), altShooter));
+
+        // downContact = new DigitalInput(DigitalSensors.kLimitSwitch1Port);
+        // upContact = new DigitalInput(DigitalSensors.kLimitSwitch2Port);
+        // downContactBackup = new DigitalInput(DigitalSensors.kLimitSwitch3Port);
+        // upContactBackup = new DigitalInput(DigitalSensors.kLimitSwitch4Port);
 
         // Sets LEDs to FMS-determined color at the beginning of the match
         
@@ -91,49 +102,37 @@ public class RobotContainer {
         // Driver One Controls
         new JoystickButton(driverOne, Button.kA.value)
             .whenPressed(() -> limeLight.setLEDMode(LimeLight.ledMode.kOn))
-            .whenReleased(() -> limeLight.setLEDMode(LimeLight.ledMode.kOff));
-        new JoystickButton(driverOne, Button.kBumperRight.value)
+            .whenReleased(() -> limeLight.setLEDMode(LimeLight.ledMode.kOff))
+            .whileHeld(new cmdLimeLight_AlignToTarget(driveTrain, limeLight));
+        new JoystickButton(driverOne, Button.kBumperLeft.value)
             .whileHeld(() -> intake.runIntake())
             .whenReleased(() -> intake.stopIntake());
-        new JoystickButton(driverOne, Button.kBumperLeft.value)
-            .toggleWhenPressed(new RunCommand(() -> driveTrain.DriveStraight()))
-            .whenPressed(() -> driveTrain.findCurrentEncoders());
-        // new JoystickButton(driverOne, Button.kBumperLeft.value)
-        //     .whenHeld(new cmdLimeLight_AlignToTarget(driveTrain, limeLight));
-        // new JoystickButton(driverOne, Button.kBack.value)
-        //     .whenPressed(new cmdDriveTrain_TurnToAngle(-90, driveTrain));
-        // new JoystickButton(driverOne, Button.kStart.value)
-        //     .whenPressed(new cmdDriveTrain_TurnToAngle(90, driveTrain));
-        // new JoystickButton(driverOne, Button.kBack.value)
-        //     .whenPressed(new cmdDriveTrain_TurnToAngle(-90, driveTrain));
-        
+        new JoystickButton(driverOne, Button.kBumperRight.value)
+            .whileHeld(() -> intake.runIntakeBackward())
+            .whenReleased(() -> intake.stopIntake());
+        // new JoystickButton(driverOne, Button.kBumperRight.value)
+        //     .whileHeld(() -> intake.runIntake())
+        //     .whenReleased(() -> intake.stopIntake());
+        // new Trigger(() -> driverOne.getTriggerAxis(Hand.kLeft) > .3)
+        //     .toggleWhenActive(new RunCommand(() -> driveTrain.DriveStraight()))
+        //     .whenActive(() -> driveTrain.findCurrentEncoders());
 
         // Driver Two Controls
-        // new JoystickButton(driverTwo, Button.kA.value)
-        //     .whileHeld(() -> colorWheel.turnFourTimes());
-        // new JoystickButton(driverTwo, Button.kB.value)
-        //     .whileHeld(() -> colorWheel.turnToColor());
-        // new JoystickButton(driverTwo, Button.kBumperLeft.value)
-        //     .toggleWhenPressed(new RunCommand(() -> driveTrain.DriveStraight()));
-        // new JoystickButton(driverTwo, Button.kX.value)
-        //     .whenPressed(() -> targetingLight.TurnOn())
-        //     .whenReleased(() -> targetingLight.TurnOff());
+
+        new Trigger(() -> driverTwo.getTriggerAxis(Hand.kLeft) > .3)
+            .whileActiveContinuous(() -> intake.runBallFeedIn())
+            .whenInactive(() -> intake.stopBallFeed());
+        new Trigger(() -> driverTwo.getTriggerAxis(Hand.kRight) > .3)
+            .whileActiveContinuous(() -> intake.runBallFeedOut())
+            .whenInactive(() -> intake.stopBallFeed());
 
 
 
-        new JoystickButton(driverTwo, Button.kBumperLeft.value)
-            .whileHeld(() -> intake.runWindow(true))
-            .whenReleased(() -> intake.stopWindow());
-        new JoystickButton(driverTwo, Button.kBumperRight.value)
-            .whileHeld(() -> intake.runWindow(false))
-            .whenReleased(() -> intake.stopWindow());
-        // new JoystickButton(driverTwo, Button.kX.value)
-        //     .whileHeld(() -> intake.runBallFeed(true))
-        //     .whenReleased(() -> intake.stopBallFeed());
-        new JoystickButton(driverTwo, Button.kB.value)
-            .whileHeld(() -> intake.runBallFeed(false))
-            .whenReleased(() -> intake.stopBallFeed());
-  }
+        // new Trigger(() -> upContact.get() == true)
+        //     .whenActive(() -> intake.stopWindow());
+    }
+
+
 
   public Command getAutonomousCommand() {
     return commandAutoCommand;
