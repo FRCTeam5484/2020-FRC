@@ -29,11 +29,17 @@ public class subIntake extends SubsystemBase {
   private AnalogInput ballSensor1;
   private AnalogInput ballSensor2;
   private AnalogInput ballSensor3;
+  private AnalogInput ballSensor4;
+  private AnalogInput ballSensor5;
+  private AnalogInput ballSensor6;
 
   public subIntake() {
     ballSensor1 = new AnalogInput(AnalogSensors.kBallSensor1Port);
     ballSensor2 = new AnalogInput(AnalogSensors.kBallSensor2Port);
     ballSensor3 = new AnalogInput(AnalogSensors.kBallSensor3Port);
+    ballSensor4 = new AnalogInput(AnalogSensors.kBallSensor4Port);
+    ballSensor5 = new AnalogInput(AnalogSensors.kBallSensor5Port);
+    ballSensor6 = new AnalogInput(AnalogSensors.kBallSensor6Port);
     intakeMotor1.setInverted(IntakeMotors.kMotor1Invert);
     window1.setInverted(IntakeMotors.kWindow1Invert);
   }
@@ -79,8 +85,11 @@ public class subIntake extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // SmartDashboard.putNumber("Ball Sensor 1", ballSensor1.getValue());
-    // SmartDashboard.putNumber("Ball Sensor 2", ballSensor2.getValue());
-    // SmartDashboard.putNumber("Ball Sensor 3", ballSensor3.getValue());
+    SmartDashboard.putNumber("Ball Sensor 1", ballSensor1.getValue());
+    SmartDashboard.putNumber("Ball Sensor 2", ballSensor2.getValue());
+    SmartDashboard.putNumber("Ball Sensor 3", ballSensor3.getValue());
+    SmartDashboard.putNumber("Ball Sensor 4", ballSensor4.getValue());
+    SmartDashboard.putNumber("Ball Sensor 5", ballSensor5.getValue());
+    SmartDashboard.putNumber("Ball Sensor 6", ballSensor6.getValue());
   }
 }

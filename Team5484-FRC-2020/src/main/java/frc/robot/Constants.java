@@ -117,6 +117,9 @@ public final class Constants {
         public final static int kBallSensor1Port = 0;
         public final static int kBallSensor2Port = 1;
         public final static int kBallSensor3Port = 2;
+        public final static int kBallSensor4Port = 3;
+        public final static int kBallSensor5Port = 4;
+        public final static int kBallSensor6Port = 5;
     }
     public final static class DigitalSensors {
         public final static int kLimitSwitch1Port = 0;
