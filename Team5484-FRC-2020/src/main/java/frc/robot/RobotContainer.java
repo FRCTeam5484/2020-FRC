@@ -43,11 +43,6 @@ public class RobotContainer {
         .withWidget(BuiltInWidgets.kNumberSlider)
         .withProperties(Map.of("min", -1, "max", 1))
         .getEntry();
-    // NetworkTableEntry ledColor = Shuffleboard.getTab("Test")
-    //     .add("LED", 0)
-    //     .withWidget(BuiltInWidgets.kToggleSwitch)
-    //     .withProperties(Map.of("Red", "red", "Blue", "blue"))
-    //     .getEntry();
     
 
     //Controllers
@@ -79,7 +74,6 @@ public class RobotContainer {
                 driverOne.getY(Hand.kRight), driverOne.getTriggerAxis(Hand.kRight) > DriveControllers.minRTriggerPress),
                 driveTrain));
             // Comment below later
-            //leds.setDefaultCommand(new RunCommand(() -> leds.setLEDStatus("detected", colorWheel.GetColor()), leds));
         altShooter.setDefaultCommand(new RunCommand(() -> altShooter.shoot(shootSpeed.getDouble(0)), altShooter));
 
         // downContact = new DigitalInput(DigitalSensors.kLimitSwitch1Port);
@@ -90,10 +84,10 @@ public class RobotContainer {
         // Sets LEDs to FMS-determined color at the beginning of the match
         
         // uncomment below for comp
-        //leds.setLEDStatus(colorWheel.getGameData());
+        leds.setLEDStatus(colorWheel.getGameData());
         
         // comment below for comp
-        leds.setLEDStatus("rainbow");
+        //leds.setLEDStatus("rainbow");
         CommandScheduler.getInstance().onCommandInterrupt(command -> USBLogging.printCommandStatus(command, "Interrupted"));
     }
 

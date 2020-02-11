@@ -32,6 +32,13 @@ public class subIntake extends SubsystemBase {
   private AnalogInput ballSensor4;
   private AnalogInput ballSensor5;
   private AnalogInput ballSensor6;
+  private int ballSensor1Active;
+  private int ballSensor2Active;
+  private int ballSensor3Active;
+  private int ballSensor4Active;
+  private int ballSensor5Active;
+  private int ballSensor6Active;
+  private int ballCount = 0;
 
   public subIntake() {
     ballSensor1 = new AnalogInput(AnalogSensors.kBallSensor1Port);
@@ -83,13 +90,40 @@ public class subIntake extends SubsystemBase {
     window1.set(0);
   }
 
+  public int getBalls() {
+    return ballCount;
+  }
+  private void UpdateBallCount() {
+    if (ballSensor1.getValue() < 8)
+      ballSensor1Active = 1;
+    else
+      ballSensor1Active = 0;
+    if (ballSensor2.getValue() < 8)
+      ballSensor2Active = 1;
+    else
+      ballSensor2Active = 0;
+    if (ballSensor3.getValue() < 8)
+      ballSensor3Active = 1;
+    else
+      ballSensor3Active = 0;
+    if (ballSensor4.getValue() < 8)
+      ballSensor4Active = 1;
+    else
+      ballSensor4Active = 0;
+    if (ballSensor5.getValue() < 8)
+      ballSensor5Active = 1;
+    else
+      ballSensor5Active = 0;
+    if (ballSensor6.getValue() < 8)
+      ballSensor6Active = 1;
+    else
+      ballSensor6Active = 0;
+    ballCount = ballSensor1Active + ballSensor2Active + ballSensor3Active + ballSensor4Active + ballSensor5Active + ballSensor6Active;
+  }
+
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("Ball Sensor 1", ballSensor1.getValue());
-    SmartDashboard.putNumber("Ball Sensor 2", ballSensor2.getValue());
-    SmartDashboard.putNumber("Ball Sensor 3", ballSensor3.getValue());
-    SmartDashboard.putNumber("Ball Sensor 4", ballSensor4.getValue());
-    SmartDashboard.putNumber("Ball Sensor 5", ballSensor5.getValue());
-    SmartDashboard.putNumber("Ball Sensor 6", ballSensor6.getValue());
+    UpdateBallCount();
+    SmartDashboard.putNumber("Ball Count", ballCount);
   }
 }
