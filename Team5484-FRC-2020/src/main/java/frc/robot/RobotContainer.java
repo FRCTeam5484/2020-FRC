@@ -62,6 +62,7 @@ public class RobotContainer {
 
     //Commands
     private final cmdAutonomous commandAutoCommand = new cmdAutonomous(driveTrain, limeLight);
+    private final cmdLimeLight_AlignToTarget align = new cmdLimeLight_AlignToTarget(driveTrain, limeLight, shooter);
 
     public RobotContainer() {
         configureButtonBindings();
@@ -98,13 +99,16 @@ public class RobotContainer {
         new JoystickButton(driverOne, Button.kA.value)
             .whenPressed(() -> limeLight.setLEDMode(LimeLight.ledMode.kOn))
             .whenReleased(() -> limeLight.setLEDMode(LimeLight.ledMode.kOff))
-            .whileHeld(new cmdLimeLight_AlignToTarget(driveTrain, limeLight));
+            .whileHeld(new cmdLimeLight_AlignToTarget(driveTrain, limeLight, shooter));
         new JoystickButton(driverOne, Button.kBumperLeft.value)
             .whileHeld(() -> intake.runIntake())
             .whenReleased(() -> intake.stopIntake());
         new JoystickButton(driverOne, Button.kBumperRight.value)
             .whileHeld(() -> intake.runIntakeBackward())
             .whenReleased(() -> intake.stopIntake());
+        new JoystickButton(driverOne, Button.kB.value)
+            .toggleWhenPressed(new RunCommand(() -> driveTrain.DriveStraight()))
+            .whenPressed(() -> driveTrain.findCurrentEncoders());
         // new JoystickButton(driverOne, Button.kBumperRight.value)
         //     .whileHeld(() -> intake.runIntake())
         //     .whenReleased(() -> intake.stopIntake());
@@ -113,10 +117,11 @@ public class RobotContainer {
         //     .whenActive(() -> driveTrain.findCurrentEncoders());
 
         // Driver Two Controls
-
         new Trigger(() -> driverTwo.getTriggerAxis(Hand.kLeft) > .3)
             .whileActiveContinuous(() -> intake.runBallFeedIn())
             .whenInactive(() -> intake.stopBallFeed());
+    // new Trigger(() -> driverTwo.getTriggerAxis(Hand.kRight) > .3)
+    //     .whenActive(() -> intake.increasePosition());
         new Trigger(() -> driverTwo.getTriggerAxis(Hand.kRight) > .3)
             .whileActiveContinuous(() -> shooter.shoot())
             .whenInactive(() -> shooter.stopShoot());
@@ -126,11 +131,16 @@ public class RobotContainer {
         new JoystickButton(driverTwo, Button.kBumperRight.value)
             .whileHeld(() -> shooter.turretCounter())
             .whenReleased(() -> shooter.turretStop());
-        // new Trigger(() -> driverTwo.getTriggerAxis(Hand.kRight) > .3)
-        //     .whenActive(() -> intake.increasePosition());
+        // Temporary (BELOW)
+        new JoystickButton(driverTwo, Button.kStart.value)
+            .whileHeld(() -> intake.runWindowUp())
+            .whenReleased(() -> intake.stopWindow());
+        new JoystickButton(driverTwo, Button.kBack.value)
+            .whileHeld(() -> intake.runWindowDown())
+            .whenReleased(() -> intake.stopWindow());
 
-
-
+        new JoystickButton(driverTwo, Button.kY.value)
+            .whileHeld(align);
         // new Trigger(() -> upContact.get() == true)
         //     .whenActive(() -> intake.stopWindow());
     }

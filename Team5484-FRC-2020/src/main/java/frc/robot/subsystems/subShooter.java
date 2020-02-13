@@ -48,6 +48,10 @@ public class subShooter extends SubsystemBase {
     turret.set(0);
   }
 
+  public void setTurret(double speed) {
+    turret.set(speed);
+  }
+
   public void seekAndShoot() {
     
   }

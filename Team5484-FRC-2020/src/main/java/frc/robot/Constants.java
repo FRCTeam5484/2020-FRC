@@ -42,6 +42,7 @@ public final class Constants {
             public final static double DESIRED_TARGET_AREA = 2.320;
             public final static double DESIRED_ANGLE = -3.86;
             public final static double MAX_DRIVE = 0.7;
+            public final static double MAX_TURRET = .2;
             public final static double MIN_DRIVE = 0.1;
         }
     }
@@ -59,7 +60,7 @@ public final class Constants {
         public final static boolean kInvertSMotor = true;
         public final static boolean kInvertTurret = false;
         public final static double kShootSpeed = .9;
-        public final static double kTurretSpeed = .1;
+        public final static double kTurretSpeed = .2;
     }   
     public final static class AltShooterMotors {
         public final static int kShooterMotorTop = 10;
@@ -71,12 +72,13 @@ public final class Constants {
     }   
     public final static class IntakeMotors {
         public final static int kIntake = 6;
-        public final static int kWindow1 = 1;
+        public final static int kWindow1 = 0;
         public final static int kBallFeed = 5;
         public final static boolean kMotor1Invert = true;
         public final static boolean kWindow1Invert = true;
         public final static double kMotorSpeed = 1;
-        public final static double kWindowSpeed = .5;
+        public final static double kWindowUpSpeed = 1;
+        public final static double kWindowDownSpeed = .6;
         public final static double kBallFeedSpeed = .5;
         public final static double kBallFeedSpeedSlow = .3;
     }

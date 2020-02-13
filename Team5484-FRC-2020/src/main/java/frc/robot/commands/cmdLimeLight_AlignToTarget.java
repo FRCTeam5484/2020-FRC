@@ -2,17 +2,19 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.LimeLight;
-import frc.robot.subsystems.subDriveTrain;
-import frc.robot.subsystems.subLimeLight;
+import frc.robot.subsystems.*;
 
 public class cmdLimeLight_AlignToTarget extends CommandBase {
   private final subDriveTrain driveTrain;
   private final subLimeLight limeLight;
-  public cmdLimeLight_AlignToTarget(final subDriveTrain _driveTrain, final subLimeLight _limeLight) {
+  private final subShooter shooter;
+  public cmdLimeLight_AlignToTarget(final subDriveTrain _driveTrain, final subLimeLight _limeLight, final subShooter _shooter) {
     driveTrain = _driveTrain;
     limeLight = _limeLight;
+    shooter = _shooter;
     addRequirements(driveTrain);
     addRequirements(limeLight);
+    addRequirements(shooter);
   }
 
   @Override
@@ -25,6 +27,7 @@ public class cmdLimeLight_AlignToTarget extends CommandBase {
   public void execute() {
     limeLight.triggeredPeriodic();
     driveTrain.AutoDrive(limeLight.DriveCommand, limeLight.SteerCommand);
+    shooter.setTurret(limeLight.TurretCommand);
   }
 
   @Override

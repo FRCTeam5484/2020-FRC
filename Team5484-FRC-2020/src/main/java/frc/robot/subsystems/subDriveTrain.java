@@ -115,7 +115,8 @@ public class subDriveTrain extends SubsystemBase {
   public void periodic() {
     // leftEncoderValue = left1Encoder.getPosition() + left2Encoder.getPosition();
     // rightEncoderValue = right1Encoder.getPosition() + right2Encoder.getPosition();
-    SmartDashboard.putNumber("Ultrasonic", ultrasonic.getRangeInches());
+    // SmartDashboard.putNumber("Ultrasonic", ultrasonic.getRangeInches());
+    SmartDashboard.putNumber("Angle", getAngle());
 
     // SmartDashboard.putNumber("Left(1) Encoder Ticks", left1Encoder.getCountsPerRevolution());
     // SmartDashboard.putNumber("Left(2) Encoder Ticks", left2Encoder.getCountsPerRevolution());

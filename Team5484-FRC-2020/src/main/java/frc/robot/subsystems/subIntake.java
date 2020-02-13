@@ -151,10 +151,10 @@ public class subIntake extends SubsystemBase {
   }
 
   public void runWindowUp() {
-    window1.set(IntakeMotors.kWindowSpeed);
+    window1.set(-IntakeMotors.kWindowUpSpeed);
   }
   public void runWindowDown() {
-    window1.set(-IntakeMotors.kWindowSpeed);
+    window1.set(IntakeMotors.kWindowDownSpeed);
   }
   public void stopWindow() {
     window1.set(0);
