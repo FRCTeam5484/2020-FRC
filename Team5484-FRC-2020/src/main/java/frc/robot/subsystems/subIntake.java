@@ -26,12 +26,12 @@ public class subIntake extends SubsystemBase {
   private CANSparkMax intakeMotor1 = new CANSparkMax(IntakeMotors.kIntake, MotorType.kBrushless);
   private CANSparkMax ballFeed = new CANSparkMax(IntakeMotors.kBallFeed, MotorType.kBrushless);
   private VictorSP window1 = new VictorSP(IntakeMotors.kWindow1);
-  private AnalogInput ballSensor1;
-  private AnalogInput ballSensor2;
-  private AnalogInput ballSensor3;
-  private AnalogInput ballSensor4;
-  private AnalogInput ballSensor5;
-  private AnalogInput ballSensor6;
+  // private AnalogInput ballSensor1;
+  // private AnalogInput ballSensor2;
+  // private AnalogInput ballSensor3;
+  // private AnalogInput ballSensor4;
+  // private AnalogInput ballSensor5;
+  // private AnalogInput ballSensor6;
   private int ballSensor1Active;
   private int ballSensor2Active;
   private int ballSensor3Active;
@@ -39,14 +39,15 @@ public class subIntake extends SubsystemBase {
   private int ballSensor5Active;
   private int ballSensor6Active;
   private int ballCount = 0;
+  private int ballPosition = 0;
 
   public subIntake() {
-    ballSensor1 = new AnalogInput(AnalogSensors.kBallSensor1Port);
-    ballSensor2 = new AnalogInput(AnalogSensors.kBallSensor2Port);
-    ballSensor3 = new AnalogInput(AnalogSensors.kBallSensor3Port);
-    ballSensor4 = new AnalogInput(AnalogSensors.kBallSensor4Port);
-    ballSensor5 = new AnalogInput(AnalogSensors.kBallSensor5Port);
-    ballSensor6 = new AnalogInput(AnalogSensors.kBallSensor6Port);
+    // ballSensor1 = new AnalogInput(AnalogSensors.kBallSensor1Port);
+    // ballSensor2 = new AnalogInput(AnalogSensors.kBallSensor2Port);
+    // ballSensor3 = new AnalogInput(AnalogSensors.kBallSensor3Port);
+    // ballSensor4 = new AnalogInput(AnalogSensors.kBallSensor4Port);
+    // ballSensor5 = new AnalogInput(AnalogSensors.kBallSensor5Port);
+    // ballSensor6 = new AnalogInput(AnalogSensors.kBallSensor6Port);
     intakeMotor1.setInverted(IntakeMotors.kMotor1Invert);
     window1.setInverted(IntakeMotors.kWindow1Invert);
   }
@@ -67,6 +68,75 @@ public class subIntake extends SubsystemBase {
   //   intakeMotor1.set(speed1);
   //   window1.set(speedWindow);
   // }
+
+  public void increasePosition() {
+    // ballPosition++;
+  }
+
+  public void runAutoFeed() {
+
+    // if (ballSensor4Active != 1) {
+    //   RunBallFeed();
+    // }
+    // else {
+    //   stopBallFeed();
+    // }
+    // switch (ballPosition) {
+    //   case 0:
+    //     if (ballSensor4.getValue() > 8) {
+    //       RunBallFeed();
+    //     }
+    //     else {
+    //       stopBallFeed();
+    //     }
+    //     break;
+    //   case 1:
+    //     if (ballSensor3.getValue() > 8) {
+    //       RunBallFeed();
+    //     }
+    //     else {
+    //       stopBallFeed();
+    //     }
+    //     break;
+    //   case 2:
+    //     if (ballSensor2.getValue() > 8) {
+    //       RunBallFeed();
+    //     }
+    //     else {
+    //       stopBallFeed();
+    //     }
+    //     break;
+    //   case 3:
+    //     if (ballSensor1.getValue() > 8) {
+    //       RunBallFeed();
+    //     }
+    //     else {
+    //       stopBallFeed();
+    //     }
+    //     break;
+    //   default:
+    //     break;
+    // }
+    
+  //   if (ballSensor3Active != 1) {
+  //     RunBallFeed();
+  //   }
+  //   else {
+  //     stopBallFeed();
+  //   }
+  //   if (ballSensor2Active != 1) {
+  //     RunBallFeed();
+  //   }
+  //   else {
+  //     stopBallFeed();
+  //   }
+  //   if (ballSensor1Active != 1) {
+  //     RunBallFeed();
+  //   }
+  //   else {
+  //     stopBallFeed();
+  //   }
+  }
 
   public void runBallFeedIn(){
     ballFeed.set(-IntakeMotors.kBallFeedSpeed);
@@ -93,37 +163,37 @@ public class subIntake extends SubsystemBase {
   public int getBalls() {
     return ballCount;
   }
-  private void UpdateBallCount() {
-    if (ballSensor1.getValue() < 8)
-      ballSensor1Active = 1;
-    else
-      ballSensor1Active = 0;
-    if (ballSensor2.getValue() < 8)
-      ballSensor2Active = 1;
-    else
-      ballSensor2Active = 0;
-    if (ballSensor3.getValue() < 8)
-      ballSensor3Active = 1;
-    else
-      ballSensor3Active = 0;
-    if (ballSensor4.getValue() < 8)
-      ballSensor4Active = 1;
-    else
-      ballSensor4Active = 0;
-    if (ballSensor5.getValue() < 8)
-      ballSensor5Active = 1;
-    else
-      ballSensor5Active = 0;
-    if (ballSensor6.getValue() < 8)
-      ballSensor6Active = 1;
-    else
-      ballSensor6Active = 0;
-    ballCount = ballSensor1Active + ballSensor2Active + ballSensor3Active + ballSensor4Active + ballSensor5Active + ballSensor6Active;
-  }
+  // private void UpdateBallCount() {
+  //   if (ballSensor1.getValue() < 8)
+  //     ballSensor1Active = 1;
+  //   else
+  //     ballSensor1Active = 0;
+  //   if (ballSensor2.getValue() < 8)
+  //     ballSensor2Active = 1;
+  //   else
+  //     ballSensor2Active = 0;
+  //   if (ballSensor3.getValue() < 8)
+  //     ballSensor3Active = 1;
+  //   else
+  //     ballSensor3Active = 0;
+  //   if (ballSensor4.getValue() < 8)
+  //     ballSensor4Active = 1;
+  //   else
+  //     ballSensor4Active = 0;
+  //   if (ballSensor5.getValue() < 8)
+  //     ballSensor5Active = 1;
+  //   else
+  //     ballSensor5Active = 0;
+  //   if (ballSensor6.getValue() < 8)
+  //     ballSensor6Active = 1;
+  //   else
+  //     ballSensor6Active = 0;
+  //   ballCount = ballSensor1Active + ballSensor2Active + ballSensor3Active + ballSensor4Active + ballSensor5Active + ballSensor6Active;
+  // }
 
   @Override
   public void periodic() {
-    UpdateBallCount();
+    // UpdateBallCount();
     SmartDashboard.putNumber("Ball Count", ballCount);
   }
 }

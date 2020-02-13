@@ -28,21 +28,21 @@ public class RobotContainer {
     // private DigitalInput upContact;
     // private DigitalInput upContactBackup;
 
-    NetworkTableEntry shootSpeed = Shuffleboard.getTab("Test")
-        .add("Shooter Speed", 0)
-        .withWidget(BuiltInWidgets.kNumberSlider)
-        .withProperties(Map.of("min", 0, "max", 1))
-        .getEntry();
-    NetworkTableEntry intakeSpeed = Shuffleboard.getTab("Test")
-        .add("Intake Speed", 0)
-        .withWidget(BuiltInWidgets.kNumberSlider)
-        .withProperties(Map.of("min", 0, "max", 1))
-        .getEntry();
-    NetworkTableEntry windowIntakeSpeed = Shuffleboard.getTab("Test")
-        .add("Window Speed", 0)
-        .withWidget(BuiltInWidgets.kNumberSlider)
-        .withProperties(Map.of("min", -1, "max", 1))
-        .getEntry();
+    // NetworkTableEntry shootSpeed = Shuffleboard.getTab("Test")
+    //     .add("Shooter Speed", 0)
+    //     .withWidget(BuiltInWidgets.kNumberSlider)
+    //     .withProperties(Map.of("min", 0, "max", 1))
+    //     .getEntry();
+    // NetworkTableEntry intakeSpeed = Shuffleboard.getTab("Test")
+    //     .add("Intake Speed", 0)
+    //     .withWidget(BuiltInWidgets.kNumberSlider)
+    //     .withProperties(Map.of("min", 0, "max", 1))
+    //     .getEntry();
+    // NetworkTableEntry windowIntakeSpeed = Shuffleboard.getTab("Test")
+    //     .add("Window Speed", 0)
+    //     .withWidget(BuiltInWidgets.kNumberSlider)
+    //     .withProperties(Map.of("min", -1, "max", 1))
+    //     .getEntry();
     
 
     //Controllers
@@ -74,7 +74,8 @@ public class RobotContainer {
                 driverOne.getY(Hand.kRight), driverOne.getTriggerAxis(Hand.kRight) > DriveControllers.minRTriggerPress),
                 driveTrain));
             // Comment below later
-        altShooter.setDefaultCommand(new RunCommand(() -> altShooter.shoot(shootSpeed.getDouble(0)), altShooter));
+        //shooter.setDefaultCommand(new RunCommand(() -> shooter.shoot(shootSpeed.getDouble(0)), shooter));
+        // intake.setDefaultCommand(new RunCommand(() -> intake.runAutoFeed(), intake));
 
         // downContact = new DigitalInput(DigitalSensors.kLimitSwitch1Port);
         // upContact = new DigitalInput(DigitalSensors.kLimitSwitch2Port);
@@ -117,8 +118,16 @@ public class RobotContainer {
             .whileActiveContinuous(() -> intake.runBallFeedIn())
             .whenInactive(() -> intake.stopBallFeed());
         new Trigger(() -> driverTwo.getTriggerAxis(Hand.kRight) > .3)
-            .whileActiveContinuous(() -> intake.runBallFeedOut())
-            .whenInactive(() -> intake.stopBallFeed());
+            .whileActiveContinuous(() -> shooter.shoot())
+            .whenInactive(() -> shooter.stopShoot());
+        new JoystickButton(driverTwo, Button.kBumperLeft.value)
+            .whileHeld(() -> shooter.turretClock())
+            .whenReleased(() -> shooter.turretStop());
+        new JoystickButton(driverTwo, Button.kBumperRight.value)
+            .whileHeld(() -> shooter.turretCounter())
+            .whenReleased(() -> shooter.turretStop());
+        // new Trigger(() -> driverTwo.getTriggerAxis(Hand.kRight) > .3)
+        //     .whenActive(() -> intake.increasePosition());
 
 
 

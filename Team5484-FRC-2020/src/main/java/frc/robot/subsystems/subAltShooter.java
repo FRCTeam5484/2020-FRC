@@ -26,10 +26,10 @@ public class subAltShooter extends SubsystemBase {
 
   public void shoot(double speed) {
     topShooter.set(speed);
-    bottomShooter.set(speed);
+    bottomShooter.set(AltShooterMotors.kBottomSpeed);
   }
   public void stop() {
-    //topShooter.set(0);
+    topShooter.set(0);
     bottomShooter.set(0);
   }
 

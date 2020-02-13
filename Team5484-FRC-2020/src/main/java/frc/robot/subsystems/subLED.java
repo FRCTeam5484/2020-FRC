@@ -16,8 +16,8 @@ public class subLED extends SubsystemBase {
   /**
    * Creates a new subLED.
    */
-  private final AddressableLED m_led = new AddressableLED(9);
-  private AddressableLEDBuffer m_buffer = new AddressableLEDBuffer(150);
+  private final AddressableLED m_led = new AddressableLED(LED.StrandOneID);
+  private AddressableLEDBuffer m_buffer = new AddressableLEDBuffer(LED.StrandOneCount);
   private int m_rainbowFirstPixelHue;
   private String colorStatus = "";
   private String detectedColor = "";

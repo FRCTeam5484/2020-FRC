@@ -47,15 +47,19 @@ public final class Constants {
     }
     public final static class LED {
         public final static int StrandOneID = 9;
-        public final static int StrandOneCount = 60;
+        public final static int StrandOneCount = 150;
         public final static int timerInterval = 3000;
     }
     public final static class ShooterMotors {
         public final static int kAmpLimit = 39;
         public final static int kShooterMasterMotor = 8;
         public final static int kShooterSlaveMotor = 7;
-        public final static boolean invertRMotor = true; 
-        public final static boolean invertLMotor = false; 
+        public final static int kTurret = 11;
+        public final static boolean kInvertMMotor = false; 
+        public final static boolean kInvertSMotor = true;
+        public final static boolean kInvertTurret = false;
+        public final static double kShootSpeed = .9;
+        public final static double kTurretSpeed = .1;
     }   
     public final static class AltShooterMotors {
         public final static int kShooterMotorTop = 10;
@@ -73,7 +77,8 @@ public final class Constants {
         public final static boolean kWindow1Invert = true;
         public final static double kMotorSpeed = 1;
         public final static double kWindowSpeed = .5;
-        public final static double kBallFeedSpeed = .8;
+        public final static double kBallFeedSpeed = .5;
+        public final static double kBallFeedSpeedSlow = .3;
     }
     public final static class DriveMotors {
         public final static double kA = .04; // Constant of Proportionality

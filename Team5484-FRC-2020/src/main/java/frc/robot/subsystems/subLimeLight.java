@@ -20,12 +20,10 @@ public class subLimeLight extends SubsystemBase {
   //private NetworkTableEntry camMode = table.getEntry("camMode");
 
   public subLimeLight() {
-
   }
 
   @Override
   public void periodic() {
-    
   }
   public void triggeredPeriodic(){
     tvHasTarget = table.getEntry("tv");

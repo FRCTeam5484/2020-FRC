@@ -14,24 +14,42 @@ import frc.robot.Constants.*;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class subShooter extends SubsystemBase {
-  /**
-   * Creates a new subShooter.
-   */
   private final CANSparkMax shooterMaster = new CANSparkMax(ShooterMotors.kShooterMasterMotor, MotorType.kBrushless);
   private final CANSparkMax shooterSlave = new CANSparkMax(ShooterMotors.kShooterSlaveMotor, MotorType.kBrushless);
+  private final CANSparkMax turret = new CANSparkMax(ShooterMotors.kTurret, MotorType.kBrushless);
 
   public subShooter() {
-    // Limits Amps
     shooterSlave.setSmartCurrentLimit(ShooterMotors.kAmpLimit);
     shooterMaster.setSmartCurrentLimit(ShooterMotors.kAmpLimit);
-    // Inverts motors
-    shooterSlave.setInverted(ShooterMotors.invertRMotor);
-    shooterMaster.setInverted(ShooterMotors.invertLMotor);
-    shooterSlave.follow(shooterMaster);
+
+    turret.setInverted(ShooterMotors.kInvertTurret);
+    shooterMaster.setInverted(ShooterMotors.kInvertMMotor);
+
+    shooterSlave.follow(shooterMaster, ShooterMotors.kInvertSMotor);
   }
 
-  public void Shoot(double speed) {
+  public void shoot() {
+    shooterMaster.set(ShooterMotors.kShootSpeed);
+  }
+  public void shoot(double speed) {
     shooterMaster.set(speed);
+  }
+  public void stopShoot() {
+    shooterMaster.set(0);
+  }
+
+  public void turretClock() {
+    turret.set(ShooterMotors.kTurretSpeed);
+  }
+  public void turretCounter() {
+    turret.set(-ShooterMotors.kTurretSpeed);
+  }
+  public void turretStop() {
+    turret.set(0);
+  }
+
+  public void seekAndShoot() {
+    
   }
 
   @Override
