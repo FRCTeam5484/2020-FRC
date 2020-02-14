@@ -123,7 +123,8 @@ public class RobotContainer {
         //     .whileActiveContinuous(() -> intake.runBallFeedIn())
         //     .whenInactive(() -> intake.stopBallFeed());
         new JoystickButton(driverTwo, Button.kA.value)
-            .whileHeld(new cFeedBall(ballIndexer));
+            .whenPressed(() -> ballIndexer.LoadIndexer())
+            .whenReleased(() -> ballIndexer.StopIndexer());
     // new Trigger(() -> driverTwo.getTriggerAxis(Hand.kRight) > .3)
     //     .whenActive(() -> intake.increasePosition());
         new Trigger(() -> driverTwo.getTriggerAxis(Hand.kRight) > .3)

@@ -7,7 +7,6 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 import frc.robot.Constants.BallIndexer;
 import frc.robot.Constants.AnalogSensors;
 
@@ -77,44 +76,80 @@ public class subBallIndexer extends SubsystemBase {
     ballFeed.set(0);
     myTimer.stop();
   }
+  public void LoadIndexer(){
+    if(ballIntakePresent && !ball5Present) {
+      while(!ball5Present){
+        RunIndexer();
+        GetBallStatus();
+      }
+      StopIndexer();
+    }
+    if(ballIntakePresent && ball5Present) {
+      while(!ball4Present){
+        RunIndexer();
+        GetBallStatus();
+      }
+      StopIndexer();
+      if(ball4Present && !ball5Present){
+        while(!ball5Present){
+          ReverseIndexer();
+          GetBallStatus();
+        }
+        StopIndexer();
+      }
+    }
+    if(ballIntakePresent && ball4Present) {
+      while(!ball3Present){
+        RunIndexer();
+        GetBallStatus();
+      }
+      StopIndexer();
+      if(ball3Present && !ball4Present){
+        while(!ball4Present){
+          ReverseIndexer();
+          GetBallStatus();
+        }
+        StopIndexer();
+      }
+    }
+    if(ballIntakePresent && ball3Present) {
+      while(!ball2Present){
+        RunIndexer();
+        GetBallStatus();
+      }
+      StopIndexer();
+      if(ball2Present && !ball3Present){
+        while(!ball3Present){
+          ReverseIndexer();
+          GetBallStatus();
+        }
+        StopIndexer();
+      }
+    }
+    if(ballIntakePresent && ball2Present) {
+      while(!ball1Present){
+        RunIndexer();
+        GetBallStatus();
+      }
+      StopIndexer();
+      if(ball1Present && !ball2Present){
+        while(!ball2Present){
+          ReverseIndexer();
+          GetBallStatus();
+        }
+        StopIndexer();
+      }
+    }
+  }
 
   public void GetBallStatus() {
-    if(ballSensor1.getVoltage()<1) {
-      ball1Present = true;
-    }
-    else{
-      ball1Present = false;
-    }
-    if(ballSensor2.getVoltage()<1) {
-      ball2Present = true;
-    }
-    else{
-      ball2Present = false;
-    }
-    if(ballSensor3.getVoltage()<1) {
-      ball3Present = true;
-    }
-    else{
-      ball3Present = false;
-    }
-    if(ballSensor4.getVoltage()<1) {
-      ball4Present = true;
-    }
-    else{
-      ball4Present = false;
-    }
-    if(ballSensor5.getVoltage()<1) {
-      ball5Present = true;
-    }
-    else{
-      ball5Present = false;
-    }
-    if(ballIntake.getVoltage()<1) {
-      ballIntakePresent = true;
-    }
-    else{
-      ballIntakePresent = false;
-    }
+    ball1Present = ballSensor1.getVoltage()<1 ? true : false;
+    ball2Present = ballSensor2.getVoltage()<1 ? true : false;
+    ball3Present = ballSensor3.getVoltage()<1 ? true : false;
+    ball4Present = ballSensor4.getVoltage()<1 ? true : false;
+    ball5Present = ballSensor5.getVoltage()<1 ? true : false;
+    ballIntakePresent = ballIntake.getVoltage()<1 ? true : false;
+    
     SmartDashboard.putNumber("Timer", myTestTimer.get());
     SmartDashboard.putNumber("Ball1v", ballSensor1.getVoltage());
     SmartDashboard.putNumber("Ball2v", ballSensor2.getVoltage());
