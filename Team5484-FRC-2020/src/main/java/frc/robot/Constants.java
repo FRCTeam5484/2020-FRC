@@ -73,7 +73,6 @@ public final class Constants {
     public final static class IntakeMotors {
         public final static int kIntake = 6;
         public final static int kWindow1 = 0;
-        public final static int kBallFeed = 5;
         public final static boolean kMotor1Invert = true;
         public final static boolean kWindow1Invert = true;
         public final static double kMotorSpeed = 1;
@@ -81,6 +80,11 @@ public final class Constants {
         public final static double kWindowDownSpeed = .6;
         public final static double kBallFeedSpeed = .5;
         public final static double kBallFeedSpeedSlow = .3;
+    }
+    public final static class BallIndexer {
+        public final static int kMotor = 5;
+        public final static double kMotorSpeed = .2;
+        public final static double kShootSpeed = .2;
     }
     public final static class DriveMotors {
         public final static double kA = .04; // Constant of Proportionality
@@ -121,12 +125,12 @@ public final class Constants {
     }
     public final static class AnalogSensors {
         //public final static int kUltrasonicPort = 0;
-        public final static int kBallSensor1Port = 0;
-        public final static int kBallSensor2Port = 1;
-        public final static int kBallSensor3Port = 2;
-        public final static int kBallSensor4Port = 3;
-        public final static int kBallSensor5Port = 4;
-        public final static int kBallSensor6Port = 5;
+        public final static int kBallSensor1 = 0;
+        public final static int kBallSensor2 = 1;
+        public final static int kBallSensor3 = 2;
+        public final static int kBallSensor4 = 3;
+        public final static int kBallSensor5 = 4;
+        public final static int kBallSensor6 = 5;
     }
     public final static class DigitalSensors {
         public final static int kLimitSwitch1Port = 0;

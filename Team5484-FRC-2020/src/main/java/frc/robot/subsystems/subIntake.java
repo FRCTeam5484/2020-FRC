@@ -24,30 +24,10 @@ public class subIntake extends SubsystemBase {
    * Creates a new subIntake.
    */
   private CANSparkMax intakeMotor1 = new CANSparkMax(IntakeMotors.kIntake, MotorType.kBrushless);
-  private CANSparkMax ballFeed = new CANSparkMax(IntakeMotors.kBallFeed, MotorType.kBrushless);
+  
   private VictorSP window1 = new VictorSP(IntakeMotors.kWindow1);
-  // private AnalogInput ballSensor1;
-  // private AnalogInput ballSensor2;
-  // private AnalogInput ballSensor3;
-  // private AnalogInput ballSensor4;
-  // private AnalogInput ballSensor5;
-  // private AnalogInput ballSensor6;
-  private int ballSensor1Active;
-  private int ballSensor2Active;
-  private int ballSensor3Active;
-  private int ballSensor4Active;
-  private int ballSensor5Active;
-  private int ballSensor6Active;
-  private int ballCount = 0;
-  private int ballPosition = 0;
-
+  
   public subIntake() {
-    // ballSensor1 = new AnalogInput(AnalogSensors.kBallSensor1Port);
-    // ballSensor2 = new AnalogInput(AnalogSensors.kBallSensor2Port);
-    // ballSensor3 = new AnalogInput(AnalogSensors.kBallSensor3Port);
-    // ballSensor4 = new AnalogInput(AnalogSensors.kBallSensor4Port);
-    // ballSensor5 = new AnalogInput(AnalogSensors.kBallSensor5Port);
-    // ballSensor6 = new AnalogInput(AnalogSensors.kBallSensor6Port);
     intakeMotor1.setInverted(IntakeMotors.kMotor1Invert);
     window1.setInverted(IntakeMotors.kWindow1Invert);
   }
@@ -138,17 +118,17 @@ public class subIntake extends SubsystemBase {
   //   }
   }
 
-  public void runBallFeedIn(){
-    ballFeed.set(-IntakeMotors.kBallFeedSpeed);
-  }
+  // public void runBallFeedIn(){
+  //   ballFeed.set(-IntakeMotors.kBallFeedSpeed);
+  // }
 
-  public void runBallFeedOut() {
-    ballFeed.set(IntakeMotors.kBallFeedSpeed);
-  }
+  // public void runBallFeedOut() {
+  //   ballFeed.set(IntakeMotors.kBallFeedSpeed);
+  // }
 
-  public void stopBallFeed() {
-    ballFeed.set(0);
-  }
+  // public void stopBallFeed() {
+  //   ballFeed.set(0);
+  // }
 
   public void runWindowUp() {
     window1.set(-IntakeMotors.kWindowUpSpeed);
@@ -160,9 +140,9 @@ public class subIntake extends SubsystemBase {
     window1.set(0);
   }
 
-  public int getBalls() {
-    return ballCount;
-  }
+  // public int getBalls() {
+  //   return ballCount;
+  // }
   // private void UpdateBallCount() {
   //   if (ballSensor1.getValue() < 8)
   //     ballSensor1Active = 1;
@@ -194,6 +174,6 @@ public class subIntake extends SubsystemBase {
   @Override
   public void periodic() {
     // UpdateBallCount();
-    SmartDashboard.putNumber("Ball Count", ballCount);
+    //SmartDashboard.putNumber("Ball Count", ballCount);
   }
 }

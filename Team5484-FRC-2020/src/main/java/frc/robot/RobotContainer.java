@@ -59,10 +59,12 @@ public class RobotContainer {
     private final subLED leds = new subLED();
     private final subIntake intake = new subIntake();
     private final subAltShooter altShooter = new subAltShooter();
+    public final subBallIndexer ballIndexer = new subBallIndexer();
 
     //Commands
     private final cmdAutonomous commandAutoCommand = new cmdAutonomous(driveTrain, limeLight);
     private final cmdLimeLight_AlignToTarget align = new cmdLimeLight_AlignToTarget(driveTrain, limeLight, shooter);
+    private final cFeedBall feedBall = new cFeedBall(ballIndexer);
 
     public RobotContainer() {
         configureButtonBindings();
@@ -117,9 +119,11 @@ public class RobotContainer {
         //     .whenActive(() -> driveTrain.findCurrentEncoders());
 
         // Driver Two Controls
-        new Trigger(() -> driverTwo.getTriggerAxis(Hand.kLeft) > .3)
-            .whileActiveContinuous(() -> intake.runBallFeedIn())
-            .whenInactive(() -> intake.stopBallFeed());
+        // new Trigger(() -> driverTwo.getTriggerAxis(Hand.kLeft) > .3)
+        //     .whileActiveContinuous(() -> intake.runBallFeedIn())
+        //     .whenInactive(() -> intake.stopBallFeed());
+        new JoystickButton(driverTwo, Button.kA.value)
+            .whileHeld(new cFeedBall(ballIndexer));
     // new Trigger(() -> driverTwo.getTriggerAxis(Hand.kRight) > .3)
     //     .whenActive(() -> intake.increasePosition());
         new Trigger(() -> driverTwo.getTriggerAxis(Hand.kRight) > .3)
