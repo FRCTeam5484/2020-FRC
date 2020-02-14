@@ -84,6 +84,7 @@ public final class Constants {
     public final static class BallIndexer {
         public final static int kMotor = 5;
         public final static double kMotorSpeed = .2;
+        public final static double kMotorSpeedMAX = .5;
         public final static double kShootSpeed = .2;
     }
     public final static class DriveMotors {

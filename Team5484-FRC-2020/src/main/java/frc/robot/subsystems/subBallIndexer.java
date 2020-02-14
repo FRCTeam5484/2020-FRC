@@ -43,9 +43,13 @@ public class subBallIndexer extends SubsystemBase {
   public void ReverseIndexer() {
     ballFeed.set(-BallIndexer.kMotorSpeed);
   }
+  public void RunIndexerFaster(){
+    ballFeed.set(BallIndexer.kMotorSpeedMAX);
+  }
   public void StopIndexer() {
     ballFeed.set(0);
-  }
+  } 
+
   public void FeedOneBallForward(){
     Timer myTimer = new Timer();
     myTimer.start();
@@ -77,66 +81,111 @@ public class subBallIndexer extends SubsystemBase {
     myTimer.stop();
   }
   public void LoadIndexer(){
-    if(ballIntakePresent && !ball5Present) {
-      while(!ball5Present){
-        RunIndexer();
-        GetBallStatus();
+    // if(ballIntakePresent && !ball5Present) {
+    //   while(!ball5Present){
+    //     RunIndexer();
+    //     GetBallStatus();
+    //   }
+    //   StopIndexer();
+    // }
+    // if(ballIntakePresent && ball5Present) {
+    //   while(!ball4Present){
+    //     RunIndexer();
+    //     GetBallStatus();
+    //   }
+    //   StopIndexer();
+    //   if(ball4Present && !ball5Present){
+    //     while(!ball5Present){
+    //       ReverseIndexer();
+    //       GetBallStatus();
+    //     }
+    //     StopIndexer();
+    //   }
+    // }
+    // if(ballIntakePresent && ball4Present) {
+    //   while(!ball3Present){
+    //     RunIndexer();
+    //     GetBallStatus();
+    //   }
+    //   StopIndexer();
+    //   if(ball3Present && !ball4Present){
+    //     while(!ball4Present){
+    //       ReverseIndexer();
+    //       GetBallStatus();
+    //     }
+    //     StopIndexer();
+    //   }
+    // }
+    // if(ballIntakePresent && ball3Present) {
+    //   while(!ball2Present){
+    //     RunIndexer();
+    //     GetBallStatus();
+    //   }
+    //   StopIndexer();
+    //   if(ball2Present && !ball3Present){
+    //     while(!ball3Present){
+    //       ReverseIndexer();
+    //       GetBallStatus();
+    //     }
+    //     StopIndexer();
+    //   }
+    // }
+    // if(ballIntakePresent && ball2Present) {
+    //   while(!ball1Present){
+    //     RunIndexer();
+    //     GetBallStatus();
+    //   }
+    //   StopIndexer();
+    //   if(ball1Present && !ball2Present){
+    //     while(!ball2Present){
+    //       ReverseIndexer();
+    //       GetBallStatus();
+    //     }
+    //     StopIndexer();
+    //   }
+    // }
+    if (ballIntakePresent) {
+      if (ball5Present && ball4Present && ball3Present && ball2Present && ball1Present) {
+        ReverseIndexer();
       }
-      StopIndexer();
+      else {
+        RunIndexer();
+      }
     }
-    if(ballIntakePresent && ball5Present) {
-      while(!ball4Present){
-        RunIndexer();
-        GetBallStatus();
-      }
-      StopIndexer();
-      if(ball4Present && !ball5Present){
-        while(!ball5Present){
-          ReverseIndexer();
-          GetBallStatus();
+    else {
+      if (ball1Present) {
+        if (ball2Present && ball3Present && ball4Present && ball5Present) {
+          StopIndexer();
         }
-        StopIndexer();
-      }
-    }
-    if(ballIntakePresent && ball4Present) {
-      while(!ball3Present){
-        RunIndexer();
-        GetBallStatus();
-      }
-      StopIndexer();
-      if(ball3Present && !ball4Present){
-        while(!ball4Present){
+        else {
           ReverseIndexer();
-          GetBallStatus();
         }
-        StopIndexer();
       }
-    }
-    if(ballIntakePresent && ball3Present) {
-      while(!ball2Present){
-        RunIndexer();
-        GetBallStatus();
-      }
-      StopIndexer();
-      if(ball2Present && !ball3Present){
-        while(!ball3Present){
+      else if (ball2Present) {
+        if (ball3Present && ball4Present && ball5Present) {
+          StopIndexer();
+        }
+        else {
           ReverseIndexer();
-          GetBallStatus();
         }
-        StopIndexer();
       }
-    }
-    if(ballIntakePresent && ball2Present) {
-      while(!ball1Present){
-        RunIndexer();
-        GetBallStatus();
-      }
-      StopIndexer();
-      if(ball1Present && !ball2Present){
-        while(!ball2Present){
+      else if (ball3Present) {
+        if (ball4Present && ball5Present) {
+          StopIndexer();
+        }
+        else {
           ReverseIndexer();
-          GetBallStatus();
         }
+      }
+      else if (ball4Present) {
+        if (ball5Present) {
+          StopIndexer();
+        }
+        else {
+          ReverseIndexer();
+        }
+      }
+      else if (ball5Present) {
         StopIndexer();
       }
     }

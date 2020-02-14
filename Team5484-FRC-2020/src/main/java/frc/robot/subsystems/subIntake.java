@@ -32,8 +32,9 @@ public class subIntake extends SubsystemBase {
     window1.setInverted(IntakeMotors.kWindow1Invert);
   }
 
-  public void runIntake() {
-    intakeMotor1.set(IntakeMotors.kMotorSpeed);
+  public void runIntake(boolean enabled) {
+    if (enabled)
+      intakeMotor1.set(IntakeMotors.kMotorSpeed);
   }
   public void runIntakeBackward() {
     intakeMotor1.set(-IntakeMotors.kMotorSpeed);

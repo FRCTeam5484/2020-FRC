@@ -103,7 +103,7 @@ public class RobotContainer {
             .whenReleased(() -> limeLight.setLEDMode(LimeLight.ledMode.kOff))
             .whileHeld(new cmdLimeLight_AlignToTarget(driveTrain, limeLight, shooter));
         new JoystickButton(driverOne, Button.kBumperLeft.value)
-            .whileHeld(() -> intake.runIntake())
+            .whileHeld(() -> intake.runIntake(!ballIndexer.ball1Present))
             .whenReleased(() -> intake.stopIntake());
         new JoystickButton(driverOne, Button.kBumperRight.value)
             .whileHeld(() -> intake.runIntakeBackward())
@@ -119,12 +119,12 @@ public class RobotContainer {
         //     .whenActive(() -> driveTrain.findCurrentEncoders());
 
         // Driver Two Controls
-        // new Trigger(() -> driverTwo.getTriggerAxis(Hand.kLeft) > .3)
-        //     .whileActiveContinuous(() -> intake.runBallFeedIn())
-        //     .whenInactive(() -> intake.stopBallFeed());
+        new Trigger(() -> driverTwo.getTriggerAxis(Hand.kLeft) > .3)
+            .whileActiveContinuous(() -> ballIndexer.RunIndexerFaster())
+            .whenInactive(() -> ballIndexer.StopIndexer());
         new JoystickButton(driverTwo, Button.kA.value)
-            .whenPressed(() -> ballIndexer.LoadIndexer())
-            .whenReleased(() -> ballIndexer.StopIndexer());
+            .toggleWhenPressed(new RunCommand(() -> ballIndexer.LoadIndexer()))
+            .whenPressed(() -> ballIndexer.StopIndexer());
     // new Trigger(() -> driverTwo.getTriggerAxis(Hand.kRight) > .3)
     //     .whenActive(() -> intake.increasePosition());
         new Trigger(() -> driverTwo.getTriggerAxis(Hand.kRight) > .3)
@@ -137,12 +137,12 @@ public class RobotContainer {
             .whileHeld(() -> shooter.turretCounter())
             .whenReleased(() -> shooter.turretStop());
         // Temporary (BELOW)
-        new JoystickButton(driverTwo, Button.kStart.value)
-            .whileHeld(() -> intake.runWindowUp())
-            .whenReleased(() -> intake.stopWindow());
-        new JoystickButton(driverTwo, Button.kBack.value)
-            .whileHeld(() -> intake.runWindowDown())
-            .whenReleased(() -> intake.stopWindow());
+        // new JoystickButton(driverTwo, Button.kStart.value)
+        //     .whileHeld(() -> intake.runWindowUp())
+        //     .whenReleased(() -> intake.stopWindow());
+        // new JoystickButton(driverTwo, Button.kBack.value)
+        //     .whileHeld(() -> intake.runWindowDown())
+        //     .whenReleased(() -> intake.stopWindow());
 
         new JoystickButton(driverTwo, Button.kY.value)
             .whileHeld(align);
