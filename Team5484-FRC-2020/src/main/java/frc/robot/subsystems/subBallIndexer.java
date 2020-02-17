@@ -7,11 +7,10 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.BallIndexer;
-import frc.robot.Constants.AnalogSensors;
+import frc.robot.Constants.*;
 
 public class subBallIndexer extends SubsystemBase {
-  private final CANSparkMax ballFeed = new CANSparkMax(BallIndexer.kMotor, MotorType.kBrushless);
+  private final CANSparkMax ballFeed = new CANSparkMax(Sparks.kBallIndexer, MotorType.kBrushless);
   private final AnalogInput ballSensor1 = new AnalogInput(AnalogSensors.kBallSensor1);
   private final AnalogInput ballSensor2 = new AnalogInput(AnalogSensors.kBallSensor2);
   private final AnalogInput ballSensor3 = new AnalogInput(AnalogSensors.kBallSensor3);

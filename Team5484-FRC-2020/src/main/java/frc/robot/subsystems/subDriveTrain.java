@@ -14,15 +14,12 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.Constants.*;
 
-
-
 public class subDriveTrain extends SubsystemBase {  
-  private final CANSparkMax leftDrive = new CANSparkMax(DriveMotors.kLeftMotor1, MotorType.kBrushless);
-  private final CANSparkMax leftDriveSlave = new CANSparkMax(DriveMotors.kLeftMotor2, MotorType.kBrushless);
-  private final CANSparkMax rightDrive = new CANSparkMax(DriveMotors.kRightMotor1, MotorType.kBrushless);
-  private final CANSparkMax rightDriveSlave = new CANSparkMax(DriveMotors.kRightMotor2, MotorType.kBrushless);
+  private final CANSparkMax leftDrive = new CANSparkMax(Sparks.kLeftDrive, MotorType.kBrushless);
+  private final CANSparkMax leftDriveSlave = new CANSparkMax(Sparks.kLeftDriveSlave, MotorType.kBrushless);
+  private final CANSparkMax rightDrive = new CANSparkMax(Sparks.kRightDrive, MotorType.kBrushless);
+  private final CANSparkMax rightDriveSlave = new CANSparkMax(Sparks.kRightDriveSlave, MotorType.kBrushless);
   private final DifferentialDrive driveTrain = new DifferentialDrive(leftDrive, rightDrive);
-  private final Ultrasonic ultrasonic = new Ultrasonic(1, 2);
   public AHRS ahrs;
 
   private CANEncoder left1Encoder = new CANEncoder(leftDrive);
@@ -49,8 +46,8 @@ public class subDriveTrain extends SubsystemBase {
       rightDrive.setSmartCurrentLimit(DriveMotors.kAmpLimit);
       rightDriveSlave.setSmartCurrentLimit(DriveMotors.kAmpLimit);
 
-      leftDrive.setInverted(DriveMotors.leftInvert);
-      rightDrive.setInverted(DriveMotors.rightInvert);
+      leftDrive.setInverted(MotorDirections.kInvertLeftDrive);
+      rightDrive.setInverted(MotorDirections.kInvertRightDrive);
 
       left1Encoder = leftDrive.getEncoder();
       left2Encoder = leftDriveSlave.getEncoder();

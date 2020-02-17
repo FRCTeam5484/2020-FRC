@@ -10,34 +10,39 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.*;
+import frc.robot.Constants.Lift;
+import frc.robot.Constants.Sparks;
 
-public class subIntake extends SubsystemBase {
+public class subLift extends SubsystemBase {
   /**
-   * Creates a new subIntake.
+   * Creates a new subLift.
    */
-  private CANSparkMax intakeMotor1 = new CANSparkMax(Sparks.kIntake, MotorType.kBrushless);
-  
-  public subIntake() {
-    intakeMotor1.setInverted(MotorDirections.kInvertIntake);
+  private CANSparkMax liftMaster;
+  private CANSparkMax liftSlave;
+
+  public subLift() {
+    liftMaster = new CANSparkMax(Sparks.kRightLift, MotorType.kBrushless);
+    liftSlave = new CANSparkMax(Sparks.kLeftLift, MotorType.kBrushless);
+    liftSlave.follow(liftMaster, true);
   }
 
-  public void runIntake(boolean enabled) {
-    if (enabled)
-      intakeMotor1.set(IntakeMotors.kMotorSpeed);
+  public void LiftUp() {
+    liftMaster.set(Lift.liftSpeed);
   }
-  public void runIntakeBackward() {
-    intakeMotor1.set(-IntakeMotors.kMotorSpeed);
+  public void LiftDown() {
+    liftMaster.set(-Lift.liftSpeed);
   }
-  public void stopIntake() {
-    intakeMotor1.set(0);
+  public void LiftStop() {
+    liftMaster.set(0);
+  }
+
+  public void setLift(double speed) {
+    liftMaster.set(speed);
   }
 
   @Override
   public void periodic() {
+    // This method will be called once per scheduler run
   }
 }

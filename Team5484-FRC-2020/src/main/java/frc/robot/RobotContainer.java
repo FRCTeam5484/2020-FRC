@@ -28,11 +28,11 @@ public class RobotContainer {
     // private DigitalInput upContact;
     // private DigitalInput upContactBackup;
 
-    // NetworkTableEntry shootSpeed = Shuffleboard.getTab("Test")
-    //     .add("Shooter Speed", 0)
-    //     .withWidget(BuiltInWidgets.kNumberSlider)
-    //     .withProperties(Map.of("min", 0, "max", 1))
-    //     .getEntry();
+    NetworkTableEntry liftSpeed = Shuffleboard.getTab("Test")
+        .add("Lift Speed", 0)
+        .withWidget(BuiltInWidgets.kNumberSlider)
+        .withProperties(Map.of("min", -1, "max", 1))
+        .getEntry();
     // NetworkTableEntry intakeSpeed = Shuffleboard.getTab("Test")
     //     .add("Intake Speed", 0)
     //     .withWidget(BuiltInWidgets.kNumberSlider)
@@ -45,11 +45,11 @@ public class RobotContainer {
     //     .getEntry();
     
 
-    //Controllers
+    // Controllers
     XboxController driverOne = new XboxController(DriveControllers.DriverOne);
     XboxController driverTwo = new XboxController(DriveControllers.DriverTwo);
 
-    //SubSystems
+    // SubSystems
     private final subDriveTrain driveTrain = new subDriveTrain(); 
     private final subLimeLight limeLight = new subLimeLight();
     private final subColorWheel colorWheel = new subColorWheel();
@@ -58,8 +58,8 @@ public class RobotContainer {
     private final subTargetingLight targetingLight = new subTargetingLight();
     private final subLED leds = new subLED();
     private final subIntake intake = new subIntake();
-    private final subAltShooter altShooter = new subAltShooter();
     public final subBallIndexer ballIndexer = new subBallIndexer();
+    public final subLift lift = new subLift();
 
     //Commands
     private final cmdAutonomous commandAutoCommand = new cmdAutonomous(driveTrain, limeLight);
@@ -76,14 +76,10 @@ public class RobotContainer {
             new RunCommand(() -> driveTrain.tankDrive(driverOne.getY(Hand.kLeft),
                 driverOne.getY(Hand.kRight), driverOne.getTriggerAxis(Hand.kRight) > DriveControllers.minRTriggerPress),
                 driveTrain));
+        // lift.setDefaultCommand(new RunCommand(() -> lift.setLift(liftSpeed.getDouble(0)), lift));
             // Comment below later
         //shooter.setDefaultCommand(new RunCommand(() -> shooter.shoot(shootSpeed.getDouble(0)), shooter));
         // intake.setDefaultCommand(new RunCommand(() -> intake.runAutoFeed(), intake));
-
-        // downContact = new DigitalInput(DigitalSensors.kLimitSwitch1Port);
-        // upContact = new DigitalInput(DigitalSensors.kLimitSwitch2Port);
-        // downContactBackup = new DigitalInput(DigitalSensors.kLimitSwitch3Port);
-        // upContactBackup = new DigitalInput(DigitalSensors.kLimitSwitch4Port);
 
         // Sets LEDs to FMS-determined color at the beginning of the match
         

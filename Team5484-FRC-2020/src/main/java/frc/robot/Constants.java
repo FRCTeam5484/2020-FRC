@@ -5,6 +5,48 @@ import com.revrobotics.ColorMatch;
 import edu.wpi.first.wpilibj.util.Color;
 
 public final class Constants {
+    public final static class Sparks {
+        public final static int kRightDrive = 1;
+        public final static int kRightDriveSlave = 2;
+        public final static int kLeftDrive = 3;
+        public final static int kLeftDriveSlave = 4;
+        public final static int kLeftLift = 5;
+        public final static int kRightLift = 6;
+        public final static int kShooterSlave = 7;
+        public final static int kShooterMaster = 8;
+        public final static int kColorWheel = 9;
+        public final static int kBallIndexer = 10;
+        public final static int kIntake = 11;
+        public final static int kTurret = 12;
+    }
+    public static final class Victors {
+        public final static int kArm = 0;
+    }
+    public final static class MotorDirections {
+        public final static boolean kInvertShooterSlave = true;
+        public final static boolean kInvertShooterMaster = true; 
+        public final static boolean kInvertIntake = true;
+        public final static boolean kInvertTurret = false;
+        public final static boolean kInvertArm = true;
+        public final static boolean kInvertLeftDrive = true;
+        public final static boolean kInvertRightDrive = true;
+    }
+    public final static class AnalogSensors {
+        public final static int kBallSensor1 = 0;
+        public final static int kBallSensor2 = 1;
+        public final static int kBallSensor3 = 2;
+        public final static int kBallSensor4 = 3;
+        public final static int kBallSensor5 = 4;
+        public final static int kBallSensor6 = 5;
+    }
+    public final static class DigitalSensors {
+        public final static int kLimitTurretClockwise = 0;
+        public final static int kLimitTurretCounter = 1;
+        public final static int kLimitTopArm = 2;
+        public final static int kLimitTopArmBackup = 3;
+        public final static int kLimitBottomArm = 4;
+        public final static int kLimitBottomArmBackup = 5;
+    }
     public final static class Colors {
         public final static Color kBlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
         public final static Color kGreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
@@ -53,14 +95,8 @@ public final class Constants {
     }
     public final static class ShooterMotors {
         public final static int kAmpLimit = 39;
-        public final static int kShooterMasterMotor = 8;
-        public final static int kShooterSlaveMotor = 7;
-        public final static int kTurret = 11;
-        public final static boolean kInvertMMotor = false; 
-        public final static boolean kInvertSMotor = true;
-        public final static boolean kInvertTurret = false;
-        public final static double kShootSpeed = .9;
-        public final static double kTurretSpeed = .2;
+        public final static double kShootSpeed = .7;
+        public final static double kTurretSpeed = .8;
     }   
     public final static class AltShooterMotors {
         public final static int kShooterMotorTop = 10;
@@ -71,18 +107,13 @@ public final class Constants {
         public final static boolean invertBMotor = false; 
     }   
     public final static class IntakeMotors {
-        public final static int kIntake = 6;
-        public final static int kWindow1 = 0;
-        public final static boolean kMotor1Invert = true;
-        public final static boolean kWindow1Invert = true;
         public final static double kMotorSpeed = 1;
-        public final static double kWindowUpSpeed = 1;
-        public final static double kWindowDownSpeed = .6;
+        public final static double kArmUpSpeed = 1;
+        public final static double kArmDownSpeed = .6;
         public final static double kBallFeedSpeed = .5;
         public final static double kBallFeedSpeedSlow = .3;
     }
     public final static class BallIndexer {
-        public final static int kMotor = 5;
         public final static double kMotorSpeed = .2;
         public final static double kMotorSpeedMAX = .5;
         public final static double kShootSpeed = .2;
@@ -90,12 +121,6 @@ public final class Constants {
     public final static class DriveMotors {
         public final static double kA = .04; // Constant of Proportionality
         public final static int kAmpLimit = 39;
-        public final static int kLeftMotor1 = 3;
-        public final static int kLeftMotor2 = 4;
-        public final static int kRightMotor1 = 1;
-        public final static int kRightMotor2 = 2;
-        public final static boolean leftInvert = true;
-        public final static boolean rightInvert = true;
         public final static String kTestMotor = "Left2";
         public final static double kMaxSpeed = 0.7;
         public final static double kUnitsPerInch = 100;
@@ -109,10 +134,6 @@ public final class Constants {
         public final static double kConstantofProportionality = .3;
         
     }
-    public final static class AllMotors {
-        public final static double kTestSpeed = .8;
-        public final static boolean kInverted = false;
-    }
     public final static class DriveControllers {
         public final static int DriverOne = 0;
         public final static int DriverTwo = 1;
@@ -120,24 +141,8 @@ public final class Constants {
     }
     public final static class WheelSystem {
         public final static int kAmpLimit = 38;
-        public final static int kMotor = 5;
         public final static double kMaxSpeed = 0.5;
         public final static double kFourTurnUnitCount = 50.0;
-    }
-    public final static class AnalogSensors {
-        //public final static int kUltrasonicPort = 0;
-        public final static int kBallSensor1 = 0;
-        public final static int kBallSensor2 = 1;
-        public final static int kBallSensor3 = 2;
-        public final static int kBallSensor4 = 3;
-        public final static int kBallSensor5 = 4;
-        public final static int kBallSensor6 = 5;
-    }
-    public final static class DigitalSensors {
-        public final static int kLimitSwitch1Port = 0;
-        public final static int kLimitSwitch2Port = 1;
-        public final static int kLimitSwitch3Port = 2;
-        public final static int kLimitSwitch4Port = 3;
     }
     public final static class NavX {
         public final static double kTurnP = 0;
@@ -149,5 +154,8 @@ public final class Constants {
 
         public static final double kTurnToleranceDeg = 5;
         public static final double kTurnRateToleranceDegPerS = 10;
+    }
+    public final static class Lift {
+        public final static double liftSpeed = .6;
     }
 }

@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.Colors;
+import frc.robot.Constants.Sparks;
 import frc.robot.Constants.WheelSystem;
 
 import com.revrobotics.CANEncoder;
@@ -20,7 +21,7 @@ public class subColorWheel extends SubsystemBase {
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
   private final ColorSensorV3 colorSensor = new ColorSensorV3(i2cPort);
   private final ColorMatch colorMatcher = new ColorMatch();
-  private final CANSparkMax wheelMotor = new CANSparkMax(WheelSystem.kMotor, MotorType.kBrushless);
+  private final CANSparkMax wheelMotor = new CANSparkMax(Sparks.kColorWheel, MotorType.kBrushless);
   private CANEncoder wheelEncoder = new CANEncoder(wheelMotor);
   private String detectedColor = "NA";
 

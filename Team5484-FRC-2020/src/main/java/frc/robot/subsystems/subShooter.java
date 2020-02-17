@@ -14,18 +14,17 @@ import frc.robot.Constants.*;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class subShooter extends SubsystemBase {
-  private final CANSparkMax shooterMaster = new CANSparkMax(ShooterMotors.kShooterMasterMotor, MotorType.kBrushless);
-  private final CANSparkMax shooterSlave = new CANSparkMax(ShooterMotors.kShooterSlaveMotor, MotorType.kBrushless);
-  private final CANSparkMax turret = new CANSparkMax(ShooterMotors.kTurret, MotorType.kBrushless);
+  private final CANSparkMax shooterMaster = new CANSparkMax(Sparks.kShooterMaster, MotorType.kBrushless);
+  private final CANSparkMax shooterSlave = new CANSparkMax(Sparks.kShooterSlave, MotorType.kBrushless);
+  private final CANSparkMax turret = new CANSparkMax(Sparks.kTurret, MotorType.kBrushless);
 
   public subShooter() {
     shooterSlave.setSmartCurrentLimit(ShooterMotors.kAmpLimit);
     shooterMaster.setSmartCurrentLimit(ShooterMotors.kAmpLimit);
+    turret.setInverted(MotorDirections.kInvertTurret);
+    shooterMaster.setInverted(MotorDirections.kInvertShooterMaster);
 
-    turret.setInverted(ShooterMotors.kInvertTurret);
-    shooterMaster.setInverted(ShooterMotors.kInvertMMotor);
-
-    shooterSlave.follow(shooterMaster, ShooterMotors.kInvertSMotor);
+    shooterSlave.follow(shooterMaster, MotorDirections.kInvertShooterSlave);
   }
 
   public void shoot() {
