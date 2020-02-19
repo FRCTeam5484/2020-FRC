@@ -18,6 +18,7 @@ public final class Constants {
         public final static int kBallIndexer = 10;
         public final static int kIntake = 11;
         public final static int kTurret = 12;
+        public final static int kLeveler = 13;
     }
     public static final class Victors {
         public final static int kArm = 0;
@@ -30,6 +31,7 @@ public final class Constants {
         public final static boolean kInvertArm = true;
         public final static boolean kInvertLeftDrive = true;
         public final static boolean kInvertRightDrive = true;
+        public final static boolean kInvertLeveler = false;
     }
     public final static class AnalogSensors {
         public final static int kBallSensor1 = 0;
@@ -46,6 +48,9 @@ public final class Constants {
         public final static int kLimitTopArmBackup = 3;
         public final static int kLimitBottomArm = 4;
         public final static int kLimitBottomArmBackup = 5;
+    }
+    public final static class MotorSpeeds {
+        public final static double kLevelerSpeed = .8;
     }
     public final static class Colors {
         public final static Color kBlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);

@@ -28,11 +28,11 @@ public class RobotContainer {
     // private DigitalInput upContact;
     // private DigitalInput upContactBackup;
 
-    NetworkTableEntry liftSpeed = Shuffleboard.getTab("Test")
-        .add("Lift Speed", 0)
-        .withWidget(BuiltInWidgets.kNumberSlider)
-        .withProperties(Map.of("min", -1, "max", 1))
-        .getEntry();
+    // NetworkTableEntry liftSpeed = Shuffleboard.getTab("Test")
+    //     .add("Lift Speed", 0)
+    //     .withWidget(BuiltInWidgets.kNumberSlider)
+    //     .withProperties(Map.of("min", -1, "max", 1))
+    //     .getEntry();
     // NetworkTableEntry intakeSpeed = Shuffleboard.getTab("Test")
     //     .add("Intake Speed", 0)
     //     .withWidget(BuiltInWidgets.kNumberSlider)
@@ -60,6 +60,7 @@ public class RobotContainer {
     private final subIntake intake = new subIntake();
     public final subBallIndexer ballIndexer = new subBallIndexer();
     public final subLift lift = new subLift();
+    public final subLeveler leveler = new subLeveler();
 
     //Commands
     private final cmdAutonomous commandAutoCommand = new cmdAutonomous(driveTrain, limeLight);
@@ -107,6 +108,12 @@ public class RobotContainer {
         new JoystickButton(driverOne, Button.kB.value)
             .toggleWhenPressed(new RunCommand(() -> driveTrain.DriveStraight()))
             .whenPressed(() -> driveTrain.findCurrentEncoders());
+        new JoystickButton(driverOne, Button.kStart.value)
+            .whileHeld(() -> leveler.levelForward())
+            .whenReleased(() -> leveler.levelStop());
+        new JoystickButton(driverOne, Button.kBack.value)
+            .whileHeld(() -> leveler.levelBackward())
+            .whenReleased(() -> leveler.levelStop());
         // new JoystickButton(driverOne, Button.kBumperRight.value)
         //     .whileHeld(() -> intake.runIntake())
         //     .whenReleased(() -> intake.stopIntake());
