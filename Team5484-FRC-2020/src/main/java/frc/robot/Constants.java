@@ -35,11 +35,11 @@ public final class Constants {
     }
     public final static class AnalogSensors {
         public final static int kBallSensor1 = 0;
-        public final static int kBallSensor2 = 1;
+        public final static int kBallSensor2 = 5;
         public final static int kBallSensor3 = 2;
         public final static int kBallSensor4 = 3;
         public final static int kBallSensor5 = 4;
-        public final static int kBallSensor6 = 5;
+        public final static int kBallSensor6 = 6;
     }
     public final static class DigitalSensors {
         public final static int kLimitTurretClockwise = 0;
