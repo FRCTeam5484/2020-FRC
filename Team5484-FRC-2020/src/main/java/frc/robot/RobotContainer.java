@@ -150,6 +150,10 @@ public class RobotContainer {
 
         new JoystickButton(driverTwo, Button.kY.value)
             .whileHeld(align);
+        new JoystickButton(driverTwo, Button.kX.value)
+            .whenPressed(() -> lift.LiftLock());
+        new JoystickButton(driverTwo, Button.kB.value)
+            .whenPressed(() -> lift.LiftUnlock());
         // new Trigger(() -> upContact.get() == true)
         //     .whenActive(() -> intake.stopWindow());
     }

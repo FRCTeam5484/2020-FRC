@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.Lift;
 import frc.robot.Constants.Sparks;
@@ -20,10 +21,14 @@ public class subLift extends SubsystemBase {
    */
   private CANSparkMax liftMaster;
   private CANSparkMax liftSlave;
+  Servo servoLeftLock;
+  Servo servoRightLock;
 
   public subLift() {
     liftMaster = new CANSparkMax(Sparks.kRightLift, MotorType.kBrushless);
     liftSlave = new CANSparkMax(Sparks.kLeftLift, MotorType.kBrushless);
+    servoLeftLock = new Servo(Lift.servoLeft);
+    servoRightLock = new Servo(Lift.servoRight);
     liftSlave.follow(liftMaster, true);
   }
 
@@ -41,6 +46,14 @@ public class subLift extends SubsystemBase {
     liftMaster.set(speed);
   }
 
+  public void LiftLock(){
+    servoLeftLock.setAngle(90);
+    servoRightLock.setAngle(90);
+  }
+  public void LiftUnlock(){
+    servoLeftLock.setAngle(0);
+    servoRightLock.setAngle(0);
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

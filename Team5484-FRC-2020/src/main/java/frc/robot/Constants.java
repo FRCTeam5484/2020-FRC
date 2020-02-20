@@ -162,5 +162,7 @@ public final class Constants {
     }
     public final static class Lift {
         public final static double liftSpeed = .6;
+        public final static int servoLeft = 1;
+        public final static int servoRight = 2;
     }
 }
