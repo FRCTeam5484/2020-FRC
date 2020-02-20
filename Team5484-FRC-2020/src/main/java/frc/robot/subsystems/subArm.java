@@ -35,7 +35,7 @@ public class subArm extends SubsystemBase {
     arm.set(IntakeMotors.kArmUpSpeed);
   }
   public void armDown() {
-    arm.set(IntakeMotors.kArmDownSpeed);
+    arm.set(-IntakeMotors.kArmDownSpeed);
   }
   public void armStop() {
     arm.set(0);

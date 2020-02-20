@@ -61,6 +61,7 @@ public class RobotContainer {
     public final subBallIndexer ballIndexer = new subBallIndexer();
     public final subLift lift = new subLift();
     public final subLeveler leveler = new subLeveler();
+    public final subArm arm = new subArm();
 
     //Commands
     private final cmdAutonomous commandAutoCommand = new cmdAutonomous(driveTrain, limeLight);
@@ -140,12 +141,12 @@ public class RobotContainer {
             .whileHeld(() -> shooter.turretCounter())
             .whenReleased(() -> shooter.turretStop());
         // Temporary (BELOW)
-        // new JoystickButton(driverTwo, Button.kStart.value)
-        //     .whileHeld(() -> intake.runWindowUp())
-        //     .whenReleased(() -> intake.stopWindow());
-        // new JoystickButton(driverTwo, Button.kBack.value)
-        //     .whileHeld(() -> intake.runWindowDown())
-        //     .whenReleased(() -> intake.stopWindow());
+        new JoystickButton(driverTwo, Button.kStart.value)
+            .whileHeld(() -> arm.armUp())
+            .whenReleased(() -> arm.armStop());
+        new JoystickButton(driverTwo, Button.kBack.value)
+            .whileHeld(() -> arm.armDown())
+            .whenReleased(() -> arm.armStop());
 
         new JoystickButton(driverTwo, Button.kY.value)
             .whileHeld(align);

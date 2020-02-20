@@ -101,7 +101,7 @@ public final class Constants {
     public final static class ShooterMotors {
         public final static int kAmpLimit = 39;
         public final static double kShootSpeed = .7;
-        public final static double kTurretSpeed = .8;
+        public final static double kTurretSpeed = .05;
     }   
     public final static class AltShooterMotors {
         public final static int kShooterMotorTop = 10;
@@ -113,8 +113,8 @@ public final class Constants {
     }   
     public final static class IntakeMotors {
         public final static double kMotorSpeed = 1;
-        public final static double kArmUpSpeed = 1;
-        public final static double kArmDownSpeed = .6;
+        public final static double kArmUpSpeed = .6;
+        public final static double kArmDownSpeed = .3;
         public final static double kBallFeedSpeed = .5;
         public final static double kBallFeedSpeedSlow = .3;
     }
