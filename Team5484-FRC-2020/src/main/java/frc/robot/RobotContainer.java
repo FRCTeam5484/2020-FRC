@@ -78,7 +78,7 @@ public class RobotContainer {
             new RunCommand(() -> driveTrain.tankDrive(driverOne.getY(Hand.kLeft),
                 driverOne.getY(Hand.kRight), driverOne.getTriggerAxis(Hand.kRight) > DriveControllers.minRTriggerPress),
                 driveTrain));
-        // lift.setDefaultCommand(new RunCommand(() -> lift.setLift(liftSpeed.getDouble(0)), lift));
+        lift.setDefaultCommand(new RunCommand(() -> lift.setLift(driverTwo.getY(Hand.kRight)), lift));
             // Comment below later
         //shooter.setDefaultCommand(new RunCommand(() -> shooter.shoot(shootSpeed.getDouble(0)), shooter));
         // intake.setDefaultCommand(new RunCommand(() -> intake.runAutoFeed(), intake));

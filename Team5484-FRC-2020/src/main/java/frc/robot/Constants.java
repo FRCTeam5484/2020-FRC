@@ -137,7 +137,6 @@ public final class Constants {
         public final static double ketchup = .8;
         public final static double kStraightPower = .5;
         public final static double kConstantofProportionality = .3;
-        
     }
     public final static class DriveControllers {
         public final static int DriverOne = 0;
@@ -162,7 +161,5 @@ public final class Constants {
     }
     public final static class Lift {
         public final static double liftSpeed = .6;
-        public final static int servoLeft = 1;
-        public final static int servoRight = 2;
     }
 }

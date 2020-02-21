@@ -27,8 +27,8 @@ public class subLift extends SubsystemBase {
   public subLift() {
     liftMaster = new CANSparkMax(Sparks.kRightLift, MotorType.kBrushless);
     liftSlave = new CANSparkMax(Sparks.kLeftLift, MotorType.kBrushless);
-    servoLeftLock = new Servo(Lift.servoLeft);
-    servoRightLock = new Servo(Lift.servoRight);
+    // servoLeftLock = new Servo(Lift.servoLeft);
+    // servoRightLock = new Servo(Lift.servoRight);
     liftSlave.follow(liftMaster, true);
   }
 
@@ -43,15 +43,18 @@ public class subLift extends SubsystemBase {
   }
 
   public void setLift(double speed) {
-    liftMaster.set(speed);
+    if (speed < -.2 || speed > .2)
+      liftMaster.set(-.5 * speed);
+    else
+      liftMaster.set(0);
   }
 
   public void LiftLock(){
-    servoLeftLock.setAngle(90);
+    servoLeftLock.setAngle(0);
     servoRightLock.setAngle(90);
   }
   public void LiftUnlock(){
-    servoLeftLock.setAngle(0);
+    servoLeftLock.setAngle(90);
     servoRightLock.setAngle(0);
   }
   @Override
